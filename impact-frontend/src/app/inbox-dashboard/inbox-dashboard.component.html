@@ -1,0 +1,20 @@
+
+<nav ngbNav #nav = "ngbNav" class="nav-tabs">
+    <ng-container ngbNavItem>
+        <a ngbNavLink>Upcomming Appointment</a>
+            <ng-template ngbNavContent>
+                <p>
+                    Hi This is my inbox-dashboard.
+                    Welcome to Upcomming appointment.
+                </p>
+            </ng-template>
+    </ng-container>
+    <ng-container ngbNavItem>
+        <a ngbNavLink>Notes</a>
+        <ng-template ngbNavContent>
+            <app-notes></app-notes>
+        </ng-template>
+    </ng-container>
+</nav>
+<div [ngbNavOutlet]="nav" class="mt-2"></div>
+
