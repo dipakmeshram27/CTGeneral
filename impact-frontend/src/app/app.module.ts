@@ -1,22 +1,21 @@
-import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { InboxDashboardComponent } from './inbox-dashboard/inbox-dashboard.component';
-import { NotesComponent } from './notes/notes.component';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {DefaultModule} from '../app/layouts/default/default.module';
 @NgModule({
   declarations: [
-    AppComponent,
-    InboxDashboardComponent,
-    NotesComponent
+    AppComponent
+  
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    BrowserAnimationsModule,
+    DefaultModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
