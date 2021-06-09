@@ -4,27 +4,21 @@
         <li ngbNavItem = "send">
             <a ngbNavLink>Send Notes</a>
             <ng-template ngbNavContent>
-                <p>
-                    Send notes
-                </p>
+                <app-send-note></app-send-note>
             </ng-template>
         </li>
         <li ngbNavItem = "received">
             <a ngbNavLink>Received Notes</a>
             <ng-template ngbNavContent>
-                <p>
-                   Receive notes
-                </p>
+              <!-- <app-send-note></app-send-note> -->
             </ng-template>
         </li>
         <li ngbNavItem = "sent">
             <a ngbNavLink>Sent Notes</a>
             <ng-template ngbNavContent>
-                <p>
-                   Sent notes
-                </p>
+                <!-- <app-sent-note></app-sent-note> -->
             </ng-template>
         </li>
     </ul>
-    <div [ngbNavOutlet]="noteNav" class="ml-4"></div>
+    <div [ngbNavOutlet]="noteNav" class="ml-4 container"></div>
 </div>
