@@ -22,4 +22,7 @@ export class NotesService {
   getSentNotes(senderId: number):Observable<usernotes[]>{
     return this.http.get<usernotes[]>(`${environment.baseUrl}/notes-service/note/getSentNotes?senderId=${senderId}`, );
   }
+  getRecieveNotes(recieverId: number):Observable<usernotes[]>{
+    return this.http.get<usernotes[]>(`${environment.baseUrl}/notes-service/note/getRecieveNotes?recieverId=${recieverId}`,);
+  }
 }
