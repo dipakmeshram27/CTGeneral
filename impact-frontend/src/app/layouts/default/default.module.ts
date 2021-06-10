@@ -15,6 +15,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
+import { SentNoteComponent } from 'src/app/modules/sent-note/sent-note.component';
 @NgModule({
   declarations: [
     DefaultComponent,
@@ -22,7 +23,8 @@ import { MatInputModule } from '@angular/material/input';
     SchedulingComponent,
     InboxDashboardComponent,
     NotesComponent,
-    SendNoteComponent
+    SendNoteComponent,
+    SentNoteComponent
   ],
   imports: [
     CommonModule,

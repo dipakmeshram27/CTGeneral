@@ -47,7 +47,7 @@ export class SendNoteComponent implements OnInit {
     console.log(this.form.value);
     let newNotes: Notes = this.form.value;
     // TODO: sender id is hardcoded for now . would be fetched from session
-    newNotes.senderId = 23;
+    newNotes.senderId = 19;
     this.noteService.sendNotes(newNotes).subscribe(value => {
       console.log(value);
     })
