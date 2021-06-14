@@ -8,9 +8,7 @@ import {DefaultModule} from '../app/layouts/default/default.module';
 import { ReceiveNoteComponent } from './modules/receive-note/receive-note.component';
 @NgModule({
   declarations: [
-    AppComponent,
-    ReceiveNoteComponent
-  
+    AppComponent
   ],
   imports: [
     BrowserModule,

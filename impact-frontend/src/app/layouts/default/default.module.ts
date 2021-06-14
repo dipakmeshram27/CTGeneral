@@ -16,6 +16,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { SentNoteComponent } from 'src/app/modules/sent-note/sent-note.component';
+import { ReceiveNoteComponent } from 'src/app/modules/receive-note/receive-note.component';
 @NgModule({
   declarations: [
     DefaultComponent,
@@ -24,7 +25,8 @@ import { SentNoteComponent } from 'src/app/modules/sent-note/sent-note.component
     InboxDashboardComponent,
     NotesComponent,
     SendNoteComponent,
-    SentNoteComponent
+    SentNoteComponent,
+    ReceiveNoteComponent
   ],
   imports: [
     CommonModule,

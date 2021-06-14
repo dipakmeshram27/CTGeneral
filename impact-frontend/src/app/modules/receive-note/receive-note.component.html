@@ -28,22 +28,43 @@
     </div>
   </div>
   <ng-template #elseBlock>
-  No notes received
+    No notes received
   </ng-template>
 </fieldset>
 
 <ng-template #content let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Reply</h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    Able to open pop up
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" (click)="modal.close()">Close</button>
-    <button type="button" class="btn btn-primary">Save changes</button>
-  </div>
+  <fieldset style="border-radius: 10px; border: 1px solid lightgray; padding: 20px;">
+    <div class="container-fluid">
+      <form (ngSubmit)='sendNotes()' [formGroup]='replyForm' novalidate class="form">
+        <div class="modal-header">
+          <h1 class="page-title" id="modal-basic-title">Reply</h1>
+        </div>
+        <div class="modal-body">
+          <div class="row mb-3">
+            <div class="col-12">
+              <div class="form-group">
+                <label for="sender">Message</label>
+                <div class="form-group">
+                  <textarea id="msg" placeholder="Message" class="form-control" formControlName="reply"
+                    [ngClass]="{ 'is-invalid': submitted && f.reply.errors }" rows="6" cols="60"></textarea>
+                  <div *ngIf="submitted && f.reply.errors" class="invalid-feedback">
+                    <div *ngIf="f.reply.errors.required">Message is required</div>
+                    <div *ngIf="f.reply.errors.maxlength">Notes contains maximum 200 characters</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div class="form-group">
+            <button type="reset" class="btn btn-secondary" (click)="modal.close()">Close</button>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-success">Save</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </fieldset>
 </ng-template>
