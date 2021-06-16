@@ -3,6 +3,7 @@ import { FormGroup, FormControl, FormArray, Validators,FormBuilder } from '@angu
 import { from } from 'rxjs';
 import { NotesService } from '../../../service/notes/notes.service';
 import { Notes } from '../../../model/notes';
+import { ToastService } from 'src/app/service/toast/toast.service';
 
 @Component({
   selector: 'app-send-note',
@@ -15,7 +16,8 @@ export class SendNoteComponent implements OnInit {
   public note;
   designation;
   submitted = false
-  constructor(private noteService: NotesService,private formBuilder: FormBuilder) { }
+  constructor(private noteService: NotesService,private formBuilder: FormBuilder,
+    private toastService: ToastService) { }
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
@@ -27,6 +29,7 @@ export class SendNoteComponent implements OnInit {
     this.designation = this.form.value.designation;
     this.noteService.getUsersByRole().subscribe(val => {
       this.users = val.filter(user => {
+        // TODO: sender id is hardcoded for now . would be fetched from session
         return user.userId !== 23;
       });
       console.log(val);
@@ -45,13 +48,16 @@ export class SendNoteComponent implements OnInit {
       return;
     }
     
-    console.log(this.form.value);
     let newNotes: Notes = this.form.value;
     // TODO: sender id is hardcoded for now . would be fetched from session
     newNotes.senderId = 23;
-    this.noteService.sendNotes(newNotes).subscribe(value => {
-      console.log(value);
-    })
+    this.noteService.sendNotes(newNotes).subscribe(
+      data => {
+        this.toastService.show(data.message, { classname: 'bg-success text-light', delay: 5000 })
+      },
+      error => {
+        this.toastService.show('Server Error please try later', { classname: 'bg-danger text-light', delay: 5000 });
+      })
   }
 
   populateDesgination() {
