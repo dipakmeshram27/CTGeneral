@@ -4,7 +4,9 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {DefaultModule} from '../app/layouts/default/default.module';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { SharedModule } from './shared/shared.module';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent
@@ -14,7 +16,9 @@ import {DefaultModule} from '../app/layouts/default/default.module';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    DefaultModule
+    MatSidenavModule,
+    SharedModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
