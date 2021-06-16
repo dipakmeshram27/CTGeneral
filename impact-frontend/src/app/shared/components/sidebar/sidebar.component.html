@@ -18,7 +18,7 @@
         <mat-icon class="menu-button" [ngClass]="{'rotated' : showNoteSubmenu}">expand_more</mat-icon>
     </mat-list-item>
     <div class="submenu" [ngClass]="{'expanded' : showNoteSubmenu}" *ngIf="showNoteSubmenu">
-        <a mat-list-item routerLinkActive="list-item-active" routerLink="/send-notes">Send New Note</a>
+        <a mat-list-item routerLinkActive="list-item-active" routerLink="/note">Send New Note</a>
         <a mat-list-item routerLinkActive="list-item-active" routerLink="/received-notes">Receive Note</a>
         <a mat-list-item routerLinkActive="list-item-active" routerLink="/sent-notes">Sent Note</a>
     </div>

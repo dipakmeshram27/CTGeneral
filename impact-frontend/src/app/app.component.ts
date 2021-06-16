@@ -7,4 +7,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Admin Dashboard';
+
+  sidebarOpened=true;
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+  sidebarToggler(){
+    this.sidebarOpened=!this.sidebarOpened;
+  }
 }
