@@ -32,7 +32,6 @@ import { NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
     MatListModule,
     RouterModule,
     NgbToastModule
-    
 
   ],
   exports: [
