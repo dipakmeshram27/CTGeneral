@@ -7,11 +7,13 @@ import { CommonModule } from '@angular/common';
 import { NoteRoutingModule } from './note-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
+import { ReceiveNoteComponent } from './receive-note/receive-note.component';
 
 @NgModule({
   declarations: [
     NotesComponent,
-    SendNoteComponent
+    SendNoteComponent,
+    ReceiveNoteComponent
   ],
   imports: [
     CommonModule,
@@ -24,6 +26,6 @@ import { NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
   ],
   providers: [],
   bootstrap: [NotesComponent],
-  exports:[SendNoteComponent]
+  exports:[SendNoteComponent,ReceiveNoteComponent]
 })
 export class NoteModule { }

@@ -32,4 +32,7 @@ export class NotesService {
     };
     return this.http.post(`${environment.baseUrl}/notes-service/note/reply`,  data);
   }
+  deleteNoteById(noteId: number):Observable<any>{
+    return this.http.delete<any>(`${environment.baseUrl}/notes-service/note/deleteNoteById?id=${noteId}`,);
+  }
 }

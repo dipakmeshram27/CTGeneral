@@ -26,7 +26,12 @@ export class ReceiveNoteComponent implements OnInit {
       reply: new FormControl('', [Validators.required, Validators.maxLength(200)])
     })
 
-    // TODO: Sender id is hardcoded - needs to be updated after login
+    this.getReciveNote();
+   
+  }
+
+  getReciveNote(){
+      // TODO: Sender id is hardcoded - needs to be updated after login
     this.noteService.getRecieveNotes(14).subscribe(val => {
       console.log(val);
       this.receiveNote = val;
@@ -34,10 +39,25 @@ export class ReceiveNoteComponent implements OnInit {
   }
 
 
-
   open(content, selectedNoteId) {
     this.selectedNoteId = selectedNoteId;
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' });
+  }
+
+  delete(selectedNoteId) {
+   this.noteService.deleteNoteById(selectedNoteId).subscribe(
+     data => {
+      console.log(data);
+      this.toastService.show(data.message, { classname: 'bg-success text-light', delay: 5000 })
+      this.getReciveNote();
+     },
+     error => {
+      this.toastService.show('Server Error please try later', { classname: 'bg-danger text-light', delay: 5000 });
+  
+     }
+     
+     )
+    
   }
 
   sendNotes() {
