@@ -5,6 +5,8 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NoteRoutingModule } from './note-routing.module';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { NoteRoutingModule } from './note-routing.module';
     RouterModule,
     ReactiveFormsModule,
     FormsModule,
-    NoteRoutingModule
+    NoteRoutingModule,
+    SharedModule,
+    NgbToastModule
   ],
   providers: [],
   bootstrap: [NotesComponent],

@@ -11,12 +11,15 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatListModule} from '@angular/material/list'; 
 import {MatDividerModule} from '@angular/material/divider'; 
 import { RouterModule } from '@angular/router';
+import { ToastsContainer } from './components/toast/toast-container.component';
+import { NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
     HeaderComponent,
     SidebarComponent,
-    FooterComponent
+    FooterComponent,
+    ToastsContainer
   ],
   imports: [
     CommonModule,
@@ -27,15 +30,15 @@ import { RouterModule } from '@angular/router';
     FlexLayoutModule,
     MatMenuModule,
     MatListModule,
-    RouterModule
-    
+    RouterModule,
+    NgbToastModule
 
   ],
   exports: [
     HeaderComponent,
     SidebarComponent,
-    FooterComponent
-
+    FooterComponent,
+    ToastsContainer
   ]
 })
 export class SharedModule { }
