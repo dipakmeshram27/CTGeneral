@@ -6,19 +6,24 @@ import { RouterModule } from '@angular/router';
 import { SchedulingComponent } from 'src/app/modules/scheduling/scheduling.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { EmployeeRegistrationComponent } from 'src/app/modules/employee-registration/employee-registration.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @NgModule({
-  declarations: [
+  declarations: 
+  [
     DefaultComponent,
     DashboardComponent,
-    SchedulingComponent
-
-
+    SchedulingComponent,
+    EmployeeRegistrationComponent
   ],
-  imports: [
+  imports: 
+  [
     CommonModule,
     RouterModule,
     SharedModule,
-    MatSidenavModule
+    MatSidenavModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class DefaultModule { }

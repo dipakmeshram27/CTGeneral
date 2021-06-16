@@ -1,0 +1,14 @@
+.form-group{
+    margin-bottom: 40px;
+}
+
+.signup-div {
+    display: flex;
+    justify-content: center;
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.radio{
+    display: inline;
+}
