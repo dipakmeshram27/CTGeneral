@@ -11,6 +11,17 @@
 
     <a mat-list-item routerLinkActive="list-item-active" routerLink="/">Dashboard</a>
     <a mat-list-item routerLinkActive="list-item-active" routerLink="/schedule">Scheduling</a>
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/inbox">Inbox</a>
+
+    <mat-list-item (click)="showNoteSubmenu = !showNoteSubmenu" class="parent">
+        <span class="full-width">Notes</span>
+        <mat-icon class="menu-button" [ngClass]="{'rotated' : showNoteSubmenu}">expand_more</mat-icon>
+    </mat-list-item>
+    <div class="submenu" [ngClass]="{'expanded' : showNoteSubmenu}" *ngIf="showNoteSubmenu">
+        <a mat-list-item routerLinkActive="list-item-active" routerLink="/note">Send New Note</a>
+        <a mat-list-item routerLinkActive="list-item-active" routerLink="/received-notes">Receive Note</a>
+        <a mat-list-item routerLinkActive="list-item-active" routerLink="/sent-notes">Receive Note</a>
+    </div>
   
     <mat-divider></mat-divider>
   
