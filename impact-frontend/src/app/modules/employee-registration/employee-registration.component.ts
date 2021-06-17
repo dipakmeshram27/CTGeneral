@@ -42,7 +42,7 @@ export class EmployeeRegistrationComponent implements OnInit
 
     this.reactiveForm= this.formBuilder.group(
     {
-      title: new FormControl(),
+      title: new FormControl(''),
       firstName : new FormControl('',[Validators.required,Validators.minLength(3)]),
       lastName : new FormControl('',[Validators.required,Validators.minLength(3)]),
       password : new FormControl('',[Validators.required,Validators.minLength(8)]),
