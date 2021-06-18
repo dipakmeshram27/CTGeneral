@@ -16,14 +16,18 @@ import { DatacreateService } from 'src/app/service/datacreate.service';
 
 import { PatientDetailsComponent } from './modules/patient-details/patient-details.component'
 import {Ng2TelInputModule} from 'ng2-tel-input';
+import { LoginComponent } from './modules/login/login.component';
+import { ForgotPasswordComponent } from './modules/forgot-password/forgot-password.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     EmployeeRegistrationComponent,
-    PatientRegistrationComponent
-    PatientDetailsComponent
+    PatientRegistrationComponent,
+    PatientDetailsComponent,
+    LoginComponent,
+    ForgotPasswordComponent
 
   
   ],

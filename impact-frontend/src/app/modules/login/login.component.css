@@ -1,0 +1,33 @@
+.container-fluid{
+    height: 100%;
+    width: 100%;
+  
+}
+.form-group{
+    flex-direction: column;
+    height: 100%;
+
+   margin-bottom: 40px;
+
+}
+.form-btn, .change-pass{
+   display: flex;
+    justify-content: center;
+    align-items: center;
+ 
+}
+.form-wrapper{
+    width: 410px;
+    max-width: 100%;
+    margin-top: auto;
+    margin-bottom: auto;
+
+ padding-block-start: 80px;
+}
+
+div.has-error{
+    height: 0px;
+}
+
+
+   

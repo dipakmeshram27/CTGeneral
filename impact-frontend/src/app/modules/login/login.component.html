@@ -1,0 +1,83 @@
+<div class="container-fluid">
+    <div class="row" style="justify-content: center;">
+     
+        <div class="col-sm-6">
+        <div class="wrapper">
+            <div class="change-pass">
+
+                
+                <form [formGroup]="form" (ngSubmit)="submit()" >
+                    <div class="form-wrapper">
+                        <div class="welcome_msg">
+                            <h1 style="font-weight: bold;">Welcome to CT General Hospital </h1>
+                            <h4 style="color: gray; padding-bottom: 50px;">Need an account? <a mat-list-item routerLinkActive="list-item-active" routerLink="/patient-registration">Sign Up</a></h4>
+                        </div>
+                        
+
+
+                        <div class="row" style="display: flex; ">
+                            <div class="form-group ">
+                                <div class="form-group has-error">
+                                    
+                                    <input type="text" id="email" placeholder="Email*" class="form-control"
+                                    formControlName="email">
+                                       
+    
+    
+                                        
+                                        
+                            
+                                         <div class="mat-error ng-tns-c77-3 ng-star-inserted" role="alert" style="color: red; font-size: small;"
+                            *ngIf="form.get('email')?.touched && form.get('email')?.invalid">
+                            <div *ngIf="form.get('email')?.errors?.required">Please enter a valid email address</div>
+                            <div *ngIf="form.get('email')?.errors?.email">Please enter a valid email address</div>
+                        </div>
+                                    
+                                </div>   
+                            </div>
+                        </div>
+                        <div class="row" style="display: flex;">
+                            <div class="form-group">
+                                <div class="form-group has-error">
+                                    <input type="password" id="password" placeholder="Enter Your Password" class="form-control"
+                                        formControlName="password">
+
+                                    <div class="mat-error ng-tns-c77-3 ng-star-inserted" role="alert" style="color: red; font-size: small;"
+                                        *ngIf="form.get('password')?.touched && form.get('password')?.invalid">
+                                        <div *ngIf="form.get('password')?.errors?.required">This field cannot be empty</div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row" style="display: flex;">
+                            <div class="form-group">
+                              
+
+                              
+                            <div class="form-btn" style="padding-block: 20px;">
+                               
+                                <button class="btn btn-success w-100" [disabled]="password.invalid"
+                                [style.color]="'#c2b6a6'" [style.background-color]="password.invalid ?'#e0e0e0':'#3f51b5'" 
+                                style="font-weight: 700;">
+                                Login
+                            </button>
+                            </div>
+                            
+                            
+                            <div class="form-group">
+                                <a mat-list-item routerLinkActive="list-item-active" routerLink="/forgot-password">Forgot Password?</a>
+                               
+                            </div>
+    
+                        </div>
+                    </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+
