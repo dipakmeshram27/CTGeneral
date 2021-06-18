@@ -16,7 +16,7 @@ export class UserService {
   getUsers():Observable<User[]>{
     return this.http.get<User[]>(`${environment.baseUrl}/user/getAllUser`);
   }
-  createUser(newUser: User){
+  createUser(newUser: User):Observable<any>{
     return this.http.post(`${environment.baseUrl}/user/addUser`, newUser);
   }
 }

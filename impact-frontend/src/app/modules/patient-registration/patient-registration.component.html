@@ -19,7 +19,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="col-sm-6 form-group">
                         <input type="text" id="firstName" placeholder="First Name" class="form-control"
                             formControlName="firstName" minlength="5"
                             [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" required>
@@ -34,7 +34,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="col-sm-6 form-group">
                         <input type="text" id="lastname" placeholder="Last Name" class="form-control"
                             formControlName="lastName" minlength="5"
                             [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" required>
@@ -49,7 +49,7 @@
                     </div>
 
                     
-                    <div class="form-group">
+                    <div class="col-sm-6 form-group">
                         <input type="email" id="email" placeholder="Email" class="form-control" formControlName="email"
                             name="email" minlength="15" [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
                             required>
@@ -65,13 +65,13 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="col-sm-6 form-group">
                         <input type="text" formControlName="phoneNumber" id="phonenumber" name="phonenumber"
                             placeholder="Phone number" class="form-control">
 
                     </div>
                 
-                    <div class="form-group">
+                    <div class="col-sm-6 form-group">
 
                         <input type="text" placeholder="DOB" name="dob" formControlName="dateOfBirth" class="form-control"
                              bsDatepicker [bsConfig]="{ isAnimated: true }">
@@ -94,7 +94,7 @@
                         <input type="hidden" id="role" name="role" value="patient">
                     </div>
 
-                    <div class="form-group">
+                    <div class="col-sm-6 form-group">
                         <input type="password" id="password" placeholder="Password" class="form-control"
                             formControlName="password" name="password" minlength="8"
                             [ngClass]="{ 'is-invalid': submitted && f.password.errors }" required ng-pattern="/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/">
@@ -108,7 +108,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="col-sm-6 form-group">
                         <input type="password" id="confpassword" placeholder="Confirm Pasword" class="form-control"
                             formControlName="confpassword" name="confpassword" minlength="8"
                             [ngClass]="{ 'is-invalid': submitted && f.confpassword.errors }" required>
@@ -124,7 +124,7 @@
                         Already Registered? <a href="www.google.com">Login</a>
                     </div>
 
-                    <div class="form-group">
+                    <div class="col-sm-6 form-group">
                         <button class="btn btn-success w-100" [disabled]="!myForm.form.valid">Submit</button>
                     </div>
             </form>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/model/user';
+import { ToastService } from 'src/app/service/toast/toast.service';
 
 import { UserService } from '../../service/user/user-service';
 
@@ -23,7 +24,7 @@ export class PatientRegistrationComponent implements OnInit {
   
 
   get f() { return this.reactiveForm.controls; } 
-  constructor(private formBuilder: FormBuilder, private userService:UserService) {
+  constructor(private formBuilder: FormBuilder, private userService:UserService, private toastService: ToastService) {
 
       this.reactiveForm= this.formBuilder.group({
         
@@ -72,14 +73,17 @@ export class PatientRegistrationComponent implements OnInit {
     if (this.reactiveForm.invalid) {
     return;
     }
-    else{
+    
       console.log(this.reactiveForm.value);
       let newUser: User= this.reactiveForm.value;
      newUser.role = 1;
-      this.userService.createUser(newUser).subscribe(value => {
-      console.log(value);
+      this.userService.createUser(newUser).subscribe(  data => {
+        this.toastService.show(data.statusMessage, { classname: 'bg-success text-light', delay: 5000 })
+      },
+      error => {
+        this.toastService.show('Server Error please try later', { classname: 'bg-danger text-light', delay: 5000 });
       })
-    }
+    
     }
 
     
