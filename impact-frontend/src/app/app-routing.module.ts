@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
+import { PatientDetailsComponent } from './modules/patient-details/patient-details.component';
 import { PatientRegistrationComponent } from './modules/patient-registration/patient-registration.component';
 import { ForgotPasswordComponent } from './modules/forgot-password/forgot-password.component';
 import { LoginComponent } from './modules/login/login.component';
@@ -17,6 +18,7 @@ const routes: Routes = [
     path: 'patient-registration',
     component: PatientRegistrationComponent
   },
+  { path: 'patient-details', component: PatientDetailsComponent},
   
   { path: 'schedule', component: SchedulingComponent },
   {

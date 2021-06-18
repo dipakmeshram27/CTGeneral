@@ -10,12 +10,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
 import { PatientRegistrationComponent } from './modules/patient-registration/patient-registration.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
-import{FormsModule,ReactiveFormsModule} from '@angular/forms'
+import{FormsModule,ReactiveFormsModule} from '@angular/forms';
+import { PatientDetailsComponent } from './modules/patient-details/patient-details.component'
+import {Ng2TelInputModule} from 'ng2-tel-input';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PatientRegistrationComponent
+    PatientRegistrationComponent,
+    PatientDetailsComponent
   
   ],
   imports: [
@@ -28,7 +31,8 @@ import{FormsModule,ReactiveFormsModule} from '@angular/forms'
     NgbToastModule,
     BsDatepickerModule.forRoot(),
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    Ng2TelInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]
