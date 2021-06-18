@@ -3,6 +3,7 @@ import { RouterModule, Routes } from "@angular/router";
 import { NotesComponent } from './notes.component';
 import { ReceiveNoteComponent } from './receive-note/receive-note.component';
 import { SendNoteComponent } from './send-note/send-note.component';
+import { SentNoteComponent } from './sent-note/sent-note.component';
 
 const routes: Routes = [
     {
@@ -10,7 +11,8 @@ const routes: Routes = [
         component: NotesComponent,
         children: [
             { path: '', component: SendNoteComponent },
-            { path: 'received-notes', component: ReceiveNoteComponent }
+            { path: 'received-notes', component: ReceiveNoteComponent },
+            { path: 'sent-notes', component: SentNoteComponent }
         ]
     }];
 
