@@ -1,0 +1,221 @@
+<h3 style="text-align: center;"><b>Patient Details</b></h3>
+
+
+<div class="container">
+  <form>
+  
+    <hr />
+    <div class="row">
+        <div class="col-sm-12">
+          <div class="col-sm-12">
+            <div>
+              <p><b>Personal Information :-</b></p>
+              <div class="row">
+                <div class="col-sm-1">
+                    Sr.No: <input type="text" class="form-control" placeholder="Sr.No">
+                  </div>
+                  <div class="col-sm-1">
+                    Mr:<br><input type="radio" class="form-group" name="mr">
+                  </div>
+                  <div class="col-sm-1">
+                    Mrs:<br><input type="radio" class="form-group" name="mrs">
+                  </div>
+                  <div class="col-sm-1">
+                    Ms:<br><input type="radio" class="form-group" name="ms">
+                  </div>
+                  <div class="col-sm-2">
+                    First Name: <input type="text" class="form-control" placeholder="" name="firstname">
+                  </div>
+                  <div class="col-sm-2">
+                    Last Name: <input type="text" class="form-control" placeholder="" name="lastname">
+                  </div>
+                  <div class="col-sm-2">
+                    Enter DOB:<input type="text" placeholder="DD/MM/YYYY" class="form-control" bsDatepicker
+                      [bsConfig]="{ isAnimated: true }">
+                  </div>
+                  <div class="col-sm-2">
+                    Age: <input type="text" class="form-control" placeholder="" name="age">
+                  </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12">
+            <div>
+              
+              <div class="row">
+                <div class="col-sm-1">
+                    Gender
+                  </div>
+                  <div class="col-sm-1">
+                    Male:<br><input type="radio" name="male">
+                  </div>
+                  <div class="col-sm-1">
+                    Female:<br><input type="radio" name="female">
+                  </div>
+                  <div class="col-sm-1">
+                    Other:<br><input type="radio" name="other">
+                  </div>
+                  <div class="col-sm-2">
+                    Race: <input type="text" class="form-control" placeholder="" name="race">
+                  </div>
+                  <div class="col-sm-2">
+                    Ethinicity: <input type="text" class="form-control" placeholder="" name="ethinicity">
+                  </div>
+                  <div class="col-sm-2">
+                    Language Known: <input type="text" class="form-control" placeholder="" name="lang">
+                  </div>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+      <hr/>
+      
+      <div class="row">
+        
+            <div class="col">
+              <p><b>Contact Information :-</b></p>
+              <div class="row">
+                <div class="col-sm-6">
+                  Email: <input type="text" class="form-control" name="email">
+                </div>
+                <div class="col-sm-6">
+                  Phone Number: <input type="text" class="form-control" name="phnumber" ng2TelInput>
+                </div>
+                <div class="col-sm-6">
+                  Address: <input type="text" class="form-control" name="address">
+                </div>
+                <div class="col-sm-6">
+                  City: <input type="text" class="form-control" name="city">
+                </div>
+                <div class="col-sm-6">
+                  Pin Code: <input type="text" class="form-control" name="pincode">
+                </div>
+  
+                <div class="col-sm-6">
+                  State: <input type="text" class="form-control" name="state">
+                </div>
+                <div class="col-sm-6">
+                  Country: <input type="text" class="form-control" name="country">
+                </div>
+              </div>
+            </div>
+            <div class="col" style="border-left: 6px solid grey; height: 350px;">
+              <p><b>Emergency Contact Information :-</b></p>
+              <div class="row">
+                <div class="col-sm-1">
+                  Mr:<br><input type="radio" class="form-group" name="mr">
+                </div>
+                <div class="col-sm-1">
+                  Mrs:<br><input type="radio" class="form-group" name="mrs">
+                </div>
+                <div class="col-sm-1">
+                  Ms:<br><input type="radio" class="form-group" name="ms">
+                </div>
+                <div class="col-sm-4">
+                  First Name: <input type="text" class="form-control" placeholder="" name="emgrfirstname">
+                </div>
+                <div class="col-sm-4">
+                  Last Name: <input type="text" class="form-control" placeholder="" name="emgrlastname">
+                </div>
+                <div class="col-sm-5">
+                  Email: <input type="text" class="form-control" name="emgremail">
+                </div>
+                <div class="col-sm-4">
+                  Phone Number: <input type="text" class="form-control" name="emgrphnumber" ng2TelInput>
+                </div>
+                <div class="col-sm-3">
+                  Relation: <select name="relation" class="form-control" id="relation">
+                    <option value="none">SELECT</option>
+                    <option value="mother">Mother</option>
+                    <option value="father">Father</option>
+                    <option value="brother">Brother</option>
+                    <option value="sister">Sister</option>
+                  </select>
+                </div>
+                <div class="col-sm-6">
+                  Address: <input type="text" class="form-control" name="emgraddress">
+                </div>
+                <div class="col-sm-6">
+                  City: <input type="text" class="form-control" name="emgrcity">
+                </div>
+                <div class="col-sm-6">
+                  Pin Code: <input type="text" class="form-control" name="emgrpincode">
+                </div>
+                <div class="col-sm-6">
+                  State: <input type="text" class="form-control" name="emgrstate">
+                </div>
+                <div class="col-sm-6">
+                  Country: <input type="text" class="form-control" name="emgrcountry">
+                </div>
+                <div class="col-sm-6">
+                  Same As Parent: <input type="checkbox" id="addrcheck" name="addrcheck" value="addrcheck">
+                </div>
+                
+                <div class="col">
+                  Do You Want To Access Patient Portal :
+                  Yes:<input type="radio" class="form-group" value="yes">
+                  No:<input type="radio" class="form-group" value="no">
+                </div>
+  
+              </div>
+            </div>
+        
+      </div>
+    
+   
+ 
+    <hr />
+    <div class="row">
+      <div>
+        Allergies :
+        Yes:<input type="radio" class="form-group" value="yes">
+        No:<input type="radio" class="form-group" value="no">
+      </div>
+      <div class="col-sm-3">
+        Allergy ID: <select name="relation" class="form-control" id="relation">
+          <option value="none">NA</option>
+          <option value="mother"></option>
+          <option value="father"></option>
+
+        </select>
+      </div>
+      <div class="col-sm-3">
+        Allergy Name: <select name="relation" class="form-control" id="relation">
+          <option value="none">NA</option>
+          <option value="mother"></option>
+          <option value="father"></option>
+
+        </select>
+      </div>
+      <div class="col-sm-3">
+        Allergy Type: <select name="relation" class="form-control" id="relation">
+          <option value="none">NA</option>
+          <option value="mother"></option>
+          <option value="father"></option>
+
+        </select>
+      </div>
+      <div class="col-sm-3">
+        Other Allergy: <input type="text" class="form-control" name="emgrcountry">
+      </div>
+      <div class="col-sm-3">
+        Is Allergy Fatal :
+        Yes:<input type="radio" class="form-group" value="yes">
+        No:<input type="radio" class="form-group" value="no">
+      </div>
+      <div class="col-sm-3">
+        Description: <input type="text" class="form-control" name="emgrcountry">
+
+      </div>
+
+    </div>
+    <hr />
+    <div class="center" style="text-align: center;">
+      <button type="button" class="btn btn-primary">Submit</button>
+      &nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-info align:center">Back</button>
+
+    </div>
+  </form>
+</div>
