@@ -63,7 +63,8 @@ export class EmployeeRegistrationComponent implements OnInit
       }
     )
   }
-  onSubmit()
+
+  Submit()
   {
     console.log(this.reactiveForm.value);
   }

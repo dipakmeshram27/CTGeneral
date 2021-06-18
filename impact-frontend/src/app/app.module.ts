@@ -7,15 +7,18 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { SharedModule } from './shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
-import {DatacreateService} from'src/app/service/datacreate.service';
-import {FormsModule, ReactiveFormsModule} from'@angular/forms';
 import { EmployeeRegistrationComponent } from './modules/employee-registration/employee-registration.component';
- 
+import { PatientRegistrationComponent } from './modules/patient-registration/patient-registration.component';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import{FormsModule,ReactiveFormsModule} from '@angular/forms'
+import { DatacreateService } from 'src/app/service/datacreate.service';
+
 @NgModule({
-  declarations: 
-  [
+  declarations: [
     AppComponent,
-    EmployeeRegistrationComponent
+    EmployeeRegistrationComponent,
+    PatientRegistrationComponent
+  
   ],
   imports: 
   [
@@ -27,7 +30,10 @@ import { EmployeeRegistrationComponent } from './modules/employee-registration/e
     HttpClientModule,
     ReactiveFormsModule,
     NgbToastModule,
-    FormsModule
+    FormsModule,
+    BsDatepickerModule.forRoot(),
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [DatacreateService],
   bootstrap: [AppComponent]
