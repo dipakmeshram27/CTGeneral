@@ -1,5 +1,6 @@
 
 <div class="container">
+    <div class="row">
         <form (ngSubmit)="createPost()" [formGroup]="reactiveForm">
 
             <div class="form-group col-md-12">
@@ -14,6 +15,16 @@
                     <input type="radio" name="title" id="title" formControlName="title" [value]="method.id">
                     <label for="title">{{method.name}}</label>
                 </div>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="role" class="col-sm-6 control-label">Role*</label>  
+                        <select name="role"  id="role" formControlName="role" class="form-control">
+                            <option value=""></option>
+                            <option *ngFor="let method of role" [value]="method.id">
+                                {{method.name}}
+                            </option>
+                        </select>
             </div>
 
             <div class="form-group col-md-6">
@@ -88,146 +99,20 @@
                         </div>
             </div>
            
-            <div class="form-group col-md-6">
-                <label for="role" class="col-sm-6 control-label">Role*</label>  
-                        <select name="role"  id="role" formControlName="role" class="form-control">
-                            <option value=""></option>
-                            <option *ngFor="let method of role" [value]="method.id">
-                                {{method.name}}
-                            </option>
-                        </select>
-            </div>
+            
             <div class="form-group col-md-6">
                 <div class="form-btn" style="padding-block: 50px;">
-                    <button class="btn btn-success w-100" [disabled]="f.role.invalid"
-                        [style.color]="'#c2b6a6'" [style.background-color]="f.role.invalid ?'#e0e0e0':'#3f51b5'" 
+                    <button class="btn btn-success w-100" [disabled]="f.phoneNumber.invalid"
+                        [style.color]="'#c2b6a6'" [style.background-color]="f.phoneNumber.invalid ?'#e0e0e0':'#3f51b5'" 
                         style="font-weight: 700;">Submit
                     </button>
                 </div>
             </div> 
         </form> 
+    </div>
   </div>
 
-<!--<div class="container">
-    <div class="col-sm-6">
-        <form (ngSubmit)="createPost()" [formGroup]="reactiveForm">
-                    
-            <div class="form-group">
-                <h2>Employee Registration</h2>
-                <h6 style="color: gray;">Please Enter Emplopyee details to create  account</h6>
-            </div>
 
-    
-            <div class="row" style="display: flex;">
-                    <div class="form-group">
-                        <label for="title" style="padding-right: 10px;">Title: </label>
-                        <div class="radio" style="padding-right: 10px;"  *ngFor="let method of title">
-                            <input type="radio" name="title" id="title" formControlName="title" [value]="method.id">
-                            <label for="title">{{method.name}}</label>
-                        </div>
-                    </div>
-
-                   
-                    <div class="form-group">
-                            <label for="firstName" class="col-sm-3 control-label">First Name*</label>
-                            <input type="text" id="firstName" placeholder="First Name" class="form-control"
-                            formControlName="firstName"  [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" required>
-                            <div class="mat-error ng-tns-c77-3 ng-star-inserted" role="alert" style="color: red; font-size: small;" 
-                                *ngIf="f.firstName.touched && f.firstName.invalid">
-
-                                <div *ngIf="f.firstName.errors.required">First name cannot be empty</div>
-                                <div *ngIf="f.firstName.errors.minlength">Please don't use abbreviations</div>
-                            </div>
-                    </div>
-                  
-
-                    
-                    <div class="form-group">
-                            <label for="lastName" class="col-sm-3 control-label">Last Name*</label>
-                            <input type="text" id="lastName" placeholder="Last Name" class="form-control"
-                            formControlName="lastName"  [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" required>
-                                
-                            <div class="mat-error ng-tns-c77-3 ng-star-inserted" role="alert" style="color: red; font-size: small;" 
-                                *ngIf="f.lastName.touched && f.lastName.invalid">
-
-                                <div *ngIf="f.lastName.errors.required">Last name cannot be empty</div>
-                                <div *ngIf="f.lastName.errors.minlength">Please don't use abbreviations</div>
-                            </div>
-                    </div>
-                            
-
-                    <div class="form-group">
-                        <label for="password" class="col-sm-3 control-label">Password*</label>
-                        <input type="password" id="password" placeholder="Password" class="form-control"
-                        formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" required>
-                        
-                        <div class="mat-error ng-tns-c77-3 ng-star-inserted" role="alert" style="color: red; font-size: small;" 
-                            *ngIf="f.password.touched && f.password.invalid">
-                            <div *ngIf="f.password.errors.required">Password is Required</div>
-                            <div *ngIf="f.password.errors.minlength">Password required atleast 8 characters</div>
-                        </div>
-                    </div>           
-                            
-
-                    <div class="form-group">
-                        <label for="email" class="col-sm-3 control-label">Email*</label>
-                        <input type="email" id="email" placeholder="Email" class="form-control"
-                        formControlName="email" name="email" 
-                        [ngClass]="{ 'is-invalid': submitted && f.email.errors }" required>
-
-                        <div class="mat-error ng-tns-c77-3 ng-star-inserted" role="alert" style="color: red; font-size: small;" 
-                            *ngIf="f.email.touched && f.email.invalid">
-
-                            <div *ngIf="f.email.errors.required">Email address cannot be empty</div>
-                            <div *ngIf="f.email.errors.email">Please enter valid email address e.g. exampleusername@xyzdomain,com</div>
-                        </div>
-                    </div>
-                           
-                                
-                    <div>
-                        <label for="dateOfBirth" class="col-sm-3 control-label">Date of Birth*</label>   
-                        <input type="date" id="dateOfBirth" placeholder="DOB" class="form-control" formControlName="dateOfBirth"
-                        name="dateOfBirth">   
-                    </div>                
-                            
-                        
-                    <div class="form-group">
-                        <label for="phoneNumber" class="col-sm-3 control-label">Contact*</label>
-                        <input type="tel" formControlName="phoneNumber" id="phoneNumber" name="phoneNumber"
-                        placeholder="Phone number" class="form-control">
-
-                        <div class="mat-error ng-tns-c77-3 ng-star-inserted" role="alert" style="color: red; font-size: small;" 
-                            *ngIf="f.phoneNumber.touched && f.phoneNumber.invalid">
-
-                            <div *ngIf="f.phoneNumber.errors.required">Contact number is Required</div>
-                            <div *ngIf="f.phoneNumber.errors.minlength">Contact required 10 digit</div>
-                            <div *ngIf="f.phoneNumber.errors.maxLength">Contact required 10 digit</div>
-                            <div *ngIf="f.phoneNumber.errors.pattern">Contact number should be a number</div>
-                        </div>
-                    </div>        
-
-                            
-                    <div>
-                        <label for="role" class="col-sm-3 control-label">Role*</label>  
-                        <select name="role"  id="role" formControlName="role" class="form-control">
-                            <option value=""></option>
-                            <option *ngFor="let method of role" [value]="method.id">
-                                {{method.name}}
-                            </option>
-                        </select>
-                    </div>            
-                                    
-                    <div class="form-btn" style="padding-block: 50px;">
-                        <button class="btn btn-success w-100" [disabled]="f.role.invalid"
-                            [style.color]="'#c2b6a6'" [style.background-color]="f.role.invalid ?'#e0e0e0':'#3f51b5'" 
-                            style="font-weight: 700;">Submit
-                        </button>
-                    </div>       
-
-            </div>
-        </form>    
-    </div>
-</div>-->
 
             
             

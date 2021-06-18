@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import {User} from 'src/app/model/User';
+import {User} from 'src/app/model/user';
 import { DatacreateService } from 'src/app/service/datacreate.service';
 
 @Component({
@@ -12,9 +12,8 @@ export class EmployeeRegistrationComponent implements OnInit
 {
   reactiveForm: FormGroup;
   employee:User;
-  ngOnInit(): void {
-  }
-  
+  ngOnInit(): void {}
+
   public role=
   [
     {'id':1, 'name':"Physician"},
@@ -23,10 +22,10 @@ export class EmployeeRegistrationComponent implements OnInit
 
   public title=
   [
-    { 'id': "Mr.", 'name': "Mr." },
-    { 'id': "Ms.", 'name': "Ms." },
-    { 'id': "Mrs.", 'name': "Mrs." },
-    { 'id': "Dr.", 'name': "Dr." }
+    { 'id': "Mr.", 'name': "Mr ." },
+    { 'id': "Miss.", 'name': "Miss ." },
+    { 'id': "Mrs.", 'name': "Mrs ." },
+    { 'id': "Dr.", 'name': "Dr ." }
   ];
 
   
@@ -68,5 +67,5 @@ export class EmployeeRegistrationComponent implements OnInit
   {
     console.log(this.reactiveForm.value);
   }
-
+  
 }

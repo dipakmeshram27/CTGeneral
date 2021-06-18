@@ -12,6 +12,7 @@ const routes: Routes = [
     component: DashboardComponent
   },
   { path: 'schedule', component: SchedulingComponent },
+  { path: 'employee-registration' , component:EmployeeRegistrationComponent},
   {
     path: 'note',
     loadChildren: () => import('./modules/notes/notes.module').then(m => m.NoteModule),
