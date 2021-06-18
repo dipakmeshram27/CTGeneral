@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
+import { PatientRegistrationComponent } from './modules/patient-registration/patient-registration.component';
 import { SchedulingComponent } from './modules/scheduling/scheduling.component';
 
 
@@ -10,6 +11,11 @@ const routes: Routes = [
     path: '',
     component: DashboardComponent
   },
+  {
+    path: 'patient-registration',
+    component: PatientRegistrationComponent
+  },
+  
   { path: 'schedule', component: SchedulingComponent },
   {
     path: 'note',
