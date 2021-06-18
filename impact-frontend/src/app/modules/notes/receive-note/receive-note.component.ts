@@ -32,7 +32,7 @@ export class ReceiveNoteComponent implements OnInit {
 
   getReciveNote(){
       // TODO: Sender id is hardcoded - needs to be updated after login
-    this.noteService.getRecieveNotes(14).subscribe(val => {
+    this.noteService.getRecieveNotes(42).subscribe(val => {
       console.log(val);
       this.receiveNote = val;
     })
