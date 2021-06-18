@@ -8,9 +8,15 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { SharedModule } from './shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
+import { PatientRegistrationComponent } from './modules/patient-registration/patient-registration.component';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import{FormsModule,ReactiveFormsModule} from '@angular/forms'
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PatientRegistrationComponent
+  
   ],
   imports: [
     BrowserModule,
@@ -19,7 +25,10 @@ import { NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
     MatSidenavModule,
     SharedModule,
     HttpClientModule,
-    NgbToastModule
+    NgbToastModule,
+    BsDatepickerModule.forRoot(),
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
