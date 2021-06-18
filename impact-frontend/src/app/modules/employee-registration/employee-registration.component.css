@@ -3,6 +3,7 @@
     margin-bottom: 20px;
 }
 
-.radio{
+.radio-group{
     display: inline;
+    margin-left: 15px;
 }
