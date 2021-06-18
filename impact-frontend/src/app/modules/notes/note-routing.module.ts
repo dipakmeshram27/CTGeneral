@@ -2,13 +2,15 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from "@angular/router";
 import { NotesComponent } from './notes.component';
 import { SendNoteComponent } from './send-note/send-note.component';
+import { SentNoteComponent } from './sent-note/sent-note.component';
 
 const routes: Routes = [
     {
         path: '',
         component: NotesComponent,
         children: [
-            { path: '', component: SendNoteComponent }
+            { path: '', component: SendNoteComponent },
+            { path: 'sent-notes', component: SentNoteComponent }
         ]
     }];
 
