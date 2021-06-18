@@ -22,4 +22,17 @@ export class NotesService {
   getSentNotes(senderId: number):Observable<usernotes[]>{
     return this.http.get<usernotes[]>(`${environment.baseUrl}/notes-service/note/getSentNotes?senderId=${senderId}`, );
   }
+  getRecieveNotes(recieverId: number):Observable<usernotes[]>{
+    return this.http.get<usernotes[]>(`${environment.baseUrl}/notes-service/note/getRecieveNotes?recieverId=${recieverId}`,);
+  }
+  reply(replyNote: string, noteId:number):Observable<any>{
+    const data = {
+      noteId: noteId,
+      reply: replyNote
+    };
+    return this.http.post(`${environment.baseUrl}/notes-service/note/reply`,  data);
+  }
+  deleteNoteById(noteId: number):Observable<any>{
+    return this.http.delete<any>(`${environment.baseUrl}/notes-service/note/deleteNoteById?id=${noteId}`,);
+  }
 }

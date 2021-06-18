@@ -1,0 +1,70 @@
+<h1 class="page-title">Receive Note</h1>
+<fieldset style="border-radius: 10px; border: 1px solid lightgray; padding: 20px;">
+  <div class="container-fluid" *ngIf="receiveNote?.length !== 0; else elseBlock">
+    <div class="card" style="width: 700px; margin-bottom: 10px;" *ngFor="let notes of receiveNote">
+      <div class="card-body">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-4">
+              <h2 class="card-title">{{notes.firstName}} {{notes.lastName}}</h2>
+              <h3 class="card-subtitle mb-2 text-muted">{{notes.role}}</h3>
+            </div>
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4">
+              <h5 class="card-subtitle mb-2 text-muted">{{notes.date | date: 'dd/MM/yyyy h:mm a'}}</h5>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <p class="card-text">{{notes.message}}</p>
+            </div>
+          </div>
+        </div>
+        <button type="button" class="btn btn-primary float-end m-2" (click)="delete(notes.noteId)">Delete</button>
+        <button type="button" class="btn btn-primary float-end m-2" (click)="open(content, notes.noteId)">
+          Reply
+        </button>
+      </div>
+    </div>
+  </div>
+  <ng-template #elseBlock>
+    No notes received
+  </ng-template>
+</fieldset>
+
+<ng-template #content let-modal>
+  <fieldset style="border-radius: 10px; border: 1px solid lightgray; padding: 20px;">
+    <div class="container-fluid">
+      <form (ngSubmit)='sendNotes()' [formGroup]='replyForm' novalidate class="form">
+        <div class="modal-header">
+          <h1 class="page-title" id="modal-basic-title">Reply</h1>
+        </div>
+        <div class="modal-body">
+          <div class="row mb-3">
+            <div class="col-12">
+              <div class="form-group">
+                <label for="sender">Message</label>
+                <div class="form-group">
+                  <textarea id="msg" placeholder="Message" class="form-control" formControlName="reply"
+                    [ngClass]="{ 'is-invalid': submitted && f.reply.errors }" rows="6" cols="60"></textarea>
+                  <div *ngIf="submitted && f.reply.errors" class="invalid-feedback">
+                    <div *ngIf="f.reply.errors.required">Message is required</div>
+                    <div *ngIf="f.reply.errors.maxlength">Notes contains maximum 200 characters</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div class="form-group">
+            <button type="reset" class="btn btn-secondary" (click)="modal.close()">Close</button>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-success">Save</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </fieldset>
+</ng-template>
