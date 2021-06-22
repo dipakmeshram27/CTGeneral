@@ -8,6 +8,7 @@ import { PatientRegistrationComponent } from './modules/patient-registration/pat
 import { ForgotPasswordComponent } from './modules/forgot-password/forgot-password.component';
 import { LoginComponent } from './modules/login/login.component';
 import { SchedulingComponent } from './modules/scheduling/scheduling.component';
+import {InboxModuleModule} from './modules/inbox-module/inbox-module.module'
 
 
 const routes: Routes = [
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path: 'note',
     loadChildren: () => import('./modules/notes/notes.module').then(m => m.NoteModule),
+  },
+  {
+    path: 'inbox',
+    loadChildren: () => import('./modules/inbox-module/inbox-module.module').then(m => m.InboxModuleModule),
   },
   {
     path: 'forgot-password',
