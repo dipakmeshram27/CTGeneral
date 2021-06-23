@@ -18,7 +18,7 @@ import { PatientDetailsComponent } from './modules/patient-details/patient-detai
 import {Ng2TelInputModule} from 'ng2-tel-input';
 import { LoginComponent } from './modules/login/login.component';
 import { ForgotPasswordComponent } from './modules/forgot-password/forgot-password.component';
-
+import { PatientVisitModule } from './modules/patient/patient-visit.module';
 
 @NgModule({
   declarations: [
@@ -45,7 +45,8 @@ import { ForgotPasswordComponent } from './modules/forgot-password/forgot-passwo
     BsDatepickerModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
-    Ng2TelInputModule
+    Ng2TelInputModule,
+    PatientVisitModule
   ],
   providers: [DatacreateService],
   bootstrap: [AppComponent]

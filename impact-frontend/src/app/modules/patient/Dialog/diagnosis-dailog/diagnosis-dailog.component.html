@@ -1,0 +1,39 @@
+<h2 mat-dialog-title>{{title}}</h2>
+
+<mat-dialog-content [formGroup]="form">
+
+  <!-- <mat-form-field>
+        <input matInput type="text"
+                placeholder="Diagnosis Code"
+               formControlName="description"> 
+
+               
+    </mat-form-field> -->
+  <mat-form-field appearance="fill">
+    <mat-label>Diagnosis Code</mat-label>
+    <!-- <mat-select>
+          <mat-option>
+            select
+          </mat-option>
+        </mat-select> -->
+    <input type="text" placeholder="Pick one" aria-label="Number" matInput [formControl]="myControl"
+      [matAutocomplete]="auto">
+    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+      <mat-option *ngFor="let option of options" [value]="option">
+        {{option}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <br>
+
+  <mat-form-field>
+    <input matInput placeholder=" Description" formControlName="description">
+  </mat-form-field>
+
+
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button class="mat-raised-button" (click)="close()" style='margin-right:10px'>Close</button>
+  <button class="mat-raised-button mat-primary" (click)="save()">Save</button>
+</mat-dialog-actions>

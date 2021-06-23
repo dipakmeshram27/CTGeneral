@@ -1,0 +1,46 @@
+<div class="example-container" style="align-content: center;padding: 20px;">
+    <div>
+        <h2 style="color: cornflowerblue">Enter Vital sings Details</h2>
+    </div>
+    <div>
+        <mat-form-field hintLabel="max limit 250 cm" appearance="fill">
+            <mat-label>Height</mat-label>
+            <input matInput #input maxlength="3" placeholder="Ex. 175 cm">
+            <span matSuffix>cm</span>
+            <mat-hint align="end">{{input.value?.length || 0}}/3</mat-hint>
+        </mat-form-field>
+
+
+        <mat-form-field hintLabel="max 3 input " appearance="fill">
+            <mat-label>Weight</mat-label>
+            <input matInput #input maxlength="3" placeholder="Ex. 50 kg">
+            <span matSuffix>kg</span>
+            <mat-hint align="end">{{input.value?.length || 0}}/3</mat-hint>
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-form-field appearance="fill">
+            <mat-label>Blood Pressure </mat-label>
+            <input matInput #input maxlength="3" placeholder="Ex. 120/80">
+            <span matSuffix>mm Hg</span>
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-form-field appearance="fill">
+            <mat-label>Body Temperature </mat-label>
+            <input matInput #input maxlength="3" placeholder="Ex. 98.6°F">
+            <span matSuffix>F</span>
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-form-field appearance="fill">
+            <mat-label>Respiration Rate </mat-label>
+            <input matInput #input >
+            <span matSuffix>BPM</span>
+        </mat-form-field>
+    </div>
+    <div class="example-button-row">
+        <button mat-raised-button color="primary"> submit</button>
+    </div>
+
+</div>
