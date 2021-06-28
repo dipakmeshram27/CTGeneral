@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { User } from '../../model/user';
 import {Notes} from '../../model/notes';
 import { environment } from '../../../environments/environment';
-import { env } from 'process';
 import { usernotes } from '../../model/UserNotes';
 
 @Injectable({
