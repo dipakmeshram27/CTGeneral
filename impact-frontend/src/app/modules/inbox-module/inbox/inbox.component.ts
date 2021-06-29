@@ -20,7 +20,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subject } from 'rxjs';
 import { AppointmentService } from 'src/app/service/appointment/appointment-service';
 import { Appointment } from 'src/app/model/appointment';
-import { convertStringToDate, isTodaysDate } from 'src/app/utils/utils';
+import { convertStringToDate, getFirstDayofWeek, getLastDayofWeek, isTodaysDate } from 'src/app/utils/utils';
 
 const colors: any = {
   red: {
@@ -46,12 +46,36 @@ export class InboxComponent implements OnInit {
   constructor(private modal: NgbModal, private appointmentService: AppointmentService) { }
   appointments = [];
   ngOnInit(): void {
-
     //ToDo call the method baed on user role
     let role = 'physician'
     if (role === 'patient') {
-      
+      this.appointmentService.getAppointmentToPatient(84).subscribe(val => {
+        //console.log(val);
+        this.appointments = val;
+        this.events = val.map((appointments: Appointment) => {
+          return {
+            start: new Date(
+              convertStringToDate(appointments.appointmentDate).getUTCFullYear(),
+              convertStringToDate(appointments.appointmentDate).getUTCMonth(),
+              convertStringToDate(appointments.appointmentDate).getUTCDate(),
+              parseInt(appointments.appointmentStartTime.split(':')[0]),
+              parseInt(appointments.appointmentStartTime.split(':')[1]), 0, 0
+            ),
 
+            end: new Date(
+              convertStringToDate(appointments.appointmentDate).getUTCFullYear(),
+              convertStringToDate(appointments.appointmentDate).getUTCMonth(),
+              convertStringToDate(appointments.appointmentDate).getUTCDate(),
+              parseInt(appointments.appointmentEndTime.split(':')[0]),
+              parseInt(appointments.appointmentEndTime.split(':')[1]), 0, 0
+            ),
+
+            title: appointments.meetingTitle,
+            color: isTodaysDate(appointments.appointmentDate) ? colors.yellow : colors.blue
+
+          } as CalendarEvent;
+        });
+      })
     }
     else {
       this.appointmentService.getAppointmentToPhysician(19).subscribe(val => {
@@ -111,25 +135,6 @@ export class InboxComponent implements OnInit {
   }
 
   events: CalendarEvent[] = [
-    /* {
-       start: subDays(startOfDay(new Date()), 1),
-       end: addDays(new Date(), 1),
-       title: 'A 3 day event'
-     },
-     {
-       start: startOfDay(new Date()),
-       title: 'An event with no end date'
-     },
-     {
-       start: subDays(endOfMonth(new Date()), 3),
-       end: addDays(endOfMonth(new Date()), 3),
-       title: 'A long event that spans 2 months'
-     },
-     {
-       start: addHours(startOfDay(new Date()), 2),
-       end: addHours(new Date(), 2),
-       title: 'A draggable and resizable event'
-     },*/
   ];
 
 }

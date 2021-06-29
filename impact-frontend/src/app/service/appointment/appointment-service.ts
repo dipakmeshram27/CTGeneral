@@ -15,6 +15,10 @@ import { environment } from '../../../environments/environment';
     getAppointmentToPhysician(physicianId: number):Observable<Appointment[]>{
         return this.http.get<Appointment[]>(`${environment.baseUrl}/appointment/getAppointmentToPhysician?physicianId=${physicianId}`, );
       }
+
+      getAppointmentToPatient(patientId: number):Observable<Appointment[]>{
+        return this.http.get<Appointment[]>(`${environment.baseUrl}/appointment/getAppointmentToPatient?physicianId=${patientId}`, );
+      }
    
   }
   
