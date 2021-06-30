@@ -12,12 +12,12 @@ import { environment } from '../../../environments/environment';
     constructor(private http:HttpClient) { }
   
    
-    getAppointmentToPhysician(physicianId: number):Observable<Appointment[]>{
-        return this.http.get<Appointment[]>(`${environment.baseUrl}/appointment/getAppointmentToPhysician?physicianId=${physicianId}`, );
+    getAppointmentToPhysician(physicianId: number, startDate: string, endDate: string):Observable<Appointment[]>{
+        return this.http.get<Appointment[]>(`${environment.baseUrl}/appointment/getAppointmentToPhysician?physicianId=${physicianId}&startDate=${startDate}&endDate=${endDate}`, );
       }
 
-      getAppointmentToPatient(patientId: number):Observable<Appointment[]>{
-        return this.http.get<Appointment[]>(`${environment.baseUrl}/appointment/getAppointmentToPatient?physicianId=${patientId}`, );
+      getAppointmentToPatient(patientId: number, startDate: string, endDate: string):Observable<Appointment[]>{
+        return this.http.get<Appointment[]>(`${environment.baseUrl}/appointment/getAppointmentToPatient?physicianId=${patientId}&startDate=${startDate}&endDate=${endDate}`, );
       }
    
   }
