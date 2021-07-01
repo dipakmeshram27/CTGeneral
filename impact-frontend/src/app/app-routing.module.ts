@@ -9,24 +9,39 @@ import { ForgotPasswordComponent } from './modules/forgot-password/forgot-passwo
 import { LoginComponent } from './modules/login/login.component';
 import { SchedulingComponent } from './modules/scheduling/scheduling.component';
 import {InboxModuleModule} from './modules/inbox-module/inbox-module.module'
+import { AuthGuard } from './auth.guard';
 
 
 const routes: Routes = [
+  
   {
     path: '',
-    component: DashboardComponent
+    component: LoginComponent
+    
+  },
+  {
+    path: 'app-dashboard',
+    component: DashboardComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'patient-registration',
     component: PatientRegistrationComponent
   },
-  { path: 'patient-details', component: PatientDetailsComponent},
+  { path: 'patient-details', 
+  component: PatientDetailsComponent,
+  canActivate: [AuthGuard]
+},
   
   { path: 'schedule', component: SchedulingComponent },
   { path: 'employee-registration' , component:EmployeeRegistrationComponent},
   {
     path: 'note',
     loadChildren: () => import('./modules/notes/notes.module').then(m => m.NoteModule),
+  },
+  {
+    path: 'dashboard',
+    loadChildren: () => import('./shared/shared.module').then(m => m.SharedModule),
   },
   {
     path: 'inbox',
@@ -36,6 +51,8 @@ const routes: Routes = [
     path: 'forgot-password',
     component: ForgotPasswordComponent
   }
+
+ // { path: 'customer', component: CustomerComponent, canActivate: [AuthGuard] },
 
 ];
 

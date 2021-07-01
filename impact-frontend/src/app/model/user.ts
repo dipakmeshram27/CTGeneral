@@ -4,6 +4,8 @@ export class User {
     firstName:string;
     lastName:string;
     role:number;
+    //role:string ;
+
     password:string;
     email:string;
     status:string;

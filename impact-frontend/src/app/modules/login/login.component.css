@@ -28,6 +28,13 @@
 div.has-error{
     height: 0px;
 }
+.image {
+    
+    padding: 25px;
+    background: url("/src/assets/loginImage.png");
+    background-repeat: no-repeat;
+    background-size: auto;
+  }
 
 
    
