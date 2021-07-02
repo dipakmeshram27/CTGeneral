@@ -13,6 +13,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import{FormsModule,ReactiveFormsModule} from '@angular/forms';
 import { PatientDetailsComponent } from './modules/patient-details/patient-details.component'
 import {Ng2TelInputModule} from 'ng2-tel-input';
+import { NgxIntlTelInputModule } from "ngx-intl-tel-input";
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import {Ng2TelInputModule} from 'ng2-tel-input';
     BsDatepickerModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
-    Ng2TelInputModule
+    Ng2TelInputModule,
+    NgxIntlTelInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

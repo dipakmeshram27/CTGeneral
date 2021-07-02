@@ -25,9 +25,11 @@
     "@angular/router": "~10.0.4",
     "@ng-bootstrap/ng-bootstrap": "^9.1.1",
     "bootstrap": "^5.0.1",
-    "intl-tel-input": "^17.0.13",
+    "google-libphonenumber": "^3.2.21",
+    "intl-tel-input": "^17.0.3",
     "ng2-tel-input": "^2.3.0",
     "ngx-bootstrap": "^6.2.0",
+    "ngx-intl-tel-input": "^3.1.1",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"
