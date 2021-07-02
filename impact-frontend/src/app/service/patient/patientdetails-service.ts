@@ -24,4 +24,7 @@ import { patientdetails } from 'src/app/model/patientdetails';
 
         return this.http.get(`${environment.baseUrl}/patient/allergy/`+allergyid );
     }
+    getCSVReport(id:number):void{
+      window.location.href = `${environment.baseUrl}/patient/download?id=${id}`;
+    }
   }

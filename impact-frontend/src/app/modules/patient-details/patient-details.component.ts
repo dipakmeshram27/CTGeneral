@@ -250,6 +250,9 @@ export class PatientDetailsComponent implements OnInit {
     console.log( this.ph_number);
   }
 
-
-
+  
+      exportCSV() {
+        console.log('export csv called'); 
+        this.patiendetailService.getCSVReport(1);
+      }
 }
