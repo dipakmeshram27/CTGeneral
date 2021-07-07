@@ -10,6 +10,7 @@ import { NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
 import { EmployeeRegistrationComponent } from './modules/employee-registration/employee-registration.component';
 import { PatientRegistrationComponent } from './modules/patient-registration/patient-registration.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+
 import{FormsModule,ReactiveFormsModule} from '@angular/forms'
 import { UserService } from 'src/app/service/user/user-service';
 import { ViewAllEmployeeComponent } from './modules/view-all-employee/view-all-employee.component';
@@ -18,14 +19,18 @@ import { ViewAllPatientsComponent } from './modules/view-all-patients/view-all-p
 
 
 
+import { PatientDetailsComponent } from './modules/patient-details/patient-details.component'
+import {Ng2TelInputModule} from 'ng2-tel-input';
+
+
 @NgModule({
   declarations: [
     AppComponent,
     EmployeeRegistrationComponent,
     PatientRegistrationComponent,
     ViewAllEmployeeComponent,
-    ViewAllPatientsComponent
-  
+    ViewAllPatientsComponent,
+    PatientDetailsComponent,
   ],
   imports: 
   [
@@ -40,7 +45,8 @@ import { ViewAllPatientsComponent } from './modules/view-all-patients/view-all-p
     FormsModule,
     BsDatepickerModule.forRoot(),
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    Ng2TelInputModule
   ],
  
   providers: [UserService],

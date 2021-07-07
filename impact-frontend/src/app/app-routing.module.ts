@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { EmployeeRegistrationComponent } from './modules/employee-registration/employee-registration.component';
+import { PatientDetailsComponent } from './modules/patient-details/patient-details.component';
 import { PatientRegistrationComponent } from './modules/patient-registration/patient-registration.component';
 import { SchedulingComponent } from './modules/scheduling/scheduling.component';
 import { ViewAllEmployeeComponent } from 'src/app/modules/view-all-employee/view-all-employee.component';
@@ -17,6 +18,7 @@ const routes: Routes = [
     path: 'patient-registration',
     component: PatientRegistrationComponent
   },
+  { path: 'patient-details', component: PatientDetailsComponent},
   
   { path: 'schedule', component: SchedulingComponent },
   { path: 'employee-registration' , component:EmployeeRegistrationComponent},
