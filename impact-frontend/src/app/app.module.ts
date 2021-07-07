@@ -11,13 +11,20 @@ import { EmployeeRegistrationComponent } from './modules/employee-registration/e
 import { PatientRegistrationComponent } from './modules/patient-registration/patient-registration.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import{FormsModule,ReactiveFormsModule} from '@angular/forms'
-import { DatacreateService } from 'src/app/service/datacreate.service';
+import { UserService } from 'src/app/service/user/user-service';
+import { ViewAllEmployeeComponent } from './modules/view-all-employee/view-all-employee.component';
+import { ViewAllPatientsComponent } from './modules/view-all-patients/view-all-patients.component';
+
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
     EmployeeRegistrationComponent,
-    PatientRegistrationComponent
+    PatientRegistrationComponent,
+    ViewAllEmployeeComponent,
+    ViewAllPatientsComponent
   
   ],
   imports: 
@@ -35,7 +42,8 @@ import { DatacreateService } from 'src/app/service/datacreate.service';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [DatacreateService],
+ 
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

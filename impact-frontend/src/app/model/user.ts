@@ -7,8 +7,8 @@ export class User {
     password:string;
     email:string;
     status:string;
-    createdDate:Date;
-    updatedDate:Date;
+    createdDate:string;
+    updatedDate:string;
     phoneNumber: number;
-    dateOfBirth: Date;
+    dateOfBirth: string;
 }
