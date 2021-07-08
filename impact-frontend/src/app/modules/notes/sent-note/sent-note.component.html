@@ -1,7 +1,7 @@
 <h1 class="page-title">Sent Note</h1>
 <fieldset style="border-radius: 10px; border: 1px solid lightgray; padding: 20px;">
   <div class="container-fluid" *ngIf="sendNote?.length !== 0; else elseBlock;">
-    <div class="card" style="width: 700px; margin-bottom: 10px;" *ngFor="let notes of sendNote">
+    <div class="card" style="margin-bottom: 10px;" *ngFor="let notes of sendNote">
       <div class="card-body">
         <div class="container">
           <div class="row">

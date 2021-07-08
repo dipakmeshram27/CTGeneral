@@ -20,7 +20,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subject } from 'rxjs';
 import { AppointmentService } from 'src/app/service/appointment/appointment-service';
 import { Appointment } from 'src/app/model/appointment';
-import { convertStringToDate, getFirstDayofWeek, getLastDayofWeek, isTodaysDate, dateToString } from 'src/app/utils/utils';
+import { convertStringToDate, getFirstDayofWeek, getLastDayofWeek, isTodaysDate, dateToString, formatDate } from 'src/app/utils/utils';
+import { FormGroup, FormControl, FormArray, Validators,FormBuilder } from '@angular/forms';
 
 const colors: any = {
   red: {
@@ -43,10 +44,20 @@ const colors: any = {
 })
 export class InboxComponent implements OnInit {
 
-  constructor(private modal: NgbModal, private appointmentService: AppointmentService) { }
+  constructor(private modal: NgbModal, private appointmentService: AppointmentService,private formBuilder: FormBuilder) { }
   appointments = [];
   activeDayIsOpen: boolean = true;
+  bookingForm: FormGroup = this.formBuilder.group({
+    meeting :new FormControl(),
+    description :new FormControl(),
+    physician : new FormControl(),
+    patient :new FormControl(),
+    bookingDate :new FormControl(),
+    startTime: new FormControl(),
+    endTime:new FormControl()
+  });
   ngOnInit(): void {
+    
     //ToDo call the method baed on user role
     let role = 'physician'
     if (role === 'patient') {
@@ -160,5 +171,19 @@ export class InboxComponent implements OnInit {
     }
     this.activeDayIsOpen = false;
   }
-
+  hourSegmentClicked(date: Date,content) {
+    
+    
+    // this.modal.open(content);
+    // this.bookingForm.get('bookingDate').setValue(formatDate(date));
+    // this.bookingForm.get('startTime').setValue(date.getHours()+":"+date.getMinutes());
+    // var endTime= new Date(date.getTime() + (30 * 60 * 1000));
+    // this.bookingForm.get('endTime').setValue(endTime.getHours()+":"+date.getMinutes());
+    this.modal.open(content);
+    this.bookingForm.get('bookingDate').setValue(formatDate(date));
+    this.bookingForm.get('startTime').setValue(date.toLocaleTimeString());
+    date.setTime((date.getTime() + (30 * 60 * 1000)));
+    this.bookingForm.get('endTime').setValue(date.toLocaleTimeString());
+    
+  } 
 }

@@ -1,29 +1,15 @@
 <div class="row text-center">
   <div class="col-md-4 m-2">
     <div class="btn-group">
-      <div
-        class="btn btn-primary"
-        mwlCalendarPreviousView
-        [view]="view"
-        [(viewDate)]="viewDate"
-        (viewDateChange)="closeOpenMonthViewDay()"
-      >
+      <div class="btn btn-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate"
+        (viewDateChange)="closeOpenMonthViewDay()">
         Previous
       </div>
-      <div
-        class="btn btn-outline-secondary"
-        mwlCalendarToday
-        [(viewDate)]="viewDate"
-      >
+      <div class="btn btn-outline-secondary" mwlCalendarToday [(viewDate)]="viewDate">
         Today
       </div>
-      <div
-        class="btn btn-primary"
-        mwlCalendarNextView
-        [view]="view"
-        [(viewDate)]="viewDate"
-        (viewDateChange)="closeOpenMonthViewDay()"
-      >
+      <div class="btn btn-primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate"
+        (viewDateChange)="closeOpenMonthViewDay()">
         Next
       </div>
     </div>
@@ -34,12 +20,52 @@
   <div class="col-md-4"></div>
 </div>
 
-  <div>
-    <mwl-calendar-week-view
-
-    [viewDate]="viewDate"
-    [events]="events"
-  >
+<div>
+  <mwl-calendar-week-view [viewDate]="viewDate" [events]="events"
+    (hourSegmentClicked)="hourSegmentClicked($event.date,content)">
   </mwl-calendar-week-view>
-  </div>
+</div>
 
+<ng-template #content let-modal>
+  <fieldset style="border-radius: 10px; border: 1px solid lightgray; padding: 20px;">
+    <div class="container-fluid">
+      <form (ngSubmit)='book()' [formGroup]='bookingForm' novalidate class="form">
+        <div class="form-group">
+          <label>Meeting Title</label>
+          <input type="text" class="form-control" formControlName="meeting" /><br>
+        </div>
+        <div class="form-group">
+          <label>Description</label>
+          <input type="text" class="form-control" formControlName="description" /><br>
+        </div>
+        <div class="form-group">
+          <label>Physician</label>
+          <input type="text" class="form-control" formControlName="physician" /><br>
+        </div>
+        <div class="form-group">
+          <label>Patient</label>
+          <input type="text" class="form-control" formControlName="patient" /><br>
+        </div>
+        <div class="form-group">
+          <label>Date</label>
+          <input type="date" class="form-control" formControlName="bookingDate" />
+        </div>
+        <div class="form-group">
+          <label>Start Time</label>
+          <input type="text" class="form-control" formControlName="startTime" /><br>
+        </div>
+        <div class="form-group">
+          <label>End Time</label>
+          <input type="text" class="form-control" formControlName="endTime" /><br>
+        </div>
+      </form>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+    <div class="form-group">
+      <button type="submit" class="btn btn-success">Book</button>
+    </div>
+  </fieldset>
+</ng-template>
