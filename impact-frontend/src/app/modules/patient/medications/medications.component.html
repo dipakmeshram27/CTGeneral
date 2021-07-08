@@ -1,1 +1,34 @@
-<p>medications works!</p>
+
+      <mat-toolbar class="toolbar">
+        <h2>Medication List</h2>
+        <span class="toolbar-spacer"></span>
+        <mat-icon (click)="addMedication()">add</mat-icon>
+      </mat-toolbar>
+  
+  
+    
+       <div class="container" >
+        <table class="table" >
+          <thead>
+            <!-- <th scope="col">Drug ID</th> -->
+            <th scope="col">Drug Name</th>
+            <th scope="col">Drug Form</th>
+            <th scope="col">Discription</th>
+          </thead>
+          <tbody>
+           <tr *ngFor="let Medications of MedicationList">
+            <!-- <td scope="row">{{Medications.DrugID}}</td> -->
+            <td scope="row">{{Medications.DrugName}}</td>
+            <td scope="row">{{Medications.DrugForm}}</td>
+            <td scope="row">{{Medications.Discription}}</td>
+            <td><mat-icon (click)="deleteMedication(Medications.DrugID)">delete</mat-icon></td>
+          
+          </tr> 
+        </tbody>
+        </table>
+      </div> 
+
+     
+
+           
+   

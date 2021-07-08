@@ -26,6 +26,8 @@ import { MatAutocompleteModule} from '@angular/material/autocomplete';
 
 import { DiagnosisDailogComponent } from './Dialog/diagnosis-dailog/diagnosis-dailog.component';
 import { PatientDetailsComponent } from '../patient-details/patient-details.component';
+import { MedicationsDialogComponent } from './Dialog/medications-dialog/medications-dialog.component';
+import { MedicationsService } from './service/medications.service';
 
 
 const routes: Routes = [
@@ -54,7 +56,8 @@ const routes: Routes = [
         PatientProceduresComponent,
         VitalSignsComponent,
         MedicationsComponent,
-        DiagnosisDailogComponent
+        DiagnosisDailogComponent,
+        MedicationsDialogComponent
     ],
 
     imports: [RouterModule.forRoot(routes),
@@ -83,6 +86,8 @@ const routes: Routes = [
 
     ],
     exports: [RouterModule],
+    providers:[MedicationsService],
+    entryComponents:[MedicationsDialogComponent]
     
 })
 

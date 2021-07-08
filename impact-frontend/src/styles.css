@@ -6,3 +6,15 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .page-title {
     font-weight: 500;
 }
+
+
+/* .toolbar{
+    background-color:  #4B0082;
+    border-radius: 5px;
+    color: white;
+
+}
+
+.toolbar-spacer{
+    flex: 1 1 auto;
+} */
