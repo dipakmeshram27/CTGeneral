@@ -34,7 +34,13 @@ export class ReceiveNoteComponent implements OnInit {
       // TODO: Sender id is hardcoded - needs to be updated after login
     this.noteService.getRecieveNotes(42).subscribe(val => {
       console.log(val);
-      this.receiveNote = val;
+      this.receiveNote = val.map(note => {
+        
+        return {
+          ...note,
+          hasReplied :null !== note.reply
+        }
+      });
     })
   }
 
@@ -70,6 +76,7 @@ export class ReceiveNoteComponent implements OnInit {
         console.log(data);
         this.toastService.show(data.message, { classname: 'bg-success text-light', delay: 5000 })
         if (this.modalService.hasOpenModals()) {
+          this.receiveNote.find( note =>note.noteId === this.selectedNoteId).hasReplied = true;
           this.modalService.dismissAll();
           this.replyForm.reset();
         }
