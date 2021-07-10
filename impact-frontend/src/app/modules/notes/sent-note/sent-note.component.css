@@ -25,6 +25,10 @@
     line-height: 17px;
 }
 
+.italic-style {
+    font-style: italic;
+}
+
 .caption2{
     font-weight: 400;
     font-size: 11px;

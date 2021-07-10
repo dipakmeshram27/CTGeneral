@@ -1,5 +1,5 @@
 <div class="title1">Sent Notes</div>
-<fieldset style="border-radius: 10px; border: 1px solid lightgray; padding-top: 20px; padding-bottom: 20px;">
+<fieldset style="border-radius: 10px; border: 1px solid lightgray; padding-top: 20px; padding-bottom: 20px;  height: 400px; overflow: auto;">
   <div class="container-fluid" *ngIf="sendNote?.length !== 0; else elseBlock;">
     <div class="card" style="margin-bottom: 10px;" *ngFor="let notes of sendNote">
       <div class="card-body">
@@ -19,7 +19,10 @@
         </div>
         <div class="row">
           <div class="col-12">
-            <div class="regular float-end">Response to the note</div>
+            <div class="regular float-end" *ngIf="null !== notes.reply; else noReply;">{{notes.reply}}</div>
+            <ng-template #noReply>
+              <div class="regular float-end italic-style">Awaiting Reply</div>
+            </ng-template>
           </div>
 
         </div>
