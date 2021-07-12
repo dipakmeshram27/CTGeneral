@@ -1,7 +1,7 @@
 <div class="title1">Received Notes</div>
 <fieldset style="border-radius: 10px; border: 1px solid lightgray; padding-top: 20px; padding-bottom: 20px; height: 400px; overflow: auto;">
   <div class="container-fluid" *ngIf="receiveNote?.length !== 0; else elseBlock">
-    <div class="card" style="margin-bottom: 10px;" *ngFor="let notes of receiveNote">
+    <div class="card" style="margin-bottom: 10px;" [class.red-background]="notes.urgency"  *ngFor="let notes of receiveNote">
       <div class="card-body">
         <div class="container">
           <div class="row">

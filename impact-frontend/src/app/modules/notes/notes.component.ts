@@ -53,9 +53,17 @@ export class NotesComponent implements OnInit {
     this.noteService.sendNotes(newNotes).subscribe(
       data => {
         this.toastService.show(data.message, { classname: 'bg-success text-light', delay: 5000 })
+        if (this.modalService.hasOpenModals()) {
+          this.modalService.dismissAll();
+          this.form.reset();
+        }
       },
       error => {
         this.toastService.show('Server Error please try later', { classname: 'bg-danger text-light', delay: 5000 });
+        if (this.modalService.hasOpenModals()) {
+          this.modalService.dismissAll();
+          this.form.reset();
+        }
       })
   }
 

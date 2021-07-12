@@ -6,3 +6,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .page-title {
     font-weight: 500;
 }
+.red-background {
+    border-color: red;
+}
