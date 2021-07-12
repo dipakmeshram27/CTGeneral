@@ -34,7 +34,7 @@ export class NotesComponent implements OnInit {
     this.noteService.getUsersByRole().subscribe(val => {
       this.users = val.filter(user => {
         // TODO: sender id is hardcoded for now . would be fetched from session
-        return user.userId !== 23;
+        return user.userId !== parseInt(sessionStorage.getItem("userId"));
       });
       console.log(val);
       
@@ -49,7 +49,7 @@ export class NotesComponent implements OnInit {
     
     let newNotes: Notes = this.form.value;
     // TODO: sender id is hardcoded for now . would be fetched from session
-    newNotes.senderId = 23;
+    newNotes.senderId = parseInt(sessionStorage.getItem("userId"));
     this.noteService.sendNotes(newNotes).subscribe(
       data => {
         this.toastService.show(data.message, { classname: 'bg-success text-light', delay: 5000 })
