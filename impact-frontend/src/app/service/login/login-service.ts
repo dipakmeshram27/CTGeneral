@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { UserLogin } from '../../model/userlogin';
 
 import { catchError } from 'rxjs/operators';
@@ -8,6 +8,9 @@ import { catchError } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { env } from 'process';
 import { User } from 'src/app/model/user';
+import jwtDecode from 'jwt-decode';
+import { Router } from '@angular/router';
+
 
 
 @Injectable({
@@ -16,15 +19,28 @@ import { User } from 'src/app/model/user';
 export class LoginService {
   
 
- 
-  private token: string = "";
-  private role: string = "";
-  private isAuthenticated: boolean = false;
 
-  constructor(private http: HttpClient) { }
+ userRole:string;
+  constructor(private http: HttpClient,private router: Router) { }
+//========================================================
+private userSubject: BehaviorSubject<User>;  
+loggedIn = new BehaviorSubject<boolean>(false); 
+get isLoggedIn() {
+return this.loggedIn.asObservable(); 
+}
+//=======================================================
+ 
+ private token: string = "";
+  private role: string[] = [];
+  private isAuthenticated: boolean = false;
+  private decodedString: string;
+
+
+ 
 
   public set AuthenticationToken(token: string)
   {
+    localStorage.setItem('token',token);
     this.token = token;
   }
   public get AuthenticationToken()
@@ -32,14 +48,8 @@ export class LoginService {
     return this.token;
   }
 
-  public set UserRole(role: string)
-  {
-    this.role = role;
-  }
-  public get UserRole()
-  {
-    return this.role;
-  }
+ 
+ 
 
   public set IsAuthenticated(isAuthenticated: boolean)
   {
@@ -47,8 +57,10 @@ export class LoginService {
   }
   public get IsAuthenticated()
   {
-    // if(Object.keys(this.token).length == 0)
-    if(this.token == "")
+
+    
+    
+    if(this.token == "" && this.role==[])
     {
       this.isAuthenticated = false;
     }
@@ -59,15 +71,22 @@ export class LoginService {
     return this.isAuthenticated;
   }
 
+ 
+
   userLogin(login: UserLogin):Observable<any>{
+    
     return this.http.post(`${environment.baseUrl}/user/login`, login)
     .pipe(catchError(this.HandleError));
   }
 
- /* getUsers():Observable<User[]>{
-    return this.http.get<User[]>(`${environment.baseUrl}/user/getAllUser`);
-  }*/
+ /* logout() {
+    // remove user from local storage and set current user to null
+    localStorage.removeItem('token');
+    this.userSubject.next(null);
+    this.router.navigate(['']);
+}*/
 
+ 
   private HandleError(error: HttpErrorResponse)
   {
     let message: string = "";
@@ -85,6 +104,13 @@ export class LoginService {
       message = `SERVER ERROR: ${error.error}`;
     }
     return throwError(message);
+  
   }
- 
-}
+
+
+   
+  }
+
+
+   
+

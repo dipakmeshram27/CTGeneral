@@ -1,6 +1,8 @@
 .container-fluid{
     height: 100%;
     width: 100%;
+
+    
   
 }
 .form-group{
@@ -8,12 +10,15 @@
     height: 100%;
 
    margin-bottom: 40px;
+   
+   
 
 }
-.form-btn, .change-pass{
+.form-btn, .login-page{
    display: flex;
     justify-content: center;
     align-items: center;
+    
  
 }
 .form-wrapper{
@@ -21,20 +26,56 @@
     max-width: 100%;
     margin-top: auto;
     margin-bottom: auto;
+    background-color: #F7F9FA;
+    border: 2px #EFF2F5;
+  border-radius: 8px;
+  
 
  padding-block-start: 80px;
 }
+
+.form-section{
+    font-family: open s;
+    margin-top: auto;
+    max-width: 100%;
+    width: 320px;
+    justify-content: center;
+    margin: auto;
+ 
+    font-family: "OpenSans-Bold";
+
+}
+
 
 div.has-error{
     height: 0px;
 }
 .image {
+ 
+    padding: 72px;
     
-    padding: 25px;
-    background: url("/src/assets/loginImage.png");
+    background: transparent;
+    background: url('../login/image/loginImage.png');
     background-repeat: no-repeat;
-    background-size: auto;
+    background-size: cover;
+   
+    background-position: center;
+    height: 100%;
+    width: 100%;
+   
   }
+
+  span{
+      color: #808B9A;
+      font-size: 11px;
+      
+  }
+  .row{
+    height: 100%;
+    width: 100%; 
+  }
+ 
+
 
 
    

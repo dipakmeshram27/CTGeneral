@@ -21,6 +21,7 @@ import { ForgotPasswordComponent } from './modules/forgot-password/forgot-passwo
 import { InboxComponent } from './modules/inbox-module/inbox/inbox.component';
 import { InboxModuleModule } from './modules/inbox-module/inbox-module.module';
 import { TokenInterceptor } from './token.interceptor';
+import { MatToolbar, MatToolbarModule } from '@angular/material/toolbar';
 
 
 @NgModule({
@@ -53,7 +54,8 @@ import { TokenInterceptor } from './token.interceptor';
     FormsModule,
     ReactiveFormsModule,
     Ng2TelInputModule,
-    InboxModuleModule
+    InboxModuleModule,
+    MatToolbarModule
   ],
   providers: [DatacreateService,
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }  ],

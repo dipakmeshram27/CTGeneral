@@ -6,6 +6,7 @@ import { LoginService } from 'src/app/service/login/login-service';
 
 
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -59,6 +60,15 @@ export class LoginComponent implements OnInit {
       this.loginService.userLogin(userLogin).subscribe(value => {
         this.loginService.AuthenticationToken=value.token;
         this.loginService.IsAuthenticated=true;
+       
+       
+        localStorage.setItem('token',value.token);
+        let decodedString = JSON.parse(atob(localStorage.getItem('token').split('.')[1]));
+      
+        this.loginService.loggedIn.next(true);
+
+       this.loginService.userRole = decodedString.role[0].authority;
+       console.log(this.loginService.userRole)
         this.router.navigate(['/app-dashboard']);
         console.log(value);
         console.log(this.form.value);
@@ -66,6 +76,8 @@ export class LoginComponent implements OnInit {
     }
 
   }
+
+ 
 
 
 

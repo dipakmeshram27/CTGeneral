@@ -20,9 +20,12 @@ const routes: Routes = [
     
   },
   {
-    path: 'app-dashboard',
+    path: 'app-dashboard',            
     component: DashboardComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data:{
+      expectedRole:['ROLE_PHYSICIAN', 'ROLE_NURSE','ROLE_ADMIN', 'ROLE_PATIENT']
+    }
   },
   {
     path: 'patient-registration',
@@ -30,11 +33,28 @@ const routes: Routes = [
   },
   { path: 'patient-details', 
   component: PatientDetailsComponent,
-  canActivate: [AuthGuard]
+  canActivate: [AuthGuard],
+  data:{
+    expectedRole:['ROLE_PHYSICIAN', 'ROLE_NURSE', 'ROLE_PATIENT']
+  }
 },
   
-  { path: 'schedule', component: SchedulingComponent },
-  { path: 'employee-registration' , component:EmployeeRegistrationComponent},
+  { path: 'schedule', 
+  component: SchedulingComponent,
+  canActivate: [AuthGuard],
+  data:{
+    expectedRole:['ROLE_PHYSICIAN', 'ROLE_NURSE', 'ROLE_PATIENT']
+  } 
+},
+
+
+  { path: 'employee-registration' , 
+  component:EmployeeRegistrationComponent,
+  canActivate: [AuthGuard],
+  data:{
+    expectedRole:['ROLE_ADMIN']
+  }
+},
   {
     path: 'note',
     loadChildren: () => import('./modules/notes/notes.module').then(m => m.NoteModule),

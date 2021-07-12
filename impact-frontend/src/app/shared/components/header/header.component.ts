@@ -1,4 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Observable } from 'rxjs';
+import { UserLogin } from 'src/app/model/userlogin';
+import { LoginService } from 'src/app/service/login/login-service';
 
 @Component({
   selector: 'app-header',
@@ -9,11 +12,20 @@ export class HeaderComponent implements OnInit {
 
   @Output() toggleSidebarForMe: EventEmitter<any> = new EventEmitter();
 
-  constructor() { }
+    //routerLinksMaster=[{link:'/', name:'dashboard'},{link: '/patient-registration', name:'Patient Registration'},{link:'/schedule', name:'Schedule'},{link:'/patient-details', name:'Patient Details'},{link:'/inbox',name:'Inbox'}];
+    isLoggedIn$: Observable<boolean>;
+  constructor(private loginService:LoginService) {
+   
+   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void { 
+    this.isLoggedIn$ = this.loginService.isLoggedIn;
+  }
   toggleSidebar() {
     this.toggleSidebarForMe.emit();
   }
+  /*onLogout(){
+    this.loginService.logout(); 
+    }*/
 
 }

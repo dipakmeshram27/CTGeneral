@@ -1,5 +1,7 @@
-import { Component, OnInit,ViewChild,
-  TemplateRef, } from '@angular/core';
+import {
+  Component, OnInit, ViewChild,
+  TemplateRef,
+} from '@angular/core';
 import {
   CalendarEvent,
   CalendarEventAction,
@@ -11,10 +13,14 @@ import {
   subDays,
   addDays,
   endOfMonth,
-  addHours
+  addHours,
+  add
 } from 'date-fns';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subject } from 'rxjs';
+import { AppointmentService } from 'src/app/service/appointment/appointment-service';
+import { Appointment } from 'src/app/model/appointment';
+import { convertStringToDate, getFirstDayofWeek, getLastDayofWeek, isTodaysDate, dateToString } from 'src/app/utils/utils';
 
 const colors: any = {
   red: {
@@ -37,12 +43,24 @@ const colors: any = {
 })
 export class InboxComponent implements OnInit {
 
-  constructor(private modal: NgbModal) { }
-
+  constructor(private modal: NgbModal, private appointmentService: AppointmentService) { }
+  appointments = [];
+  activeDayIsOpen: boolean = true;
   ngOnInit(): void {
+    //ToDo call the method baed on user role
+    let role = 'physician'
+    if (role === 'patient') {
+      this.populatePatientsAppointments(dateToString(getFirstDayofWeek(this.viewDate)), 
+            dateToString(getLastDayofWeek(this.viewDate)));
+    }
+    else {
+      this.populatePhysiciansAppoitments(dateToString(getFirstDayofWeek(this.viewDate)),
+            dateToString(getLastDayofWeek(this.viewDate)));
+    }
+
   }
   view: CalendarView = CalendarView.Week;
-  viewDate : Date = new Date();
+  viewDate: Date = new Date();
   CalendarView = CalendarView;
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
   refresh: Subject<any> = new Subject();
@@ -52,30 +70,95 @@ export class InboxComponent implements OnInit {
     event: CalendarEvent;
   };
 
+  populatePatientsAppointments(startDate: string, endDate: string) {
+    this.appointmentService.getAppointmentToPatient(84, startDate, endDate).subscribe(val => {
+      //console.log(val);
+      this.appointments = val;
+      this.events = val.map((appointments: Appointment) => {
+        return {
+          start: new Date(
+            convertStringToDate(appointments.appointmentDate).getUTCFullYear(),
+            convertStringToDate(appointments.appointmentDate).getUTCMonth(),
+            convertStringToDate(appointments.appointmentDate).getUTCDate(),
+            parseInt(appointments.appointmentStartTime.split(':')[0]),
+            parseInt(appointments.appointmentStartTime.split(':')[1]), 0, 0
+          ),
+
+          end: new Date(
+            convertStringToDate(appointments.appointmentDate).getUTCFullYear(),
+            convertStringToDate(appointments.appointmentDate).getUTCMonth(),
+            convertStringToDate(appointments.appointmentDate).getUTCDate(),
+            parseInt(appointments.appointmentEndTime.split(':')[0]),
+            parseInt(appointments.appointmentEndTime.split(':')[1]), 0, 0
+          ),
+
+          title: appointments.meetingTitle,
+          color: isTodaysDate(appointments.appointmentDate) ? colors.yellow : colors.blue
+
+        } as CalendarEvent;
+      });
+    })
+  }
+
+  populatePhysiciansAppoitments(startDate: string, endDate: string) {
+    this.appointmentService.getAppointmentToPhysician(19, startDate, endDate).subscribe(val => {
+      //console.log(val);
+      this.appointments = val;
+      this.events = val.map((appointments: Appointment) => {
+        return {
+          start: new Date(
+            convertStringToDate(appointments.appointmentDate).getUTCFullYear(),
+            convertStringToDate(appointments.appointmentDate).getUTCMonth(),
+            convertStringToDate(appointments.appointmentDate).getUTCDate(),
+            parseInt(appointments.appointmentStartTime.split(':')[0]),
+            parseInt(appointments.appointmentStartTime.split(':')[1]), 0, 0
+          ),
+
+          end: new Date(
+            convertStringToDate(appointments.appointmentDate).getUTCFullYear(),
+            convertStringToDate(appointments.appointmentDate).getUTCMonth(),
+            convertStringToDate(appointments.appointmentDate).getUTCDate(),
+            parseInt(appointments.appointmentEndTime.split(':')[0]),
+            parseInt(appointments.appointmentEndTime.split(':')[1]), 0, 0
+          ),
+
+          title: appointments.meetingTitle,
+          color: isTodaysDate(appointments.appointmentDate) ? colors.yellow : colors.blue
+
+        } as CalendarEvent;
+      });
+    })
+  }
+
+  colors: any = {
+    blue: {
+      primary: '#2B4FA6',
+      secondary: '#1570E4',
+    },
+    yellow: {
+      primary: '#EDAA00',
+      secondary: '#EDAA00',
+    },
+  };
+
   setView(view: CalendarView) {
     this.view = view;
   }
 
   events: CalendarEvent[] = [
-    {
-      start: subDays(startOfDay(new Date()), 1),
-      end: addDays(new Date(), 1),
-      title: 'A 3 day event'
-    },
-    {
-      start: startOfDay(new Date()),
-      title: 'An event with no end date'
-    },
-    {
-      start: subDays(endOfMonth(new Date()), 3),
-      end: addDays(endOfMonth(new Date()), 3),
-      title: 'A long event that spans 2 months'
-    },
-    {
-      start: addHours(startOfDay(new Date()), 2),
-      end: addHours(new Date(), 2),
-      title: 'A draggable and resizable event'
-    },
   ];
-  
+
+  closeOpenMonthViewDay() {
+    let role = 'physician'
+    if (role === 'patient') {
+      this.populatePatientsAppointments(dateToString(getFirstDayofWeek(this.viewDate)), 
+            dateToString(getLastDayofWeek(this.viewDate)));
+    }
+    else {
+      this.populatePhysiciansAppoitments(dateToString(getFirstDayofWeek(this.viewDate)),
+            dateToString(getLastDayofWeek(this.viewDate)));
+    }
+    this.activeDayIsOpen = false;
+  }
+
 }
