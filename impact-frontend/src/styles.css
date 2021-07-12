@@ -9,3 +9,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .red-background {
     border-color: red;
 }
+
+@font-face {
+    font-family: "Open Sans";
+    src: local("Open Sans"), url(./assets/fonts/OpenSans-Bold.ttf) format("truetype");
+    src: local("Open Sans"), url(./assets/fonts/OpenSans-SemiBold.ttf) format("truetype");
+    src: local("Open Sans"), url(./assets/fonts/OpenSans-Regular.ttf) format("truetype");
+}
