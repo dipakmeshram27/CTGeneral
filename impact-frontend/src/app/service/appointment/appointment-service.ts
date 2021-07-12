@@ -11,6 +11,11 @@ import { environment } from '../../../environments/environment';
   export class AppointmentService {
     constructor(private http:HttpClient) { }
   
+
+    bookAppointment(newAppointment: Appointment):Observable<any>{
+      return this.http.post(`${environment.baseUrl}/appointment/save`, newAppointment);
+    }
+
    
     getAppointmentToPhysician(physicianId: number, startDate: string, endDate: string):Observable<Appointment[]>{
         return this.http.get<Appointment[]>(`${environment.baseUrl}/appointment/getAppointmentToPhysician?physicianId=${physicianId}&startDate=${startDate}&endDate=${endDate}`, );

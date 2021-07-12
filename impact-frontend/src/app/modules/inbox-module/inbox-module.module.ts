@@ -6,7 +6,7 @@ import { InboxComponent } from './inbox/inbox.component';
 import { CalendarCommonModule, CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [InboxComponent],
@@ -18,7 +18,8 @@ import { ReactiveFormsModule } from '@angular/forms';
       provide: DateAdapter,
       useFactory: adapterFactory,
     }),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbToastModule
   ]
 })
 export class InboxModuleModule { }

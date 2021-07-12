@@ -22,6 +22,7 @@ import { AppointmentService } from 'src/app/service/appointment/appointment-serv
 import { Appointment } from 'src/app/model/appointment';
 import { convertStringToDate, getFirstDayofWeek, getLastDayofWeek, isTodaysDate, dateToString, formatDate } from 'src/app/utils/utils';
 import { FormGroup, FormControl, FormArray, Validators,FormBuilder } from '@angular/forms';
+import { ToastService } from 'src/app/service/toast/toast.service';
 
 const colors: any = {
   red: {
@@ -44,17 +45,17 @@ const colors: any = {
 })
 export class InboxComponent implements OnInit {
 
-  constructor(private modal: NgbModal, private appointmentService: AppointmentService,private formBuilder: FormBuilder) { }
+  constructor(private modal: NgbModal, private appointmentService: AppointmentService,private formBuilder: FormBuilder,private toastService :ToastService) { }
   appointments = [];
   activeDayIsOpen: boolean = true;
   bookingForm: FormGroup = this.formBuilder.group({
-    meeting :new FormControl(),
+    meetingTitle :new FormControl(),
     description :new FormControl(),
-    physician : new FormControl(),
-    patient :new FormControl(),
-    bookingDate :new FormControl(),
-    startTime: new FormControl(),
-    endTime:new FormControl()
+    physicianId : new FormControl(),
+    patientId :new FormControl(),
+    appointmentDate :new FormControl(),
+    appointmentStartTime: new FormControl(),
+    appointmentEndTime:new FormControl()
   });
   ngOnInit(): void {
     
@@ -173,17 +174,31 @@ export class InboxComponent implements OnInit {
   }
   hourSegmentClicked(date: Date,content) {
     
-    
-    // this.modal.open(content);
-    // this.bookingForm.get('bookingDate').setValue(formatDate(date));
-    // this.bookingForm.get('startTime').setValue(date.getHours()+":"+date.getMinutes());
-    // var endTime= new Date(date.getTime() + (30 * 60 * 1000));
-    // this.bookingForm.get('endTime').setValue(endTime.getHours()+":"+date.getMinutes());
     this.modal.open(content);
-    this.bookingForm.get('bookingDate').setValue(formatDate(date));
-    this.bookingForm.get('startTime').setValue(date.toLocaleTimeString());
+    this.bookingForm.get('appointmentDate').setValue(formatDate(date));
+    this.bookingForm.get('appointmentStartTime').setValue(date.toLocaleTimeString());
     date.setTime((date.getTime() + (30 * 60 * 1000)));
-    this.bookingForm.get('endTime').setValue(date.toLocaleTimeString());
+    this.bookingForm.get('appointmentEndTime').setValue(date.toLocaleTimeString());
     
   } 
+  submitted=false;
+
+  book(){
+    console.log("inside")
+    this.submitted = true;
+    if (this.bookingForm.invalid) {
+      return;
+    }
+    
+    let newAppointment: Appointment = this.bookingForm.value;
+    // TODO: sender id is hardcoded for now . would be fetched from session
+    this.appointmentService.bookAppointment(newAppointment).subscribe(
+      data => {
+        this.toastService.show(data.message, { classname: 'bg-success text-light', delay: 5000 })
+      },
+      error => {
+        this.toastService.show('Server Error please try later', { classname: 'bg-danger text-light', delay: 5000 });
+      })
+  }
+
 }
