@@ -7,17 +7,22 @@
             <h4>admin@email.com</h4>
         </div>
     </div>
-    <h2 matSubheader>Scheduling</h2>
+  
+  
 
-    <a mat-list-item routerLinkActive="list-item-active" routerLink="/">Dashboard</a>
+
+   <!-- <a mat-list-item routerLinkActive="list-item-active" routerLink="/">Dashboard</a>
     <a mat-list-item routerLinkActive="list-item-active" routerLink="/patient-registration">Patient Registration</a>
     <a mat-list-item routerLinkActive="list-item-active" routerLink="/schedule">Scheduling</a>
 
-    <a mat-list-item routerLinkActive="list-item-active" routerLink="/employee-registration">Register New Employee</a>
+   
 
     <a mat-list-item routerLinkActive="list-item-active" routerLink="/patient-details">Patient Details</a>
-    <a mat-list-item routerLinkActive="list-item-active" routerLink="/inbox">Inbox</a>
-
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/inbox">Inbox</a>-->
+    
+    <div *ngFor = "let routerLink of routerLinks">
+        <mat-list-item routerLinkActive="list-item-active" routerLink='{{routerLink.link}}'>{{routerLink.name}} </mat-list-item>
+      </div>
     <mat-list-item (click)="showNoteSubmenu = !showNoteSubmenu" class="parent">
         <span class="full-width">Notes</span>
         <mat-icon class="menu-button" [ngClass]="{'rotated' : showNoteSubmenu}">expand_more</mat-icon>
@@ -27,6 +32,7 @@
         <a mat-list-item routerLinkActive="list-item-active" routerLink="/note/received-notes">Receive Note</a>
         <a mat-list-item routerLinkActive="list-item-active" routerLink="/note/sent-notes">Sent Note</a>
     </div>
+ 
   
     <mat-divider></mat-divider>
   

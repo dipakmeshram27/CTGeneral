@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from "@angular/router";
+import { AuthGuard } from 'src/app/auth.guard';
 import { NotesComponent } from './notes.component';
 import { ReceiveNoteComponent } from './receive-note/receive-note.component';
 import { SendNoteComponent } from './send-note/send-note.component';
@@ -13,7 +14,11 @@ const routes: Routes = [
             { path: '', component: SendNoteComponent },
             { path: 'received-notes', component: ReceiveNoteComponent },
             { path: 'sent-notes', component: SentNoteComponent }
-        ]
+        ],
+        canActivate: [AuthGuard],
+  data:{
+    expectedRole:['ROLE_PHYSICIAN', 'ROLE_NURSE', 'ROLE_PATIENT']
+  }
     }];
 
 @NgModule({
