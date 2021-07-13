@@ -23,6 +23,8 @@ import { Appointment } from 'src/app/model/appointment';
 import { convertStringToDate, getFirstDayofWeek, getLastDayofWeek, isTodaysDate, dateToString, formatDate } from 'src/app/utils/utils';
 import { FormGroup, FormControl, FormArray, Validators,FormBuilder } from '@angular/forms';
 import { ToastService } from 'src/app/service/toast/toast.service';
+import { WeekViewHourColumn } from 'calendar-utils';
+
 
 const colors: any = {
   red: {
@@ -48,6 +50,11 @@ export class InboxComponent implements OnInit {
   constructor(private modal: NgbModal, private appointmentService: AppointmentService,private formBuilder: FormBuilder,private toastService :ToastService) { }
   appointments = [];
   activeDayIsOpen: boolean = true;
+  hourColumns: WeekViewHourColumn[];
+
+
+  selectedDate:Date=null;
+
   bookingForm: FormGroup = this.formBuilder.group({
     meetingTitle :new FormControl(),
     description :new FormControl(),
@@ -160,6 +167,21 @@ export class InboxComponent implements OnInit {
   events: CalendarEvent[] = [
   ];
 
+
+  private addSelectedDayViewClass() {
+    this.hourColumns.forEach(column => {
+      column.hours.forEach(hourSegment => {
+        hourSegment.segments.forEach(segment => {
+          delete segment.cssClass;
+          if (this.shouldAddHighlight(segment.date)) {
+            segment.cssClass = 'cal-day-selected';
+          }
+        });
+      });
+    });
+  }
+
+
   closeOpenMonthViewDay() {
     let role = 'physician'
     if (role === 'patient') {
@@ -173,12 +195,20 @@ export class InboxComponent implements OnInit {
     this.activeDayIsOpen = false;
   }
   hourSegmentClicked(date: Date,content) {
-    
+    this.selectedDate=date;
     this.modal.open(content);
     this.bookingForm.get('appointmentDate').setValue(formatDate(date));
-    this.bookingForm.get('appointmentStartTime').setValue(date.toLocaleTimeString());
+    var options = { hour12: false };
+  console.log(date.toLocaleString('en-US', options));
+  //we need getter method to get & set the time 
+    // this.bookingForm.get('appointmentStartTime').setValue(date.toLocaleTimeString());
+     this.bookingForm.get('appointmentStartTime').setValue(date.toLocaleTimeString('en-US', options));
     date.setTime((date.getTime() + (30 * 60 * 1000)));
-    this.bookingForm.get('appointmentEndTime').setValue(date.toLocaleTimeString());
+    // this.bookingForm.get('appointmentEndTime').setValue(date.toLocaleTimeString());
+    this.bookingForm.get('appointmentEndTime').setValue(date.toLocaleTimeString('en-US', options));
+    
+    this.addSelectedDayViewClass();
+
     
   } 
   submitted=false;
@@ -189,8 +219,13 @@ export class InboxComponent implements OnInit {
     if (this.bookingForm.invalid) {
       return;
     }
-    
+    // this.bookingForm.appointmentStartTime=   Date.now()
     let newAppointment: Appointment = this.bookingForm.value;
+
+    //setter method to set time
+
+  console.log(this.selectedDate)
+
     // TODO: sender id is hardcoded for now . would be fetched from session
     this.appointmentService.bookAppointment(newAppointment).subscribe(
       data => {
@@ -201,4 +236,31 @@ export class InboxComponent implements OnInit {
       })
   }
 
+
+  shouldAddHighlight = function(date) {
+
+    let startDate = this.selectedDate;
+   let  endDate =     this.selectedDate.setTime(this.selectedDate.getTime() + (30 * 60 * 1000));
+    console.log("Start date "+startDate)
+    console.log("Date "+startDate)
+    if (date > startDate && date < endDate) {
+      return true;
+      alert(date);
+    }
+
+
+function addSelectedDayViewClass() {
+    this.hourColumns.forEach(column => {
+      column.hours.forEach(hourSegment => {
+        hourSegment.segments.forEach(segment => {
+          delete segment.cssClass;
+          if (this.shouldAddHighlight(segment.date)) {
+            segment.cssClass = 'cal-day-selected';
+          }
+        });
+      });
+    });
+  }
+
+  }
 }
