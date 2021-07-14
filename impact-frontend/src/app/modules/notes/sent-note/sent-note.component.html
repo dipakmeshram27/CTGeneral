@@ -1,30 +1,36 @@
-<h1 class="page-title">Sent Note</h1>
-<fieldset style="border-radius: 10px; border: 1px solid lightgray; padding: 20px;">
+<div class="title1">Sent Notes</div>
+<fieldset style="border-radius: 10px; border: 1px solid lightgray; padding-top: 20px; padding-bottom: 20px;  height: 400px; overflow: auto;">
   <div class="container-fluid" *ngIf="sendNote?.length !== 0; else elseBlock;">
-    <div class="card" style="margin-bottom: 10px;" *ngFor="let notes of sendNote">
+    <div class="card" style="margin-bottom: 10px;" [class.red-background]="notes.urgency" *ngFor="let notes of sendNote">
       <div class="card-body">
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-4">
-              <h2 class="card-title">{{notes.firstName}} {{notes.lastName}}</h2>
-              <h3 class="card-subtitle mb-2 text-muted">{{notes.role}}</h3>
-            </div>
-            <div class="col-sm-4"></div>
-            <div class="col-sm-4">
-              <h5 class="card-subtitle mb-2 text-muted">{{notes.date | date: 'dd/MM/yyyy h:mm a'}}</h5>
-            </div>
+        <div class="row">
+          <div class="col-sm-8">
+            <div class="title2">{{notes.firstName}} {{notes.lastName}}</div>
+            <div class="title3">{{notes.role}}</div>
           </div>
-          <div class="row">
-            <div class="col-12">
-              <p class="card-text">{{notes.message}}</p>
-            </div>
+          <div class="col-sm-4">
+            <div class="caption2">{{notes.date | date: 'dd/MM/yyyy h:mm a'}}</div>
           </div>
         </div>
-        <p class="card-text font-italic float-end">Response to the note</p>
+        <div class="row">
+          <div class="col-12">
+            <div class="regular">{{notes.message}}</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="regular float-end" *ngIf="null !== notes.reply; else noReply;">{{notes.reply}}</div>
+            <ng-template #noReply>
+              <div class="regular float-end italic-style">Awaiting Reply</div>
+            </ng-template>
+          </div>
+
+        </div>
       </div>
+
     </div>
   </div>
   <ng-template #elseBlock>
-  No notes available
+    No notes available
   </ng-template>
 </fieldset>
