@@ -2,3 +2,8 @@
     height: calc(100vh - 200px);
     overflow-y: auto;
   }
+
+  .cal-day-selected,
+  .cal-day-selected:hover {
+    background-color: deeppink !important;
+  }
