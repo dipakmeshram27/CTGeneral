@@ -23,7 +23,7 @@
     <div *ngFor = "let routerLink of routerLinks">
         <mat-list-item routerLinkActive="list-item-active" routerLink='{{routerLink.link}}'>{{routerLink.name}} </mat-list-item>
       </div>
-    <mat-list-item (click)="showNoteSubmenu = !showNoteSubmenu" class="parent">
+    <!-- <mat-list-item (click)="showNoteSubmenu = !showNoteSubmenu" class="parent">
         <span class="full-width">Notes</span>
         <mat-icon class="menu-button" [ngClass]="{'rotated' : showNoteSubmenu}">expand_more</mat-icon>
     </mat-list-item>
@@ -31,7 +31,7 @@
         <a mat-list-item routerLinkActive="list-item-active" routerLink="/note">Send New Note</a>
         <a mat-list-item routerLinkActive="list-item-active" routerLink="/note/received-notes">Receive Note</a>
         <a mat-list-item routerLinkActive="list-item-active" routerLink="/note/sent-notes">Sent Note</a>
-    </div>
+    </div> -->
  
   
     <mat-divider></mat-divider>
