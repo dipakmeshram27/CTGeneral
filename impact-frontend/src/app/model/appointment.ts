@@ -4,7 +4,7 @@ export class Appointment {
     appointmentId :number;
 	meetingTitle :string;
 	description:string;
-	hysicianId :number;
+	physicianId :number;
 	patientId :number;
     appointmentDate: string;
     appointmentStartTime: string;
