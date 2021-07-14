@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { LoginService } from './service/login/login-service';
 import { TokenStorageService } from './token-storage.service';
 
 @Component({
@@ -17,13 +18,22 @@ export class AppComponent {
 
 
   constructor(private currentRoute: ActivatedRoute,
-    private router: Router) { }
+    private router: Router,private loginService:LoginService) { }
 
   ngOnInit(): void {
-    console.log(this.currentRoute);
-    this.currentRoute.url.subscribe(url => {
-      console.log(url)
-    })
+    // console.log(this.currentRoute);
+    // this.currentRoute.url.subscribe(url => {
+    //   console.log(url)
+
+    //})
+
+    if(localStorage.getItem('token')){
+      this.loginService.AuthenticationToken=localStorage.getItem('token');
+      this.loginService.IsAuthenticated=true;
+      let decodedString = JSON.parse(atob(localStorage.getItem('token').split('.')[1]));
+      this.loginService.loggedIn.next(true);
+      this.loginService.userRole = decodedString.role[0].authority;
+  }
   }
   sidebarToggler(){
     this.sidebarOpened=!this.sidebarOpened;
