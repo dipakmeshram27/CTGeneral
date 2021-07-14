@@ -38,14 +38,37 @@
           <label>Description</label>
           <input type="text" class="form-control" formControlName="description" /><br>
         </div>
-        <div class="form-group">
-          <label>Physician</label>
-          <input type="text" class="form-control" formControlName="physicianId" /><br>
+
+
+
+
+
+
+
+         <div class="form-group">
+          <label>Physician*</label>
+          <select class="form-control" formControlName="patientId" id="physicians">
+            <option *ngFor="let physician of physicians; let i = index" [value]="physicians[i].id">
+              {{physicians[i].name}}
+            </option>
+
+          </select>
+
+          <br>
         </div>
+
+
         <div class="form-group">
-          <label>Patient</label>
-          <input type="text" class="form-control" formControlName="patientId" /><br>
+          <label>Patient*</label>
+          <select class="form-control" formControlName="physicianId">
+            <option *ngFor="let physician of patients; let i=index" [value]="patients[i].id">
+              {{patients[i].name}}
+            </option>
+          </select> 
+
         </div>
+
+
         <div class="form-group">
           <label>Date</label>
           <input type="date" class="form-control" formControlName="appointmentDate" />
@@ -67,6 +90,6 @@
       </form>
     </div>
 
-   
+
   </fieldset>
 </ng-template>
