@@ -12,8 +12,8 @@ import { usernotes } from '../../model/UserNotes';
 export class NotesService {
   constructor(private http:HttpClient) { }
 
-  getUsersByRole():Observable<User[]>{
-    return this.http.get<User[]>(`${environment.baseUrl}/user-api/user/getUsersByRole?role=Physician`, );
+  getUsersByRole(userRole: string):Observable<User[]>{
+    return this.http.get<User[]>(`${environment.baseUrl}/user-api/user/getUsersByRole?role=${userRole}`, );
   }
   sendNotes(newNote: Notes):Observable<any>{
     return this.http.post(`${environment.baseUrl}/notes-service/note/addNote`, newNote);

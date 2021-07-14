@@ -63,6 +63,7 @@ export class LoginComponent implements OnInit {
        
        
         localStorage.setItem('token',value.token);
+        localStorage.setItem('id', value.id);
         let decodedString = JSON.parse(atob(localStorage.getItem('token').split('.')[1]));
       
         this.loginService.loggedIn.next(true);

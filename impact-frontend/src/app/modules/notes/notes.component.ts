@@ -5,6 +5,7 @@ import { ToastService } from 'src/app/service/toast/toast.service';
 import { FormGroup, FormControl, FormArray, Validators,FormBuilder } from '@angular/forms';
 import { NotesService } from 'src/app/service/notes/notes.service';
 import { Notes } from 'src/app/model/notes';
+import { LoginService } from 'src/app/service/login/login-service';
 
 
 @Component({
@@ -20,7 +21,8 @@ export class NotesComponent implements OnInit {
   submitted = false
   constructor(private router: Router,
     private modalService: NgbModal,private noteService: NotesService,private formBuilder: FormBuilder,
-    private toastService: ToastService) { }
+    private toastService: ToastService,
+    private loginService: LoginService) { }
 
   ngOnInit(): void {
 
@@ -31,10 +33,10 @@ export class NotesComponent implements OnInit {
       urgency: new FormControl('',[Validators.required])
     })
     this.designation = this.form.value.designation;
-    this.noteService.getUsersByRole().subscribe(val => {
+    this.noteService.getUsersByRole(this.loginService.userRole).subscribe(val => {
       this.users = val.filter(user => {
         // TODO: sender id is hardcoded for now . would be fetched from session
-        return user.userId !== parseInt(localStorage.getItem("userId"));
+        return user.userId !== parseInt(localStorage.getItem("id"));
       });
       console.log(val);
       
@@ -49,7 +51,7 @@ export class NotesComponent implements OnInit {
     
     let newNotes: Notes = this.form.value;
     // TODO: sender id is hardcoded for now . would be fetched from session
-    newNotes.senderId = parseInt(localStorage.getItem("userId"));
+    newNotes.senderId = parseInt(localStorage.getItem("id"));
     this.noteService.sendNotes(newNotes).subscribe(
       data => {
         this.toastService.show(data.message, { classname: 'bg-success text-light', delay: 5000 })
