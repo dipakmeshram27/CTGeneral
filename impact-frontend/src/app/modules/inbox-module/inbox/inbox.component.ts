@@ -35,6 +35,10 @@ import {
 import { ToastService } from 'src/app/service/toast/toast.service';
 import { WeekViewHourColumn } from 'calendar-utils';
 import { NotesService } from 'src/app/service/notes/notes.service';
+import { LoginService } from 'src/app/service/login/login-service';
+import { UserRole } from 'src/app/utils/constants';
+import { UserLogin } from 'src/app/model/userlogin';
+import { Router } from '@angular/router';
 
 const colors: any = {
   red: {
@@ -59,12 +63,19 @@ export class InboxComponent implements OnInit {
    physicians = [];
    patients = [];
    bookingForm:FormGroup;
+   isAppointmentToPhysician : boolean;
+   isAppointmentToPatient : boolean;
+   isNewAppointment : boolean;
+   selectedAppointmentId: number;
+  // isAppointmentUpdated :boolean;
   constructor(
     private modal: NgbModal,
     private appointmentService: AppointmentService,
     private formBuilder: FormBuilder,
     private toastService: ToastService,
-    private noteService: NotesService
+    private noteService: NotesService,
+    private loginService:LoginService,
+    private router: Router
   ) {
     // this.bookingForm = this.formBuilder.group({
     //   physicianId: [''],
@@ -72,41 +83,12 @@ export class InboxComponent implements OnInit {
     // });
       }
   appointments = [];
+  visitAppoitment = [];
   activeDayIsOpen: boolean = true;
   // hourColumns: WeekViewHourColumn[];
   selectedDate: Date = null;
 
- 
-
-  getPhysician() {
-    return [
-      { id: '1', name: 'Dr. Smith' },
-      { id: '2', name: 'Dr. Subhash' },
-      { id: '3', name: 'Dr. Thomas' },
-      { id: '4', name: 'Dr. Prajakta' },
-      { id: '5', name: 'Dr. John' },
-      { id: '6', name: 'Dr. William' },
-      { id: '7', name: 'Dr. Rk' },
-      { id: '8', name: 'Dr. Allen' },
-      { id: '9', name: 'Dr. Lee' },
-    ];
-  }
-  getPatient() {
-    return [
-      { id: '1', name: 'Santosh' },
-      { id: '2', name: 'Gorge' },
-      { id: '3', name: 'Ashraf' },
-      { id: '4', name: 'Willam' },
-      { id: '5', name: 'Bruce' },
-      { id: '6', name: 'Loki' },
-      { id: '7', name: 'Natasha' },
-      { id: '8', name: 'Tony' },
-      { id: '9', name: 'Thanos' },
-    ];
-  }
-
   ngOnInit(): void {
-
     this.bookingForm = this.formBuilder.group({
       meetingTitle: new FormControl(),
       description: new FormControl(),
@@ -117,14 +99,13 @@ export class InboxComponent implements OnInit {
       appointmentEndTime: new FormControl(),
     });
 
-    //ToDo call the method baed on user role
-    this.physicians = this.getPhysician();
-    this.patients = this.getPatient();
 
+    this.isAppointmentToPhysician = this.loginService.userRole === UserRole.PATIENT || this.loginService.userRole === UserRole.NURSE
+    this.isAppointmentToPatient = this.loginService.userRole === UserRole.PHYSICIAN || this.loginService.userRole === UserRole.NURSE
+
+    UserRole.PHYSICIAN === this.loginService.userRole;
   
-  
-    let role = 'physician';
-    if (role === 'patient') {
+    if (this.loginService.userRole === UserRole.PATIENT) {
       this.populatePatientsAppointments(
         dateToString(getFirstDayofWeek(this.viewDate)),
         dateToString(getLastDayofWeek(this.viewDate))
@@ -135,16 +116,25 @@ export class InboxComponent implements OnInit {
         dateToString(getLastDayofWeek(this.viewDate))
       );
     }
-
-    // this.noteService.getUsersByRole().subscribe((val) => {
-    //   this.physicians = val.filter((user) => {
-    //     // TODO: sender id is hardcoded for now . would be fetched from session
-
-    //     return user.userId !== 3;
-    //   });
-
-    //   console.log(val);
-    // });
+    if(UserRole.PHYSICIAN === this.loginService.userRole)
+    {
+      this.noteService.getUsersByRole(UserRole.PATIENT).subscribe((val) => {
+        this.patients = val;
+      });
+    }
+    else if(UserRole.NURSE === this.loginService.userRole){
+      this.noteService.getUsersByRole(UserRole.PATIENT).subscribe((val) => {
+        console.log(val);
+      });
+      this.noteService.getUsersByRole(UserRole.PHYSICIAN).subscribe((val) => {
+        console.log(val);
+      });
+    }
+    else{
+      this.noteService.getUsersByRole(UserRole.PATIENT).subscribe((val) => {
+        this.physicians = val;
+      });
+    }
   }
   view: CalendarView = CalendarView.Week;
   viewDate: Date = new Date();
@@ -159,7 +149,7 @@ export class InboxComponent implements OnInit {
 
   populatePatientsAppointments(startDate: string, endDate: string) {
     this.appointmentService
-      .getAppointmentToPatient(84, startDate, endDate)
+      .getAppointmentToPatient(parseInt(localStorage.getItem('id')), startDate, endDate)
       .subscribe((val) => {
         //console.log(val);
         this.appointments = val;
@@ -188,7 +178,7 @@ export class InboxComponent implements OnInit {
               0,
               0
             ),
-
+            id: appointments.appointmentId,
             title: appointments.meetingTitle,
             color: isTodaysDate(appointments.appointmentDate)
               ? colors.yellow
@@ -200,7 +190,7 @@ export class InboxComponent implements OnInit {
 
   populatePhysiciansAppoitments(startDate: string, endDate: string) {
     this.appointmentService
-      .getAppointmentToPhysician(19, startDate, endDate)
+      .getAppointmentToPhysician(parseInt(localStorage.getItem('id')), startDate, endDate)
       .subscribe((val) => {
         //console.log(val);
         this.appointments = val;
@@ -229,7 +219,7 @@ export class InboxComponent implements OnInit {
               0,
               0
             ),
-
+            id: appointments.appointmentId,
             title: appointments.meetingTitle,
             color: isTodaysDate(appointments.appointmentDate)
               ? colors.yellow
@@ -256,22 +246,9 @@ export class InboxComponent implements OnInit {
 
   events: CalendarEvent[] = [];
 
-  // private addSelectedDayViewClass() {
-  //   this.hourColumns.forEach((column) => {
-  //     column.hours.forEach((hourSegment) => {
-  //       hourSegment.segments.forEach((segment) => {
-  //         delete segment.cssClass;
-  //         if (this.shouldAddHighlight(segment.date)) {
-  //           segment.cssClass = 'cal-day-selected';
-  //         }
-  //       });
-  //     });
-  //   });
-  // }
-
   closeOpenMonthViewDay() {
-    let role = 'physician';
-    if (role === 'patient') {
+    UserRole.PHYSICIAN === this.loginService.userRole;
+    if (this.loginService.userRole === UserRole.PATIENT) {
       this.populatePatientsAppointments(
         dateToString(getFirstDayofWeek(this.viewDate)),
         dateToString(getLastDayofWeek(this.viewDate))
@@ -286,37 +263,44 @@ export class InboxComponent implements OnInit {
   }
   hourSegmentClicked(date: Date, content) {
     this.selectedDate = date;
-    this.modal.open(content);
+    this.isNewAppointment = true;
+    this.modal.open(content, {'size': 'md'});
     this.bookingForm.get('appointmentDate').setValue(formatDate(date));
     var options = { hour12: false };
     console.log(date.toLocaleString('en-US', options));
-    //we need getter method to get & set the time
-    // this.bookingForm.get('appointmentStartTime').setValue(date.toLocaleTimeString());
+   
     this.bookingForm
       .get('appointmentStartTime')
       .setValue(date.toLocaleTimeString('en-US', options));
     date.setTime(date.getTime() + 30 * 60 * 1000);
-    // this.bookingForm.get('appointmentEndTime').setValue(date.toLocaleTimeString());
+   
     this.bookingForm
       .get('appointmentEndTime')
       .setValue(date.toLocaleTimeString('en-US', options));
-
-    // this.addSelectedDayViewClass();
   }
   submitted = false;
 
+  get f() { return this.bookingForm.controls; }
+
   book() {
-    console.log('inside');
+   
     this.submitted = true;
     if (this.bookingForm.invalid) {
       return;
     }
-    // this.bookingForm.appointmentStartTime=   Date.now()
+   
     let newAppointment: Appointment = this.bookingForm.value;
 
-    //setter method to set time
+    //setting physician id from storage if logged in user is physician
+    if (UserRole.PHYSICIAN === this.loginService.userRole) {
+      newAppointment.physicianId = parseInt(localStorage.getItem('id'));
+    }
 
-    console.log(this.selectedDate);
+    // setting patient id from storage if logged in user is patient.
+    // For nurse, we have both dropdowns to select both physician and patient
+    if (UserRole.PATIENT === this.loginService.userRole) {
+      newAppointment.patientId = parseInt(localStorage.getItem('id'));
+    }
 
     // TODO: sender id is hardcoded for now . would be fetched from session
     this.appointmentService.bookAppointment(newAppointment).subscribe(
@@ -324,8 +308,22 @@ export class InboxComponent implements OnInit {
         this.toastService.show(data.message, {
           classname: 'bg-success text-light',
           delay: 5000,
-        });
+        })
+        UserRole.PHYSICIAN === this.loginService.userRole;
+  
+        if (this.loginService.userRole === UserRole.PATIENT) {
+          this.populatePatientsAppointments(
+            dateToString(getFirstDayofWeek(this.viewDate)),
+            dateToString(getLastDayofWeek(this.viewDate))
+          );
+        } else {
+          this.populatePhysiciansAppoitments(
+            dateToString(getFirstDayofWeek(this.viewDate)),
+            dateToString(getLastDayofWeek(this.viewDate))
+          );
+        }
       },
+      
       (error) => {
         this.toastService.show('Server Error please try later', {
           classname: 'bg-danger text-light',
@@ -333,31 +331,89 @@ export class InboxComponent implements OnInit {
         });
       }
     );
+    if (this.modal.hasOpenModals()) {
+      this.modal.dismissAll();
+    }
   }
 
-  shouldAddHighlight = function (date) {
-    let startDate = this.selectedDate;
-    let endDate = this.selectedDate.setTime(
-      this.selectedDate.getTime() + 30 * 60 * 1000
-    );
-    console.log('Start date ' + startDate);
-    console.log('Date ' + startDate);
-    if (date > startDate && date < endDate) {
-      return true;
-      alert(date);
+  handleEvent(action: string, event: CalendarEvent, content): void {
+    this.isNewAppointment = false;
+    this.selectedAppointmentId = parseInt(event.id.toString());
+    this.appointmentService.getAppointmentById(parseInt(event.id.toString())).subscribe(val => {
+      this.bookingForm.get('meetingTitle').setValue(val.meetingTitle);
+      this.bookingForm.get('description').setValue(val.description);
+      this.bookingForm.get('patientId').setValue(val.patientId);
+      this.bookingForm.get('physicianId').setValue(val.physicianId);
+      this.bookingForm.get('appointmentDate').setValue(val.appointmentDate);
+      this.bookingForm.get('appointmentStartTime').setValue(val.appointmentStartTime);
+      this.bookingForm.get('appointmentEndTime').setValue(val.appointmentEndTime);
+    })
+    this.modalData = { event, action };
+    console.log(this.modalData);
+    this.modal.open(content, { size: 'md' });
+    // Calling get appointment details API
+    
+  }
+
+  updateAppointment() {
+    this.submitted = true;
+    if (this.bookingForm.invalid) {
+      return;
+    }
+   
+    let newAppointment: Appointment = this.bookingForm.value;
+    newAppointment.appointmentId = this.selectedAppointmentId;
+
+    //setting physician id from storage if logged in user is physician
+    if (UserRole.PHYSICIAN === this.loginService.userRole) {
+      newAppointment.physicianId = parseInt(localStorage.getItem('id'));
     }
 
-    function addSelectedDayViewClass() {
-      this.hourColumns.forEach((column) => {
-        column.hours.forEach((hourSegment) => {
-          hourSegment.segments.forEach((segment) => {
-            delete segment.cssClass;
-            if (this.shouldAddHighlight(segment.date)) {
-              segment.cssClass = 'cal-day-selected';
-            }
-          });
-        });
-      });
+    // setting patient id from storage if logged in user is patient.
+    // For nurse, we have both dropdowns to select both physician and patient
+    if (UserRole.PATIENT === this.loginService.userRole) {
+      newAppointment.patientId = parseInt(localStorage.getItem('id'));
     }
-  };
+
+    // TODO: sender id is hardcoded for now . would be fetched from session
+    this.appointmentService.updateAppointment(newAppointment).subscribe(
+      (data) => {
+        this.toastService.show(data.message, {
+          classname: 'bg-success text-light',
+          delay: 5000,
+        })
+        UserRole.PHYSICIAN === this.loginService.userRole;
+  
+        if (this.loginService.userRole === UserRole.PATIENT) {
+          this.populatePatientsAppointments(
+            dateToString(getFirstDayofWeek(this.viewDate)),
+            dateToString(getLastDayofWeek(this.viewDate))
+          );
+        } else {
+          this.populatePhysiciansAppoitments(
+            dateToString(getFirstDayofWeek(this.viewDate)),
+            dateToString(getLastDayofWeek(this.viewDate))
+          );
+        }
+      },
+      
+      (error) => {
+        this.toastService.show('Server Error please try later', {
+          classname: 'bg-danger text-light',
+          delay: 5000,
+        });
+      }
+    );
+    if (this.modal.hasOpenModals()) {
+      this.modal.dismissAll();
+    }
+  }
+
+  goToVisit() {
+    if (this.modal.hasOpenModals()) {
+      this.modal.dismissAll();
+    }
+    //TODO: Navigate to correct patient visit page by sending appointment id
+    this.router.navigate(['note']);
+  }
 }
