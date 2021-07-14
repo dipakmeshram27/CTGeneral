@@ -32,16 +32,22 @@ export class ReceiveNoteComponent implements OnInit {
 
   getReciveNote(){
       // TODO: Sender id is hardcoded - needs to be updated after login
-    this.noteService.getRecieveNotes(42).subscribe(val => {
+    this.noteService.getRecieveNotes(parseInt(localStorage.getItem("userId"))).subscribe(val => {
       console.log(val);
-      this.receiveNote = val;
+      this.receiveNote = val.map(note => {
+        
+        return {
+          ...note,
+          hasReplied :null !== note.reply
+        }
+      });
     })
   }
 
 
   open(content, selectedNoteId) {
     this.selectedNoteId = selectedNoteId;
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' });
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', size: 'sm'  });
   }
 
   delete(selectedNoteId) {
@@ -70,6 +76,7 @@ export class ReceiveNoteComponent implements OnInit {
         console.log(data);
         this.toastService.show(data.message, { classname: 'bg-success text-light', delay: 5000 })
         if (this.modalService.hasOpenModals()) {
+          this.receiveNote.find( note =>note.noteId === this.selectedNoteId).hasReplied = true;
           this.modalService.dismissAll();
           this.replyForm.reset();
         }

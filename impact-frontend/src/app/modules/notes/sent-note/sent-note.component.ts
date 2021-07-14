@@ -17,7 +17,7 @@ export class SentNoteComponent implements OnInit {
 
   ngOnInit(): void {
     // TODO: Sender id is hardcoded - needs to be updated after login
-    this.noteService.getSentNotes(23).subscribe(val => {
+    this.noteService.getSentNotes(parseInt(localStorage.getItem("userId"))).subscribe(val => {
       console.log(val);
       this.sendNote = val;
     })
