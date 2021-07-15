@@ -24,14 +24,15 @@ export class ViewAllPatientsComponent implements OnInit {
 
   ngOnInit() 
   {
-    this.userService.getUsers().subscribe((val:User[]) => {
-      console.log(val);
+    this.userService.getUsers().subscribe((responceArray:User[]) => 
+    {
+      console.log(responceArray);
 
       this.user = [];
-      this.user = this.user.filter((userObj)=>{
-      return userObj.role === 3;
+      this.user = responceArray.filter((userObj)=>{
+        console.log(userObj);
+      return userObj.role["roleId"] === 3;
       })
-      this.user = val;
     })
     
   }

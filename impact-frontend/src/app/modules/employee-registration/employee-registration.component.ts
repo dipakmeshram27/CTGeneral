@@ -41,16 +41,8 @@ export class EmployeeRegistrationComponent implements OnInit
     email:new FormControl('',[Validators.required,Validators.minLength(15),Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$")]),
     phoneNumber:new FormControl('',[Validators.required,Validators.pattern("^[0-9]*$"),Validators.minLength(10), Validators.maxLength(10)]),
     dateOfBirth: new FormControl('',[Validators.required]),
-    password : new FormControl('',[Validators.required,Validators.minLength(8)]),
-    confpassword: new FormControl('',[Validators.required])
     
-  },{
-
-      validators:this.mustmatch('password','confpassword')
-  
-
-      })
-   }
+  })}
 
   ngOnInit(): void {}
 

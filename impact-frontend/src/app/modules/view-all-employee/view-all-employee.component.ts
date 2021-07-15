@@ -3,6 +3,7 @@ import { User } from 'src/app/model/User';
 import { UserService } from 'src/app/service/user/user-service';
 import {ActivatedRoute} from'@angular/router';
 import {ToastService} from 'src/app/service/toast/toast.service';
+import { analyzeAndValidateNgModules } from '@angular/compiler';
 
 @Component({
   selector: 'app-view-all-employee',
@@ -24,9 +25,14 @@ export class ViewAllEmployeeComponent implements OnInit
 
   ngOnInit() 
   {
-    this.userService.getUsers().subscribe((val:User[]) => {
-      console.log(val);
-      this.user = val;
+    this.userService.getUsers().subscribe((responceArray:User[]) => 
+    {
+      console.log(responceArray);
+      this.user = [];
+      this.user = responceArray.filter((userObj)=>{
+        console.log(userObj);
+      return userObj.role["roleId"] === 1 || userObj.role["roleId"] === 2;
+      })
     })
     
   }

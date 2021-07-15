@@ -2,10 +2,8 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from '../../model/User';
-import {Notes} from '../../model/notes';
 import { environment } from '../../../environments/environment';
-import { env } from 'process';
-import { usernotes } from '../../model/UserNotes';
+import { SetStatus } from 'src/app/model/SetStatus';
 
 @Injectable({
   providedIn: 'root'
@@ -13,21 +11,6 @@ import { usernotes } from '../../model/UserNotes';
 export class UserService {
   constructor(private http:HttpClient) { }
 
-  user: User =
-  {
-    title:'',
-    userId : null,
-    firstName:'',
-    lastName:'',
-    role:null,
-    password:'',
-    email:'',
-    status:'',
-    createdDate:'',
-    updatedDate:'',
-    phoneNumber: null,
-    dateOfBirth: ''
-  }
 
   getUsers():Observable<User[]>
   {
@@ -49,11 +32,17 @@ export class UserService {
     return this.http.put(`${environment.baseUrl}/user/updateUser`,newUser);
   }
 
-  setStatus(status : string,userId : number):Observable<any>
+  setStatus(status :string,userId:number):Observable<any>
   {
-    console.log(userId);
+    //console.log(userId);
+    const data = {
+      userId: userId,
+      status: status
+    };
+
     console.log(status);
-    return this.http.delete(`${environment.baseUrl}/user/editStatusById/${status}/${userId}`);
+    console.log(userId);
+    return this.http.post(`${environment.baseUrl}/user/editStatusById`,data);
   }
 
 }
