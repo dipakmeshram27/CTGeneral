@@ -68,6 +68,7 @@ export class InboxComponent implements OnInit {
    isNewAppointment : boolean;
    selectedAppointmentId: number;
   // isAppointmentUpdated :boolean;
+  isPatient : boolean;
   constructor(
     private modal: NgbModal,
     private appointmentService: AppointmentService,
@@ -100,8 +101,8 @@ export class InboxComponent implements OnInit {
     });
 
 
-    this.isAppointmentToPhysician = this.loginService.userRole === UserRole.PATIENT || this.loginService.userRole === UserRole.NURSE
-    this.isAppointmentToPatient = this.loginService.userRole === UserRole.PHYSICIAN || this.loginService.userRole === UserRole.NURSE
+    this.isAppointmentToPhysician = this.loginService.userRole === UserRole.PATIENT || this.loginService.userRole === UserRole.NURSE;
+    this.isAppointmentToPatient = this.loginService.userRole === UserRole.PHYSICIAN || this.loginService.userRole === UserRole.NURSE;
 
     UserRole.PHYSICIAN === this.loginService.userRole;
   
@@ -116,25 +117,21 @@ export class InboxComponent implements OnInit {
         dateToString(getLastDayofWeek(this.viewDate))
       );
     }
-    if(UserRole.PHYSICIAN === this.loginService.userRole)
+    if(UserRole.PHYSICIAN === this.loginService.userRole
+      || UserRole.NURSE === this.loginService.userRole)
     {
       this.noteService.getUsersByRole(UserRole.PATIENT).subscribe((val) => {
         this.patients = val;
       });
     }
-    else if(UserRole.NURSE === this.loginService.userRole){
-      this.noteService.getUsersByRole(UserRole.PATIENT).subscribe((val) => {
-        console.log(val);
-      });
+    if(UserRole.NURSE === this.loginService.userRole ||
+      UserRole.PATIENT === this.loginService.userRole){
       this.noteService.getUsersByRole(UserRole.PHYSICIAN).subscribe((val) => {
-        console.log(val);
-      });
-    }
-    else{
-      this.noteService.getUsersByRole(UserRole.PATIENT).subscribe((val) => {
         this.physicians = val;
       });
+      
     }
+    
   }
   view: CalendarView = CalendarView.Week;
   viewDate: Date = new Date();
@@ -193,7 +190,7 @@ export class InboxComponent implements OnInit {
       .getAppointmentToPhysician(parseInt(localStorage.getItem('id')), startDate, endDate)
       .subscribe((val) => {
         //console.log(val);
-        this.appointments = val;
+       // this.appointments = val;
         this.events = val.map((appointments: Appointment) => {
           return {
             start: new Date(
@@ -262,6 +259,10 @@ export class InboxComponent implements OnInit {
     this.activeDayIsOpen = false;
   }
   hourSegmentClicked(date: Date, content) {
+    if (date < new Date()) {
+      return;
+    }
+    this.bookingForm.reset();
     this.selectedDate = date;
     this.isNewAppointment = true;
     this.modal.open(content, {'size': 'md'});
@@ -338,6 +339,7 @@ export class InboxComponent implements OnInit {
 
   handleEvent(action: string, event: CalendarEvent, content): void {
     this.isNewAppointment = false;
+    this.isPatient = UserRole.PATIENT === this.loginService.userRole;
     this.selectedAppointmentId = parseInt(event.id.toString());
     this.appointmentService.getAppointmentById(parseInt(event.id.toString())).subscribe(val => {
       this.bookingForm.get('meetingTitle').setValue(val.meetingTitle);
