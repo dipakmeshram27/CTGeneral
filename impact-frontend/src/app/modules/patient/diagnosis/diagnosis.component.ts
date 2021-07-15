@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog,MatDialogConfig } from '@angular/material/dialog';
 import { DiagnosisDailogComponent } from '../Dialog/diagnosis-dailog/diagnosis-dailog.component';
+import { DiagnosisService } from '../service/diagnosis.service';
 
 
 // export interface UsersData {
@@ -28,16 +29,16 @@ import { DiagnosisDailogComponent } from '../Dialog/diagnosis-dailog/diagnosis-d
 
 export class DiagnosisComponent implements OnInit {
 
-  displayedColumns: string[] = ['position','id', 'name','action'];
-  // dataSource = ELEMENT_DATA;
+  
   isPopupOpened = true;
   
-  constructor(private dialog?: MatDialog) { }
+  constructor(private dialog?: MatDialog,
+              private service?: DiagnosisService) { }
 
   ngOnInit(): void {
   }
 
-  addContact(){
+  addDiagnosis(){
     // this.isPopupOpened = true;
     // const dialogRef = this.dialog.open(DiagnosisComponent, {
     //   data: {}
@@ -53,7 +54,8 @@ export class DiagnosisComponent implements OnInit {
   
       dialogConfig.disableClose = true;
       dialogConfig.autoFocus = true;
-       dialogConfig.width="500px";
+       dialogConfig.width="400px";
+       dialogConfig.height="350px";
       dialogConfig.position = {
        
     };
@@ -66,6 +68,15 @@ export class DiagnosisComponent implements OnInit {
           data => console.log("Dialog output:", data)
       );    
   
+  }
+
+  get DiagnosisList(){
+    return this.service.getAllList();
+  }
+
+  deleteDiagnosis(id: number){
+    console.log(id)
+    this.service.deleteDiagnosis(id);
   }
 
 }

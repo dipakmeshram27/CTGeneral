@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Medications } from '../model/medications';
-import {map, skipWhile, tap} from 'rxjs/operators'
+import {map, skipWhile, tap} from 'rxjs/operators';
 
-const baseUrl= "http://localhost:8081/drug/drugs";
+const baseUrl= "http://localhost:8081/drug";
 
 @Injectable({
   providedIn: 'root'
@@ -29,21 +29,21 @@ export class MedicationsService {
   }
 
   getData(){
-    return this.http.get(baseUrl)
+    return this.http.get(`${baseUrl}/drugs`)
       .pipe(
         map((response:[]) => response.map(item => item['drugId']))
       )
   }
 
   getallDAta(){
-    return this.http.get(baseUrl)
+    return this.http.get(`${baseUrl}/drugs`)
       .pipe(
         map((response:[]) => response.map(item => item['drugName']))
       )
   }
 
   getAllDrugForm(){
-    return this.http.get(baseUrl)
+    return this.http.get(`${baseUrl}/drugs`)
       .pipe(
         map((response:[]) => response.map(item => item['drugForm']))
       )
@@ -51,6 +51,10 @@ export class MedicationsService {
 
   getDrugByID(id){
     return this.http.get(`${baseUrl}/${id}`)   
+  }
+
+  saveMedication(medicine: Medications){
+    return this.http.post(`${baseUrl}/saveDrugs/`,medicine);
   }
 
 }

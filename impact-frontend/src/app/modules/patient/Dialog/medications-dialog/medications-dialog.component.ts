@@ -4,6 +4,8 @@ import { debounceTime } from 'rxjs/operators';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MedicationsService } from '../../service/medications.service';
+import { Medications } from '../../model/medications';
+import { ToastService } from 'src/app/service/toast/toast.service';
 
 @Component({
   selector: 'app-medications-dialog',
@@ -25,6 +27,7 @@ export class MedicationsDialogComponent implements OnInit {
   constructor(private dialogRef: MatDialogRef<MedicationsDialogComponent>,
     private formBuilder: FormBuilder,
     private medService: MedicationsService,
+    private toastService: ToastService,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnChanges() {
@@ -87,7 +90,12 @@ export class MedicationsDialogComponent implements OnInit {
 
     this.medService.addMedication(this.Form.value);
     this.dialogRef.close();
-    console.log(this.medService);
+    let medicine:Medications=this.Form.value;
+    medicine.appointmentId=2;
+    console.log(medicine)
+    this.medService.saveMedication(medicine).subscribe(data =>{
+      
+    })
   }
 
   getDrugId() {

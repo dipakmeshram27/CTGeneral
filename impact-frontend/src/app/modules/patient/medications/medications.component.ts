@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog ,MatDialogConfig} from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { MedicationsDialogComponent } from '../Dialog/medications-dialog/medications-dialog.component';
 import { MedicationsService } from '../service/medications.service';
@@ -29,10 +29,18 @@ export class MedicationsComponent implements OnInit {
 
   addMedication(){
 
+    const dialogConfig = new MatDialogConfig();
+  
+      dialogConfig.disableClose = true;
+      dialogConfig.autoFocus = true;
+       dialogConfig.width="400px";
+       dialogConfig.height="380px";
+      dialogConfig.position = {
+       
+    };
+
     this.isPopupOpened = true;
-    const dialogRef = this.dialog.open(MedicationsDialogComponent, {
-      data: {}
-    });
+    const dialogRef = this.dialog.open(MedicationsDialogComponent,dialogConfig);
 
 
     dialogRef.afterClosed().subscribe(result => {
@@ -50,6 +58,10 @@ export class MedicationsComponent implements OnInit {
     const dialogRef =this.dialog.open(MedicationsDialogComponent,{
       data:medicine
     });
+  }
+
+  save(){
+    console.log(this.MedicationList)
   }
 
 }

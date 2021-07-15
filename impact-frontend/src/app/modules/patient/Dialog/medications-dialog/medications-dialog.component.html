@@ -1,6 +1,6 @@
 
     <h2 mat-dialog-title>Add Medications 
-      <mat-icon (click)="onNoClick()">cancel</mat-icon> </h2>
+      <mat-icon mat-flat-button (click)="onNoClick()">cancel</mat-icon> </h2>
     
 
 <mat-dialog-content>
@@ -34,7 +34,7 @@
           {{item}}
         </mat-option>
       </mat-autocomplete>
-    </mat-form-field><br>
+    </mat-form-field>
 
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>
@@ -53,17 +53,10 @@
     
   <mat-form-field class="example-full-width" appearance="fill">
     <mat-label>Discription</mat-label>
-    <textarea formControlName="Discription" matInput placeholder="Leave a comment..."></textarea>
-  </mat-form-field>
+    <input type="text" formControlName="Discription" matInput placeholder="Leave a comment...">
+  </mat-form-field><br>
 
-        <button type="submit" class="btn btn-primary">
-          <!-- <mat-icon>save</mat-icon> -->
-          <mat-icon>note_add</mat-icon>
-        </button >&nbsp;
-        <button class="btn btn-warning" (click)="onNoClick()">
-          <mat-icon >cancel</mat-icon>
-        </button>
-
+        <button type="submit" class="btn btn-primary">save</button > 
   </form>
 
 </mat-dialog-content>

@@ -28,6 +28,7 @@ import { DiagnosisDailogComponent } from './Dialog/diagnosis-dailog/diagnosis-da
 import { PatientDetailsComponent } from '../patient-details/patient-details.component';
 import { MedicationsDialogComponent } from './Dialog/medications-dialog/medications-dialog.component';
 import { MedicationsService } from './service/medications.service';
+import { ProcedureDailogComponent } from './Dialog/procedure-dailog/procedure-dailog.component';
 
 
 const routes: Routes = [
@@ -57,7 +58,8 @@ const routes: Routes = [
         VitalSignsComponent,
         MedicationsComponent,
         DiagnosisDailogComponent,
-        MedicationsDialogComponent
+        MedicationsDialogComponent,
+        ProcedureDailogComponent
     ],
 
     imports: [RouterModule.forRoot(routes),

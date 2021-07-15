@@ -4,4 +4,5 @@ export class Medications {
     drugName: string;
     drugForm: string;
     discription: string;
+    appointmentId:number;
 }
