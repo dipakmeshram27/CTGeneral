@@ -4,6 +4,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { ProcedureService } from '../../service/procedure.service';
 import { debounceTime } from 'rxjs/operators';
 import { Procedure } from '../../model/procedure';
+import { ToastService } from 'src/app/service/toast/toast.service';
 
 @Component({
   selector: 'app-procedure-dailog',
@@ -19,7 +20,8 @@ export class ProcedureDailogComponent implements OnInit {
   filterdCodes;
   constructor(private dailogRef: MatDialogRef<ProcedureDailogComponent>,
               private formBuilder: FormBuilder,
-               private procedureService: ProcedureService) { }
+               private procedureService: ProcedureService,
+               private to: ToastService) { }
 
   ngOnInit(): void {
 
@@ -73,7 +75,7 @@ export class ProcedureDailogComponent implements OnInit {
       let procedure:Procedure=this.Form.value;
       let appointmeId=4;
       this.procedureService.saveProcedures(procedure,appointmeId).subscribe(data=>{
-
+        this.to.show(data.statusMessage,{ classname: 'bg-success text-light', delay: 5000 })
       });
       
   }

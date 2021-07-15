@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Diagnosis } from '../model/diagnosis';
 import {map} from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 const basrUrl="http://localhost:8081/diagnosis";
 
@@ -40,7 +41,7 @@ export class DiagnosisService {
       )
   }
 
-  saveDiagnosis(diagnosis: Diagnosis,id :number){
+  saveDiagnosis(diagnosis: Diagnosis,id :number):Observable<any>{
     return this.http.post(`${basrUrl}/saveDaignosis/${id}`,diagnosis);
   }
 

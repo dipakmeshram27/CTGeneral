@@ -6,10 +6,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .page-title {
     font-weight: 500;
 }
-<<<<<<< HEAD
 
 
-=======
 .red-background {
     border-color: red;
 }
@@ -18,6 +16,5 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     font-family: "Open Sans";
     src: local("Open Sans"), url(./assets/fonts/OpenSans-Bold.ttf) format("truetype");
     src: local("Open Sans"), url(./assets/fonts/OpenSans-SemiBold.ttf) format("truetype");
-    src: local("Open Sans"), url(./assets/fonts/OpenSans-Regular.ttf) format("truetype");
+     src: local("Open Sans"), url(./assets/fonts/OpenSans-Regular.ttf) format("truetype") 
 }
->>>>>>> 91dc305f66776612298aece231aeaf9010b454a5

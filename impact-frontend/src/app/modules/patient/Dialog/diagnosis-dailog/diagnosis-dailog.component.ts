@@ -4,6 +4,7 @@ import { FormGroup ,FormControl, FormBuilder, Validators} from '@angular/forms';
 import { DiagnosisService } from '../../service/diagnosis.service';
 import { debounceTime } from 'rxjs/operators';
 import { Diagnosis } from '../../model/diagnosis';
+import { ToastService } from 'src/app/service/toast/toast.service';
 @Component({
   selector: 'app-diagnosis-dailog',
   templateUrl: './diagnosis-dailog.component.html',
@@ -22,7 +23,8 @@ export class DiagnosisDailogComponent implements OnInit {
 
   constructor(private dialogRef: MatDialogRef<DiagnosisDailogComponent>,
               private formBuilder: FormBuilder,
-              private service: DiagnosisService) { }
+              private service: DiagnosisService,
+              private toastService: ToastService) { }
 
   ngOnInit() {
 
@@ -74,7 +76,7 @@ export class DiagnosisDailogComponent implements OnInit {
     let diagnose:Diagnosis=this.Form.value;
     let appointmentId=2;
     this.service.saveDiagnosis(diagnose,appointmentId).subscribe(data=>{
-
+        this.toastService.show(data.statusMessage,{ classname: 'bg-success text-light', delay: 5000 })
     })
   }
   

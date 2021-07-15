@@ -55,8 +55,8 @@ import { MatToolbar, MatToolbarModule } from '@angular/material/toolbar';
     FormsModule,
     ReactiveFormsModule,
     Ng2TelInputModule,
-    PatientVisitModule
-    InboxModuleModule,
+    PatientVisitModule,
+    
     MatToolbarModule
   ],
   providers: [DatacreateService,

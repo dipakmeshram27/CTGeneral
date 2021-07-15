@@ -7,6 +7,7 @@ import { MedicationsService } from '../../service/medications.service';
 import { Medications } from '../../model/medications';
 import { ToastService } from 'src/app/service/toast/toast.service';
 
+
 @Component({
   selector: 'app-medications-dialog',
   templateUrl: './medications-dialog.component.html',
@@ -27,7 +28,7 @@ export class MedicationsDialogComponent implements OnInit {
   constructor(private dialogRef: MatDialogRef<MedicationsDialogComponent>,
     private formBuilder: FormBuilder,
     private medService: MedicationsService,
-    private toastService: ToastService,
+    private to: ToastService,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnChanges() {
@@ -44,12 +45,12 @@ export class MedicationsDialogComponent implements OnInit {
   initForm(){
     this.Form = this.formBuilder.group({
       // DrugID: ['', Validators.required],
-      DrugName: ['', Validators.required],
-      DrugForm: ['', Validators.required],
-      Discription:['']
+      drugName: ['', Validators.required],
+      drugForm: ['', Validators.required],
+      discription:['']
     });
 
-    this.Form.get('DrugName').valueChanges.
+    this.Form.get('drugName').valueChanges.
       pipe(debounceTime(1000)).subscribe(response => {
         if (response && response.length) {
           this.filterData(response);
@@ -58,7 +59,7 @@ export class MedicationsDialogComponent implements OnInit {
         }
       })
 
-      this.Form.get('DrugForm').valueChanges.
+      this.Form.get('drugForm').valueChanges.
       pipe(debounceTime(1000)).subscribe(response => {
         if (response && response.length) {
           this.filterData1(response);
@@ -93,8 +94,8 @@ export class MedicationsDialogComponent implements OnInit {
     let medicine:Medications=this.Form.value;
     medicine.appointmentId=2;
     console.log(medicine)
-    this.medService.saveMedication(medicine).subscribe(data =>{
-      
+    this.medService.saveMedication(medicine).subscribe(data=>{
+      this.to.show(data.statusMessage,{ classname: 'bg-success text-light', delay: 5000 })
     })
   }
 

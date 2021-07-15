@@ -12,6 +12,9 @@ import {InboxModuleModule} from './modules/inbox-module/inbox-module.module'
 import { AuthGuard } from './auth.guard';
 
 
+import { PatientVisitComponent } from './modules/patient/patient-visit/patient-visit.component';
+
+
 const routes: Routes = [
   
   {
@@ -38,6 +41,7 @@ const routes: Routes = [
     expectedRole:['ROLE_PHYSICIAN', 'ROLE_NURSE', 'ROLE_PATIENT']
   }
 },
+
   
   { path: 'schedule', 
   component: SchedulingComponent,
@@ -53,7 +57,16 @@ const routes: Routes = [
   canActivate: [AuthGuard],
   data:{
     expectedRole:['ROLE_ADMIN']
-  }
+  },
+
+},
+
+{ path: 'visit', 
+component: PatientVisitComponent,
+canActivate: [AuthGuard],
+data:{
+  expectedRole:['ROLE_PHYSICIAN', 'ROLE_NURSE', 'ROLE_PATIENT']
+} 
 },
   {
     path: 'note',
@@ -70,6 +83,11 @@ const routes: Routes = [
   {
     path: 'forgot-password',
     component: ForgotPasswordComponent
+  },
+
+  {
+    path: 'visit',
+    loadChildren: () =>import('./modules/patient/patient-visit.module').then(m =>m.PatientVisitModule)
   }
 
  // { path: 'customer', component: CustomerComponent, canActivate: [AuthGuard] },

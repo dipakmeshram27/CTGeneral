@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Medications } from '../model/medications';
 import {map, skipWhile, tap} from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 const baseUrl= "http://localhost:8081/drug";
 
@@ -53,7 +54,7 @@ export class MedicationsService {
     return this.http.get(`${baseUrl}/${id}`)   
   }
 
-  saveMedication(medicine: Medications){
+  saveMedication(medicine: Medications):Observable<any>{
     return this.http.post(`${baseUrl}/saveDrugs/`,medicine);
   }
 

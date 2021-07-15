@@ -26,8 +26,8 @@
       <mat-label>
         Drug Name
       </mat-label>
-      <input formControlName="DrugName" matInput type="text" [matAutocomplete]="autoo" />
-      <mat-error *ngIf="Form.controls['DrugName'].hasError('required')">This field cannot be empty
+      <input formControlName="drugName" matInput type="text" [matAutocomplete]="autoo" />
+      <mat-error *ngIf="Form.controls['drugName'].hasError('required')">This field cannot be empty
       </mat-error>
       <mat-autocomplete #autoo="matAutocomplete">
         <mat-option *ngFor="let item of filteredOptions" [value]="item">
@@ -40,8 +40,8 @@
       <mat-label>
         Drug Form
       </mat-label>
-      <input formControlName="DrugForm" matInput type="text" [matAutocomplete]="auto2"/>
-      <mat-error *ngIf="Form.controls['DrugForm'].hasError('required')">This field cannot be empty
+      <input formControlName="drugForm" matInput type="text" [matAutocomplete]="auto2"/>
+      <mat-error *ngIf="Form.controls['drugForm'].hasError('required')">This field cannot be empty
       </mat-error>
        <mat-autocomplete #auto2="matAutocomplete">
             <mat-option *ngFor="let item of filteredOptions1" [value]="item">
@@ -53,7 +53,7 @@
     
   <mat-form-field class="example-full-width" appearance="fill">
     <mat-label>Discription</mat-label>
-    <input type="text" formControlName="Discription" matInput placeholder="Leave a comment...">
+    <input type="text" formControlName="discription" matInput placeholder="Leave a comment...">
   </mat-form-field><br>
 
         <button type="submit" class="btn btn-primary">save</button > 

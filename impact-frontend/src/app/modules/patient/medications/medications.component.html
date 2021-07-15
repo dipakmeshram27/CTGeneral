@@ -10,9 +10,9 @@
     <tbody>
       <tr *ngFor="let Medications of MedicationList">
         <!-- <td scope="row">{{Medications.DrugID}}</td> -->
-        <td scope="row">{{Medications.DrugName}}</td>
-        <td scope="row">{{Medications.DrugForm}}</td>
-        <td scope="row">{{Medications.Discription}}</td>
+        <td scope="row">{{Medications.drugName}}</td>
+        <td scope="row">{{Medications.drugForm}}</td>
+        <td scope="row">{{Medications.discription}}</td>
         <td>
           <mat-icon (click)="deleteMedication(Medications.DrugID)">delete</mat-icon>
         </td>

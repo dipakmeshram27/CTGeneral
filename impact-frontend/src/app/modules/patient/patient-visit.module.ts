@@ -29,21 +29,24 @@ import { PatientDetailsComponent } from '../patient-details/patient-details.comp
 import { MedicationsDialogComponent } from './Dialog/medications-dialog/medications-dialog.component';
 import { MedicationsService } from './service/medications.service';
 import { ProcedureDailogComponent } from './Dialog/procedure-dailog/procedure-dailog.component';
+import { AuthGuard } from 'src/app/auth.guard';
 
 
 const routes: Routes = [
     {
-        path: 'visit', component: PatientVisitComponent,
-        children: [{
-            path: 'diagnosis', component: DiagnosisComponent
-        },{
-            path: 'procedures', component: PatientProceduresComponent
-        },{
-            path: 'signs', component: VitalSignsComponent
-        },{
-            path: 'medications', component:MedicationsComponent
-        },{ path: 'patient-details', component:PatientDetailsComponent}
-    ]
+        path: '', 
+        component: PatientVisitComponent,
+        children: [
+        { path: 'diagnosis', component: DiagnosisComponent },
+        { path: 'procedures', component: PatientProceduresComponent},
+        { path: 'signs', component: VitalSignsComponent },
+        { path: 'medications', component:MedicationsComponent},
+        { path: 'patient-details', component:PatientDetailsComponent}
+    ],
+    canActivate: [AuthGuard],
+    data:{
+      expectedRole:['ROLE_PHYSICIAN', 'ROLE_NURSE', 'ROLE_PATIENT']
+    }
 
     }
 ];
@@ -89,7 +92,7 @@ const routes: Routes = [
     ],
     exports: [RouterModule],
     providers:[MedicationsService],
-    entryComponents:[MedicationsDialogComponent]
+    entryComponents:[PatientVisitComponent]
     
 })
 
