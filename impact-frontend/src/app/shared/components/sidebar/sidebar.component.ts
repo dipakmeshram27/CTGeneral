@@ -34,7 +34,7 @@ export class SidebarComponent implements OnInit {
           this.routerLinks = [{ link: '/', name: 'dashboard' },{ link: '/inbox', name: 'Inbox' }, { link: '/note', name: 'Note' }];
  
         } else if (currentRole === "Patient") {
-          this.routerLinks = [{ link: '/', name: 'dashboard' }, { link: '/patient-details', name: 'Patient Details' }];
+          this.routerLinks = [{ link: '/', name: 'dashboard' }, { link: '/patient-details', name: 'Patient Details' },{ link: '/inbox', name: 'Inbox' }];
  
         }
  
