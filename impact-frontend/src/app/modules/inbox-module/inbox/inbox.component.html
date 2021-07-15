@@ -141,7 +141,7 @@
           <div class="col-12 text-center">
             <button type="button" class="secondaryButton" (click)="modal.close('Close click')">Close</button>
             <button type="button" class="primaryButton" style="margin-right: 20px;" (click)="updateAppointment()">Update Appointment</button>
-            <button type="submit" class="primaryButton" (click)="goToVisit()">Go To Visit</button>
+            <button type="submit" class="primaryButton" (click)="goToVisit()" *ngIf="!isPatient">Go To Visit</button>
           </div>
         </div>
       </ng-template>

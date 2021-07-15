@@ -33,8 +33,8 @@ export class SidebarComponent implements OnInit {
           this.loginService.loggedIn.next(true);
           this.routerLinks = [{ link: '/', name: 'dashboard' }, { link: '/patient-details', name: 'Patient Details' }, { link: '/inbox', name: 'Inbox' }, { link: '/note', name: 'Note' }];
  
-        } else if (currentRole === "ROLE_PATIENT") {
-          this.routerLinks = [{ link: '/', name: 'dashboard' }, { link: '/patient-details', name: 'Patient Details' }];
+        } else if (currentRole === "Patient") {
+          this.routerLinks = [{ link: '/', name: 'dashboard' }, { link: '/patient-details', name: 'Patient Details' },{ link: '/inbox', name: 'Inbox' }];
  
         }
  
