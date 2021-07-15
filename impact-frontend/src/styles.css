@@ -8,14 +8,3 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 
-.toolbar{
-    background-color: rgb(187, 202, 216);
-    border-radius: 5px;
-    color:black;
-    height: 40px;
-
-}
-
-.toolbar-spacer{
-    flex: 1 1 auto;
-} 
