@@ -1,10 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
-
+@import "../node_modules/angular-calendar/css/angular-calendar.css";
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .page-title {
     font-weight: 500;
 }
+<<<<<<< HEAD
 
 
+=======
+.red-background {
+    border-color: red;
+}
+
+@font-face {
+    font-family: "Open Sans";
+    src: local("Open Sans"), url(./assets/fonts/OpenSans-Bold.ttf) format("truetype");
+    src: local("Open Sans"), url(./assets/fonts/OpenSans-SemiBold.ttf) format("truetype");
+    src: local("Open Sans"), url(./assets/fonts/OpenSans-Regular.ttf) format("truetype");
+}
+>>>>>>> 91dc305f66776612298aece231aeaf9010b454a5

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators, FormBuilder, ValidationErrors } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { UserLogin } from 'src/app/model/userlogin';
-import {LoginService} from 'src/app/service/login/login-service'
+import { LoginService } from 'src/app/service/login/login-service';
+
 
 
 
@@ -19,7 +21,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  constructor(private formBuilder: FormBuilder, private loginService: LoginService) {
+  constructor(private formBuilder: FormBuilder, private loginService: LoginService, private router: Router) {
 
     this.form = this.formBuilder.group({
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -40,26 +42,44 @@ export class LoginComponent implements OnInit {
   get password() {
     return this.form.get('password');
   }
- 
+
 
   get f() { return this.form.controls; }
 
-  
+
 
   submit() {
     console.log(this.form.value);
     this.submitted = true;
     if (this.form.invalid) {
       return;
-    }else{
-    
-  let userLogin: UserLogin= this.form.value;
- 
-this.loginService.userLogin(userLogin).subscribe(value => {
-console.log(value);
-    console.log(this.form.value);
-  })
-}
+    } else {
 
-}
+      let userLogin: UserLogin = this.form.value;
+
+      this.loginService.userLogin(userLogin).subscribe(value => {
+        this.loginService.AuthenticationToken=value.token;
+        this.loginService.IsAuthenticated=true;
+       
+       
+        localStorage.setItem('token',value.token);
+        localStorage.setItem('id', value.id);
+        let decodedString = JSON.parse(atob(localStorage.getItem('token').split('.')[1]));
+      
+        this.loginService.loggedIn.next(true);
+
+       this.loginService.userRole = decodedString.role[0].authority;
+       console.log(this.loginService.userRole)
+        this.router.navigate(['/app-dashboard']);
+        console.log(value);
+        console.log(this.form.value);
+      })
+    }
+
+  }
+
+ 
+
+
+
 }

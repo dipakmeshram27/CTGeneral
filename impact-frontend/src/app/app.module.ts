@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { SharedModule } from './shared/shared.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
 import { EmployeeRegistrationComponent } from './modules/employee-registration/employee-registration.component';
 import { PatientRegistrationComponent } from './modules/patient-registration/patient-registration.component';
@@ -19,6 +19,11 @@ import {Ng2TelInputModule} from 'ng2-tel-input';
 import { LoginComponent } from './modules/login/login.component';
 import { ForgotPasswordComponent } from './modules/forgot-password/forgot-password.component';
 import { PatientVisitModule } from './modules/patient/patient-visit.module';
+import { InboxComponent } from './modules/inbox-module/inbox/inbox.component';
+import { InboxModuleModule } from './modules/inbox-module/inbox-module.module';
+import { TokenInterceptor } from './token.interceptor';
+import { MatToolbar, MatToolbarModule } from '@angular/material/toolbar';
+
 
 @NgModule({
   declarations: [
@@ -27,7 +32,11 @@ import { PatientVisitModule } from './modules/patient/patient-visit.module';
     PatientRegistrationComponent,
     PatientDetailsComponent,
     LoginComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    
+
+
+
 
   
   ],
@@ -47,8 +56,11 @@ import { PatientVisitModule } from './modules/patient/patient-visit.module';
     ReactiveFormsModule,
     Ng2TelInputModule,
     PatientVisitModule
+    InboxModuleModule,
+    MatToolbarModule
   ],
-  providers: [DatacreateService],
+  providers: [DatacreateService,
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
