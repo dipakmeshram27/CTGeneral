@@ -11,6 +11,8 @@ import {
   SearchCountryField,
 
 } from "ngx-intl-tel-input";
+import { LoginService } from 'src/app/service/login/login-service';
+import { getAge } from 'src/app/utils/utils';
 
 @Component({
   selector: 'app-patient-details',
@@ -64,12 +66,12 @@ export class PatientDetailsComponent implements OnInit {
     CountryISO.UnitedStates,
     CountryISO.UnitedKingdom
   ];
-
+allergy =[];
 
 
 
   get f() { return this.reactiveForm.controls; }
-  constructor(private formBuilder: FormBuilder, private patiendetailService: PatientdetailsService, private toastService: ToastService) {
+  constructor(private formBuilder: FormBuilder, private patiendetailService: PatientdetailsService, private toastService: ToastService, private loginService: LoginService) {
 
 
   }
@@ -86,12 +88,12 @@ export class PatientDetailsComponent implements OnInit {
     this.patiendetailService.getAllergy().subscribe(allergy_idlist => {
       this.allergy_idlist = allergy_idlist;
     });
-    this.patiendetailService.getAllergy().subscribe(allergy_namelist => {
+    /* this.patiendetailService.getAllergy().subscribe(allergy_namelist => {
       this.allergy_namelist = allergy_namelist;
     });
     this.patiendetailService.getAllergy().subscribe(allergy_typelist => {
       this.allergy_typelist = allergy_typelist;
-    });
+    }); */
 
     // this.reactiveForm = this.formBuilder.group({
     //   title: ['']
@@ -112,7 +114,7 @@ export class PatientDetailsComponent implements OnInit {
       race: new FormControl('', [Validators.minLength(2), Validators.maxLength(50)]),
       ethinicity: new FormControl('', [Validators.minLength(2), Validators.maxLength(50)]),
       lang_known: new FormControl('', [Validators.minLength(2), Validators.maxLength(50)]),
-      email: new FormControl('', [Validators.minLength(15), Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$")]),
+      email: new FormControl('', [Validators.minLength(15)]),
       ph_number: new FormControl('', [Validators.minLength(7)]),
       address: new FormControl(),
       city: new FormControl(),
@@ -122,7 +124,7 @@ export class PatientDetailsComponent implements OnInit {
       emgr_title: new FormControl(),
       emgr_fname: new FormControl('', [Validators.required, Validators.minLength(2)]),
       emgr_lname: new FormControl('', [Validators.required, Validators.minLength(2)]),
-      emgr_email: new FormControl('', [Validators.minLength(15), Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$")]),
+      emgr_email: new FormControl('', [Validators.minLength(15)]),
       emgr_phnumber: new FormControl(),
       emgr_relation: new FormControl(),
       emgr_address: new FormControl(),
@@ -140,6 +142,9 @@ export class PatientDetailsComponent implements OnInit {
 
     });
 
+    this.reactiveForm.get('dob').valueChanges.subscribe(value => {
+      this.ageCalculator();
+    })
 
   }
 
@@ -150,9 +155,6 @@ export class PatientDetailsComponent implements OnInit {
    
     console.log(PhoneNumberFormat.International.valueOf.toString);
     
-    // this.phonenumber =this.reactiveForm.value.ph_number.internationalNumber;
-    // this.ph_number=this.phonenumber;
-    // console.log(this.ph_number);
     console.log('inside outside submit')
     console.log(this.reactiveForm.value);
     let _patientDetails: patientdetails = this.reactiveForm.value;
@@ -163,28 +165,11 @@ export class PatientDetailsComponent implements OnInit {
       error => {
         this.toastService.show('Server Error please try later', { classname: 'bg-danger text-light', delay: 5000 });
       })
-
-
-
-    
-
-
-
   }
-
-  GetAllergyNameById(event: any) {
-    console.log(event);
-    this.patiendetailService.getAllergyById(event.target.value).subscribe(allergynamelist => {
-      this.allergy_namelist = this.allergy_namelist;
-    })
-  }
-
 
   onChangeAllergyName() {
-    console.log('hiiiiii');
-    // this.patiendetailService.getAllergyById(allergy_id).subscribe(
-    // data => this.allergy_namelist=data
-    // );
+    this.reactiveForm.get('allergy_name').setValue(this.allergy_idlist.filter(allergeies =>allergeies.id == this.reactiveForm.get('allergy_id').value)[0].allergy_name);
+    this.reactiveForm.get('allergy_type').setValue(this.allergy_idlist.filter(allergeies =>allergeies.id == this.reactiveForm.get('allergy_id').value)[0].allergy_type);
   }
 
 
@@ -208,7 +193,7 @@ export class PatientDetailsComponent implements OnInit {
 
   addresscheck(event) {
 
-    console.log('hiiiiii');
+   
 
     if (event.target.checked) {
       this.emgr_address = this.address;
@@ -227,23 +212,15 @@ export class PatientDetailsComponent implements OnInit {
 
 
   }
-
-  ageCalculator() {
-    console.log('inside age')
-    // if(event.target.checked){
-    //if(this.dob){
-    //  var timeDiff = Math.abs(Date.now() - this.dob);
-    const convertAge = new Date(this.age);
-    this.dob =convertAge;
-    const timeDiff = Math.abs(Date.now() - convertAge.getTime());
-    this.showage = Math.floor((timeDiff / (1000 * 3600 * 24)) / 365);
-    // this.age = Math.floor((timeDiff / (1000 * 3600 * 24))/365);
-    this.age=this.showage;
-    this.patient_age = this.age;
-    console.log(this.patient_age);
-    // }
-    // }
+  
+  ageCalculator(){
+    let date1 = this.reactiveForm.get('dob').value;
+    let date2 = new Date();
+    //getAge(date1,date2);
+    console.log(getAge(date1,date2));
+    this.reactiveForm.get('patient_age').setValue(getAge(date1,date2));
   }
+
   phonecode(){
     console.log('inside ph');
     this.ph_number=this.phone;
@@ -253,6 +230,8 @@ export class PatientDetailsComponent implements OnInit {
   
       exportCSV() {
         console.log('export csv called'); 
-        this.patiendetailService.getCSVReport(1);
+        this.patiendetailService.getCSVReport(parseInt(localStorage.getItem("id")));
       }
+
+   
 }

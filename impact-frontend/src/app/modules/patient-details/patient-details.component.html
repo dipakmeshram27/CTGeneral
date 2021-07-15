@@ -3,17 +3,17 @@
 <body>
   <div class="container">
     <div class="row">
-      <div class = "col-md-4">
+      <div class="col-md-4">
       </div>
-      <div class = "col-md-4 p-3">
+      <div class="col-md-4 p-3">
         <h1>Patient Details</h1>
       </div>
-      <div class = "col-md-4 p-3">
-      <img class="float-end pointer" height="30" width="30" src="/assets/excel.png" (click)="exportCSV()"/>
+      <div class="col-md-4 p-3">
+        <img class="float-end pointer" height="30" width="30" src="/assets/excel.png" (click)="exportCSV()" />
       </div>
-  </div>
+    </div>
     <form (ngSubmit)="onSubmit()" [formGroup]="reactiveForm">
-      
+
       <div class="row">
         <div class="col-sm-12">
           <div class="col-sm-12">
@@ -53,9 +53,9 @@
                   </div>
                 </div>
                 <div class="col-sm-2">
-                 <!--  Enter DOB: <input type="date" placeholder="DD/MM/YYYY" [(ngModel)]="age" class="form-control" formControlName="dob" (change)="ageCalculator()"/> -->
-                  Enter DOB:<input type="text" placeholder="DD/MM/YYYY" formControlName="dob" class="form-control"
-                    bsDatepicker [bsConfig]="{ isAnimated: true }">
+                  <!--  Enter DOB: <input type="date" placeholder="DD/MM/YYYY" [(ngModel)]="age" class="form-control" formControlName="dob" (change)="ageCalculator()"/> -->
+                  Enter DOB:<input type="text" placeholder="MM/DD/YYYY" formControlName="dob" class="form-control"
+                    bsDatepicker [bsConfig]="{ isAnimated: true }" (change)="ageCalculator()">
                   <!--   Age: <p *ngIf="age">{{ showAge }}</p> -->
                   <div class="text-danger" *ngIf="f.dob.touched && f.dob.invalid">
 
@@ -65,7 +65,7 @@
                   </div>
                 </div>
                 <div class="col-sm-2 ">
-                
+
                   Age: <input type="text" class="form-control" formControlName="patient_age" placeholder="" name="age">
                   <div class="text-danger" *ngIf="f.patient_age.touched && f.patient_age.invalid">
 
@@ -190,7 +190,7 @@
               Country: <input type="text" class="form-control" [(ngModel)]="country" formControlName="country"
                 name="country">
             </div>
-           <!--   <div class="col-sm-6">
+            <!--   <div class="col-sm-6">
             <ngx-intl-tel-input  [preferredCountries]="[CountryISO.UnitedStates, CountryISO.UnitedKingdom]"
             [enableAutoCountrySelect]="true" [enablePlaceholder]="true" [searchCountryFlag]="true"
             [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
@@ -214,28 +214,29 @@
             <div class="col-sm-4 ">
               First Name: <input type="text" class="form-control" placeholder="" formControlName="emgr_fname"
                 name="emgrfirstname">
-                <div class="text-danger" *ngIf="f.emgr_fname.touched && f.emgr_fname.invalid">
+              <div class="text-danger" *ngIf="f.emgr_fname.touched && f.emgr_fname.invalid">
 
-                  <div *ngIf="f.emgr_fname.errors.required">* First name cannot be empty</div>
-                  <div *ngIf="f.emgr_fname.errors.minlength">Please don’t use abbreviations</div>
+                <div *ngIf="f.emgr_fname.errors.required">* First name cannot be empty</div>
+                <div *ngIf="f.emgr_fname.errors.minlength">Please don’t use abbreviations</div>
 
-                </div>
+              </div>
             </div>
             <div class="col-sm-4 ">
               Last Name: <input type="text" class="form-control" placeholder="" formControlName="emgr_lname"
                 name="emgrlastname">
-                <div class="text-danger" *ngIf="f.emgr_lname.touched && f.emgr_lname.invalid">
+              <div class="text-danger" *ngIf="f.emgr_lname.touched && f.emgr_lname.invalid">
 
-                  <div *ngIf="f.emgr_lname.errors.required">* First name cannot be empty</div>
-                  <div *ngIf="f.emgr_lname.errors.minlength">Please don’t use abbreviations</div>
+                <div *ngIf="f.emgr_lname.errors.required">* First name cannot be empty</div>
+                <div *ngIf="f.emgr_lname.errors.minlength">Please don’t use abbreviations</div>
 
-                </div>
+              </div>
             </div>
             <div class="col-sm-5 ">
               Email: <input type="text" class="form-control" formControlName="emgr_email" name="emgremail">
               <div class="text-danger" *ngIf="f.emgr_email.touched && f.emgr_email.invalid">
 
-                <div *ngIf="f.emgr_email.errors.pattern">*Please enter your email address e.g. exampleusername@xyzdomain,com
+                <div *ngIf="f.emgr_email.errors.pattern">*Please enter your email address e.g.
+                  exampleusername@xyzdomain,com
                 </div>
                 <div *ngIf="f.emgr_email.errors.minlength">Please don’t use abbreviations</div>
 
@@ -245,15 +246,15 @@
             <div class="col-sm-4 ">
               Phone Number: <input type="text" class="form-control" formControlName="emgr_phnumber" name="emgrphnumber"
                 ng2TelInput>
-                <div class="text-danger" *ngIf="f.emgr_phnumber.touched && f.emgr_phnumber.invalid">
+              <div class="text-danger" *ngIf="f.emgr_phnumber.touched && f.emgr_phnumber.invalid">
 
-                  <div *ngIf="f.emgr_phnumber.errors.required">*Please provide the telephone number</div>
-                  <div *ngIf="f.emgr_phnumber.errors.minlength">Please validate the phone number. Telephone number has XX
-                    number of digits</div>
-  
-  
-  
-                </div>
+                <div *ngIf="f.emgr_phnumber.errors.required">*Please provide the telephone number</div>
+                <div *ngIf="f.emgr_phnumber.errors.minlength">Please validate the phone number. Telephone number has XX
+                  number of digits</div>
+
+
+
+              </div>
             </div>
             <div class="col-sm-3 ">
               Relation: <select name="relation" class="form-control" formControlName="emgr_relation" id="relation">
@@ -297,66 +298,68 @@
                 (change)="addresscheck($event)">
             </div>
 
-            <div class="col">
-              Do You Want To Access Patient Portal :
-              <input type="radio" name="patientaccess" value="Yes" (click)="setradio('Yes')" > Yes
-              <input type="radio" name="patientaccess" value="No" (click)="setradio('No')" [checked]='true' > No
-            </div>
+            
 
           </div>
+          
         </div>
 
       </div>
 
+      <div class="row mb-3">
+        <div class="col">
+          Do You Want To Access Patient Portal :
+          <input type="radio" name="patientaccess" value="Yes" (click)="setradio('Yes')"> Yes
+          <input type="radio" name="patientaccess" value="No" (click)="setradio('No')" [checked]='true'> No
+        </div>
+      </div>
 
-
-      <hr />
       <div *ngIf="isSelected('Yes')">
-        <div class="row">
-          <div class="">
+        <div class="row mb-3">
+          <div class="col">
             Allergies :
-            Yes:<input type="radio" class="form-group" formControlName="allergy_option" value="yes">
-            No:<input type="radio" class="form-group" formControlName="allergy_option" value="no">
+            Yes: <input type="radio" class="form-group" formControlName="allergy_option" value="yes"style="margin-right: 20px;">
+            No: <input type="radio" class="form-group" formControlName="allergy_option" value="no" >
           </div>
+          
+
+        </div>
+        <div class="row mb-3">
           <div class="col-sm-3 ">
-            Allergy ID: <select name="allergy_id" formControlName="allergy_id" ng-change="onChangeAllergyName()"
+            Allergy ID: <select name="allergy_id" formControlName="allergy_id" (change)="onChangeAllergyName()"
               class="form-control">
               <option value="none">SELECT</option>
 
-              <option ngValue="allergy.id" *ngFor="let allergy of allergy_idlist">{{allergy.allergy_id}}</option>
+              <option [value]="allergy.id" *ngFor="let allergy of allergy_idlist">{{allergy.allergy_id}}</option>
 
             </select>
           </div>
+
           <div class="col-sm-3 ">
-            Allergy Name: <select name="allergy_name" formControlName="allergy_name" class="form-control">
-              <option value="none">SELECT</option>
-              <option ngValue="allergynm.id" *ngFor="let allergynm of allergy_namelist">{{allergynm.allergy_name}}
-              </option>
-
-
-            </select>
+            <div>Allergy Name:</div>
+            <input type="text" placeholder="Allergy Name" class="form-control" formControlName="allergy_name">
           </div>
+
           <div class="col-sm-3 ">
-            Allergy Type: <select name="allergy_type" formControlName="allergy_type" class="form-control">
-              <option value="none">SELECT</option>
-              <option *ngFor="let allergytype of allergy_typelist">{{allergytype.allergy_type}}</option>
-
-
-            </select>
+            <div>Allergy Type:</div>
+            <input type="text" placeholder="Allergy Type" class="form-control" formControlName="allergy_type">
           </div>
+
           <div class="col-sm-3 ">
             Other Allergy: <input type="text" class="form-control" formControlName="other_allergy" name="other_allergy">
           </div>
-          <div class="col-sm-3">
+          
+        </div>
+        <div class="row">
+          <div class="col-sm-4">
             Is Allergy Fatal :
-            Yes:<input type="radio" class="form-group" formControlName="allergy_fatal" value="yes">
-            No:<input type="radio" class="form-group" formControlName="allergy_fatal" value="no">
+            Yes: <input type="radio" class="form-group" formControlName="allergy_fatal" value="yes" style="margin-right: 20px;">
+            No: <input type="radio" class="form-group" formControlName="allergy_fatal" value="no">
           </div>
-          <div class="col-sm-3 ">
+          <div class="col-sm-8 ">
             Description: <input type="text" class="form-control" formControlName="allergy_desc" name="allergy_desc">
 
           </div>
-
         </div>
       </div>
 
@@ -368,8 +371,6 @@
       </div>
     </form>
   </div>
-
-
 </body>
 
 </html>

@@ -13,18 +13,18 @@ import { patientdetails } from 'src/app/model/patientdetails';
   
   
     patientdetails(_patientDetails: patientdetails):Observable<any>{
-      return this.http.post(`${environment.baseUrl}/patient/savePatient`, _patientDetails);
+      return this.http.post(`${environment.baseUrl}/patient-details/patient/savePatient`, _patientDetails);
     }
 
     getAllergy():Observable<any>{
-      return this.http.get(`${environment.baseUrl}/patient/allergy`);
+      return this.http.get(`${environment.baseUrl}/patient-details/patient/allergy`);
     }
 
     getAllergyById(allergyid: number):Observable<any>{
 
-        return this.http.get(`${environment.baseUrl}/patient/allergy/`+allergyid );
+        return this.http.get(`${environment.baseUrl}/patient-details/patient/allergy/`+allergyid );
     }
     getCSVReport(id:number):void{
-      window.location.href = `${environment.baseUrl}/patient/download?id=${id}`;
+      window.location.href = `${environment.baseUrl}/patient-details/patient/download?id=${id}`;
     }
   }
