@@ -16,6 +16,7 @@ import { DatacreateService } from 'src/app/service/datacreate.service';
 
 import { PatientDetailsComponent } from './modules/patient-details/patient-details.component'
 import {Ng2TelInputModule} from 'ng2-tel-input';
+import { NgxIntlTelInputModule } from "ngx-intl-tel-input";
 import { LoginComponent } from './modules/login/login.component';
 import { ForgotPasswordComponent } from './modules/forgot-password/forgot-password.component';
 import { InboxComponent } from './modules/inbox-module/inbox/inbox.component';
@@ -54,6 +55,7 @@ import { MatToolbar, MatToolbarModule } from '@angular/material/toolbar';
     FormsModule,
     ReactiveFormsModule,
     Ng2TelInputModule,
+    NgxIntlTelInputModule,
     InboxModuleModule,
     MatToolbarModule
   ],
