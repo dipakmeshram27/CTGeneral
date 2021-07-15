@@ -1,0 +1,76 @@
+.title1{
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.title2{
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 18px;
+    margin-bottom: 5px;
+}
+
+.title3{
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 15px;
+    margin-bottom: 5px;
+}
+.regular{
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 17px;
+}
+
+.caption2{
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 15px;
+}   
+.primaryButton{
+    background :  #1570E4;
+    border-radius : 2px;
+    font-size : 13px;
+    color : #FFFFFF;
+    padding-left: 12px;
+    padding-right: 12px;
+    height: 24px;
+    border: none;
+}
+
+.primaryButton:disabled {
+    background :  #E1E5EB;
+    color : #B3BAC3;
+}
+
+.secondaryButton{
+    background :  #EFF2F5;
+    border: 1px #E1E5EB;
+    border-radius : 2px;
+    font : Open Sans (600);
+    font-size : 13px;
+    color : #2B4FA6;
+    padding-left:12px ;
+    padding-right: 12px;
+    width: 100px;
+    height: 24px;
+    margin-right: 20px;
+}
+.textArea{
+    width: 200px;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 12px;
+    border-color: rgba(225, 229, 235, 1);
+    box-sizing: border-box;
+    border-width: 1px;
+    border-style: solid;
+    padding: 0px 0px 0px 4px;
+}
+
+.modal-dialog {
+    width: 350px !important;
+}
