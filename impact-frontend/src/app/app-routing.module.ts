@@ -8,6 +8,8 @@ import { PatientRegistrationComponent } from './modules/patient-registration/pat
 import { ForgotPasswordComponent } from './modules/forgot-password/forgot-password.component';
 import { LoginComponent } from './modules/login/login.component';
 import { SchedulingComponent } from './modules/scheduling/scheduling.component';
+import { ViewAllEmployeeComponent } from 'src/app/modules/view-all-employee/view-all-employee.component';
+import { ViewAllPatientsComponent } from './modules/view-all-patients/view-all-patients.component';
 import {InboxModuleModule} from './modules/inbox-module/inbox-module.module'
 import { AuthGuard } from './auth.guard';
 
@@ -96,6 +98,15 @@ data:{
   expectedRole:['ROLE_PHYSICIAN', 'ROLE_NURSE', 'ROLE_PATIENT']
 } 
 },
+{ path: 'view-employee' , component:ViewAllEmployeeComponent ,canActivate: [AuthGuard],
+data:{
+  expectedRole:['ROLE_ADMIN']
+}},
+  { path: 'view-patient' , component:ViewAllPatientsComponent,
+  canActivate: [AuthGuard],
+  data:{
+    expectedRole:['ROLE_ADMIN']
+  }},
   {
     path: 'note',
     loadChildren: () => import('./modules/notes/notes.module').then(m => m.NoteModule),
@@ -119,7 +130,7 @@ data:{
 // }
 
  // { path: 'customer', component: CustomerComponent, canActivate: [AuthGuard] },
-
+  
 ];
 
 

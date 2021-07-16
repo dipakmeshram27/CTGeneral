@@ -12,10 +12,16 @@ import { PatientRegistrationComponent } from './modules/patient-registration/pat
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 import{FormsModule,ReactiveFormsModule} from '@angular/forms'
-import { DatacreateService } from 'src/app/service/datacreate.service';
+import { UserService } from 'src/app/service/user/user-service';
+import { ViewAllEmployeeComponent } from './modules/view-all-employee/view-all-employee.component';
+import { ViewAllPatientsComponent } from './modules/view-all-patients/view-all-patients.component';
+
+//import { DatacreateService } from 'src/app/service/datacreate.service';
+
 
 import { PatientDetailsComponent } from './modules/patient-details/patient-details.component'
 import {Ng2TelInputModule} from 'ng2-tel-input';
+import { NgxIntlTelInputModule } from "ngx-intl-tel-input";
 import { LoginComponent } from './modules/login/login.component';
 import { ForgotPasswordComponent } from './modules/forgot-password/forgot-password.component';
 import { PatientVisitModule } from './modules/patient/patient-visit.module';
@@ -30,6 +36,9 @@ import { MatToolbar, MatToolbarModule } from '@angular/material/toolbar';
     AppComponent,
     EmployeeRegistrationComponent,
     PatientRegistrationComponent,
+    ViewAllEmployeeComponent,
+    ViewAllPatientsComponent,
+    PatientDetailsComponent,
     PatientDetailsComponent,
     LoginComponent,
     ForgotPasswordComponent,
@@ -56,10 +65,11 @@ import { MatToolbar, MatToolbarModule } from '@angular/material/toolbar';
     ReactiveFormsModule,
     Ng2TelInputModule,
     PatientVisitModule,
-    
+    NgxIntlTelInputModule,
+    InboxModuleModule,
     MatToolbarModule
   ],
-  providers: [DatacreateService,
+  providers: [ UserService,
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }  ],
   bootstrap: [AppComponent]
 })

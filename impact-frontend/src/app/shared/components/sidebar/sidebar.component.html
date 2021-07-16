@@ -1,20 +1,29 @@
 <mat-nav-list>
-    <div class="profile-card">
+    <div class="profile-card" >
         
-        <img src="/assets/userImage.png" alt="Admin" hight="50" width="50">
-        <div class="header">
-            <h2>Admin</h2>
-            <h4>admin@email.com</h4>
+        <img  *ngIf="currentRole == 'Physician'" src="/assets/doctor.png" class="center">
+        <img  *ngIf="currentRole == 'Patient'" src="/assets/userImage.png" class="center" >
+        <div class="header" >
+            <p>{{name}}</p>
+            <p id="role">{{currentRole}}</p>
+           
+            
         </div>
     </div>
+
+    <br>
+    <hr>
   
   
 
 
    <!-- <a mat-list-item routerLinkActive="list-item-active" routerLink="/">Dashboard</a>
     <a mat-list-item routerLinkActive="list-item-active" routerLink="/patient-registration">Patient Registration</a>
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/view-patient">View All Patients</a>
     <a mat-list-item routerLinkActive="list-item-active" routerLink="/schedule">Scheduling</a>
 
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/employee-registration">Register New Employee</a>
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/view-employee">View All Employee</a>
    
 
     <a mat-list-item routerLinkActive="list-item-active" routerLink="/patient-details">Patient Details</a>
@@ -33,7 +42,7 @@
         <a mat-list-item routerLinkActive="list-item-active" routerLink="/note/sent-notes">Sent Note</a>
     </div> -->
  
-  
+    
     <mat-divider></mat-divider>
   
     

@@ -1,0 +1,37 @@
+export class patientdetails {
+    title:string;
+    first_name:string;
+    last_name:string;
+    dob:Date;
+    patient_age:number;
+    gender:string;
+    race:string;
+    ethinicity:string;
+    lang_known:string;
+    email:string;
+    ph_number:string;
+    address:string;
+    city:string;
+    pincode:string;
+    state:string;
+    country:string;
+    emgr_title:string;
+    emgr_fname:string;
+    emgr_lname:string;
+    emgr_email:string;
+    emgr_phnumber:string;
+    emgr_relation:string;
+    emgr_address:string;
+    emgr_city:string;
+    emgr_pincode:string;
+    emgr_state:string;
+    emgr_country:string;
+    allergy_option:string;
+    allergy_id:string;
+    allergy_name:string;
+    allergy_type:string;
+    other_allergy:string;
+    allergy_fatal:string;
+   allergy_desc:string;
+
+}

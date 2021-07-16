@@ -45,3 +45,10 @@ export function formatDate(date) {
     if (day.length < 2) day = '0' + day;
     return [year, month, day].join('-');
 }
+
+export function getAge(d1, d2){
+    d2 = d2 || new Date();
+    var diff = d2.getTime() - d1.getTime();
+    return Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25));
+}
+//console.log( getAge(new Date(1978, 10, 3)) );
