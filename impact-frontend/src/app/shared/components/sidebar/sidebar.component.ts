@@ -31,10 +31,10 @@ export class SidebarComponent implements OnInit {
         console.log(currentRole);
         if (currentRole === "ROLE_PHYSICIAN") {
           this.loginService.loggedIn.next(true);
-          this.routerLinks = [{ link: '/', name: 'dashboard' }, { link: '/patient-details', name: 'Patient Details' }, { link: '/inbox', name: 'Inbox' }, { link: '/note', name: 'Note' },{ link: '/visit', name: 'Vital Signs' },{link:'/diagnosis',name:'Diagnosis'}];
+          this.routerLinks = [{ link: '/', name: 'dashboard' }, { link: '/patient-details', name: 'Patient Details' }, { link: '/inbox', name: 'Inbox' }, { link: '/note', name: 'Note' },{ link: '/visit', name: 'Vital Signs' },{link:'/diagnosis',name:'Diagnosis'},{link:'/diagnosis',name:'Procedure'}];
  
         } else if (currentRole === "ROLE_PATIENT") {
-          this.routerLinks = [{ link: '/', name: 'dashboard' }, { link: '/patient-details', name: 'Patient Details' },{ link: '/visit', name: 'Visit Signs' },{link:'/diagnosis',name:'Diagnosis'}];
+          this.routerLinks = [{ link: '/', name: 'dashboard' }, { link: '/patient-details', name: 'Patient Details' },{ link: '/visit', name: 'Visit Signs' },{link:'/diagnosis',name:'Diagnosis'},{link:'/procedure',name:'Procedure'},{link:'/medication',name:'Medications'}];
  
         }
  

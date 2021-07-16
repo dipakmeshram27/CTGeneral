@@ -75,7 +75,7 @@ export class ProcedureDailogComponent implements OnInit {
       let procedure:Procedure=this.Form.value;
       let appointmeId=4;
       this.procedureService.saveProcedures(procedure,appointmeId).subscribe(data=>{
-        this.to.show(data.statusMessage,{ classname: 'bg-success text-light', delay: 5000 })
+        this.to.show(data.statusMessage,{ classname: 'bg-success text-light', delay: 1000 })
       });
       
   }

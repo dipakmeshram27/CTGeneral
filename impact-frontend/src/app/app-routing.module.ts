@@ -16,6 +16,7 @@ import { PatientVisitComponent } from './modules/patient/patient-visit/patient-v
 import { DiagnosisComponent } from './modules/patient/diagnosis/diagnosis.component';
 import { VitalSignsComponent } from './modules/patient/vital-signs/vital-signs.component';
 import { MedicationsComponent } from './modules/patient/medications/medications.component';
+import { PatientProceduresComponent } from './modules/patient/patient-procedures/patient-procedures.component';
 
 
 const routes: Routes = [
@@ -80,15 +81,15 @@ data:{
 } 
 },
 
-{ path: 'visit/signs', 
-component: VitalSignsComponent,
+{ path: 'procedure', 
+component: PatientProceduresComponent,
 canActivate: [AuthGuard],
 data:{
   expectedRole:['ROLE_PHYSICIAN', 'ROLE_NURSE', 'ROLE_PATIENT']
 } 
 },
 
-{ path: 'visit/medications', 
+{ path: 'medication', 
 component: MedicationsComponent,
 canActivate: [AuthGuard],
 data:{

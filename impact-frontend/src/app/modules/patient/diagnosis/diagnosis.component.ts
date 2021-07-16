@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog,MatDialogConfig } from '@angular/material/dialog';
+import { ToastService } from 'src/app/service/toast/toast.service';
 import { DiagnosisDailogComponent } from '../Dialog/diagnosis-dailog/diagnosis-dailog.component';
 import { DiagnosisService } from '../service/diagnosis.service';
 
@@ -33,7 +34,8 @@ export class DiagnosisComponent implements OnInit {
   isPopupOpened = true;
   
   constructor(private dialog?: MatDialog,
-              private service?: DiagnosisService) { }
+              private service?: DiagnosisService,
+              private to?:ToastService) { }
 
   ngOnInit(): void {
   }
@@ -77,6 +79,8 @@ export class DiagnosisComponent implements OnInit {
   deleteDiagnosis(id: number){
     console.log(id)
     this.service.deleteDiagnosis(id);
+    this.to.show("one row deleted",{ classname: 'bg-danger text-light', delay: 1000 })
+
   }
 
 }
