@@ -1,16 +1,21 @@
-<div style="align-content: center;">
+
 <div class="container-fluid">
     <!-- style="min-height: 100%;height: 100%;" -->
-    <div class="row" >
+    <div class="row" style="justify-content: center;">
+        <div class="image">
+            <div class="wrapper">
+                <div class="login-page" >
         
-        <div class="col-sm-6 signup" style="align-content: center;">
+        <div class="col-sm">
             <form (ngSubmit)="onSubmit()" [formGroup]="reactiveForm" #myForm="ngForm">
-                    <div class="form-group">
+                <div class="form-wrapper" >
+                    <div class="form-section">
+                    <div class="form-group has-error">
                         <h2>Sign Up</h2>
                         <h5 style="color: gray;">Enter details to create your account</h5>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group has-error">
                         <label for="title" style="padding-right: 10px;">Title: </label>
                         <div class="radio" style="padding-right: 10px;" *ngFor="let method of title">
                             <input type="radio" name="title" id="title" formControlName="title" [value]="method.id">
@@ -20,59 +25,65 @@
                         </div>
                     </div>
 
-                    <div class="col-sm-6 form-group">
+                    <div class=" form-group has-error">
                         <input type="text" id="firstName" placeholder="First Name" class="form-control"
-                            formControlName="firstName" minlength="5"
+                            formControlName="firstName" 
                             [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" required>
 
 
-                        <div class="text-danger" *ngIf="f.firstName.touched && f.firstName.invalid">
+                            <div class="mat-error ng-tns-c77-3 ng-star-inserted" role="alert" style="color: red; font-size: small;"  *ngIf="f.firstName.touched && f.firstName.invalid">
 
-                            <div *ngIf="f.firstName.errors.required">* First Name is Required</div>
-                            <div *ngIf="f.firstName.errors.minlength">First Name contains atleast 5
-                                characters</div>
+                            <div *ngIf="f.firstName.errors.required">* First name cannot be empty</div>
+                            <div *ngIf="f.firstName.errors.minlength">Please don't use abbreviations</div>
 
                         </div>
                     </div>
 
-                    <div class="col-sm-6 form-group">
+                    <div class="form-group has-error">
                         <input type="text" id="lastname" placeholder="Last Name" class="form-control"
-                            formControlName="lastName" minlength="5"
+                            formControlName="lastName" 
                             [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" required>
 
-                        <div class="text-danger" *ngIf="f.lastName.touched && f.lastName.invalid">
+                            <div class="mat-error ng-tns-c77-3 ng-star-inserted" role="alert" style="color: red; font-size: small;"  *ngIf="f.lastName.touched && f.lastName.invalid">
 
-                            <div *ngIf="f.lastName.errors.required">* Last Name is Required</div>
-                            <div *ngIf="f.lastName.errors.minlength">Last Name required atleast 2
-                                characters
+                            <div *ngIf="f.lastName.errors.required">* First name cannot be empty</div>
+                            <div *ngIf="f.lastName.errors.minlength">Please don't use abbreviations
                             </div>
                         </div>
                     </div>
 
                     
-                    <div class="col-sm-6 form-group">
+                    <div class="form-group has-error">
                         <input type="email" id="email" placeholder="Email" class="form-control" formControlName="email"
-                            name="email" minlength="15" [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
+                            name="email"  [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
                             required>
 
 
-                        <div class="text-danger" *ngIf="f.email.touched && f.email.invalid">
-                            <div *ngIf="f.email.errors.required">* Email is Required</div>
-                            <div *ngIf="f.email.errors.minlength">Email required atleast 15
-                                characters</div>
-                            <div *ngIf="f.email.errors.pattern">Invalid Email</div>
+                            <div class="mat-error ng-tns-c77-3 ng-star-inserted" role="alert" style="color: red; font-size: small;"  *ngIf="f.email.touched && f.email.invalid">
+                            <div *ngIf="f.email.errors.required">*Email address cannot be empty</div>
+                            <div *ngIf="f.email.errors.email">Please enter valid email address e.g. exampleusername@xyzdomain,com</div>
+                            
 
 
                         </div>
                     </div>
 
-                    <div class="col-sm-6 form-group">
+                    <div class="form-group has-error">
                         <input type="text" formControlName="phoneNumber" id="phonenumber" name="phonenumber"
-                            placeholder="Phone number" class="form-control">
+                            placeholder="Phone number" class="form-control"
+                            formControlName="phoneNumber" 
+                            [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" required>
+
+                            <div class="mat-error ng-tns-c77-3 ng-star-inserted" role="alert" style="color: red; font-size: small;"  *ngIf="f.phoneNumber.touched && f.phoneNumber.invalid">
+                                <div *ngIf="f.phoneNumber.errors.required">*Mobile number must be 10 digit</div>
+        
+    
+    
+                            </div>
 
                     </div>
                 
-                    <div class="col-sm-6 form-group">
+                    <div class="form-group has-error">
 
                         <input type="text" placeholder="DOB" name="dob" formControlName="dateOfBirth" class="form-control"
                              bsDatepicker [bsConfig]="{ isAnimated: true }">
@@ -95,28 +106,30 @@
                         <input type="hidden" id="role" name="role" value="patient">
                     </div>
 
-                    <div class="col-sm-6 form-group">
+                    <div class="form-group has-error">
                         <input type="password" id="password" placeholder="Password" class="form-control"
                             formControlName="password" name="password" minlength="8"
                             [ngClass]="{ 'is-invalid': submitted && f.password.errors }" required ng-pattern="/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/">
-                        <div class="text-danger" *ngIf="f.password.touched && f.password.invalid">
-                            <div *ngIf="f.password.errors.required">* Password is Required</div>
+                        
+                            <div class="mat-error ng-tns-c77-3 ng-star-inserted" role="alert" style="color: red; font-size: small;"  *ngIf="f.password.touched && f.password.invalid">
+                            <div *ngIf="f.password.errors.required">*This field cannot be empty</div>
                             <div *ngIf="f.password.errors.minlength">Password required atleast 8
                                 characters
                             </div>
-                            <div *ngIf="f.password.errors.pattern">Please Enter Valid Password
+                            <div *ngIf="f.password.errors.pattern">Password entry does not meet criteria.</div>
                             </div>
                         </div>
-                    </div>
+                    
 
-                    <div class="col-sm-6 form-group">
+                    <div class="form-group has-error">
                         <input type="password" id="confpassword" placeholder="Confirm Pasword" class="form-control"
                             formControlName="confpassword" name="confpassword" minlength="8"
                             [ngClass]="{ 'is-invalid': submitted && f.confpassword.errors }" required>
-                        <div class="text-danger" *ngIf="f.confpassword.touched && f.confpassword.invalid">
+                       
+                            <div class="mat-error ng-tns-c77-3 ng-star-inserted" role="alert" style="color: red; font-size: small;"  *ngIf="f.confpassword.touched && f.confpassword.invalid">
 
-                            <div *ngIf="f.confpassword.errors.required">* Confirm password is Required</div>
-                            <div *ngIf="f.confpassword.errors.mustmatch">Confirm password did not matched
+                            <div *ngIf="f.confpassword.errors.required">*This field cannot be empty</div>
+                            <div *ngIf="f.confpassword.errors.mustmatch">Password entries not match.
                             </div>
                         </div>
                     </div>
@@ -125,11 +138,12 @@
                         Already Registered?<a mat-list-item routerLinkActive="list-item-active" routerLink="/">Login</a>
                     </div>
 
-                    <div class="col-sm-6 form-group">
+                    <div class="form-group">
                         <button class="btn btn-success w-100" [disabled]="!myForm.form.valid">Submit</button>
                     </div>
+                </div>
+                     </div>
             </form>
         </div>
     </div>
-</div>
-</div>
+</div></div></div>

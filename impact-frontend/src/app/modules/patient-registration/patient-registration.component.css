@@ -1,7 +1,74 @@
 .form-group{
-    margin-bottom: 20px;
+    
+    margin-bottom: 40px;
+    flex-direction: column;
+    padding-bottom: 25px;
 }
 
 .radio{
     display: inline;
 }
+.image {
+ 
+    padding: 72px;
+    
+    background: transparent;
+    background: url('../patient-registration/image/signupImage.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+   
+    background-position: center;
+    
+    max-width: 100%;
+    max-height: 100%;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    overflow: auto;
+    position: fixed;
+    right: 0;
+    top: 0;
+    -o-object-fit: contain;
+    object-fit: contain;
+    
+   
+  }
+  .form-wrapper{
+    width: 410px;
+    max-width: 100%;
+    margin-top: auto;
+    margin-bottom: auto;
+    background-color: #F7F9FA;
+    border: 2px #EFF2F5;
+  border-radius: 8px;
+
+  
+
+ padding-block-start: 80px;
+}
+
+.form-section{
+    font-family: open s;
+    margin-top: auto;
+    max-width: 100%;
+    width: 320px;
+    justify-content: center;
+    margin: auto;
+ 
+    font-family: "OpenSans-Bold";
+
+}
+
+.form-btn, .login-page{
+    display: flex;
+     justify-content: center;
+     align-items: center;
+     
+  
+ }
+
+ div.has-error{
+    height: 0px;
+}
+
+ 

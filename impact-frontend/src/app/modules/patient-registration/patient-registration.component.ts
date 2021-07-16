@@ -31,7 +31,7 @@ export class PatientRegistrationComponent implements OnInit {
     title: new FormControl(),
     firstName : new FormControl('',[Validators.required,Validators.minLength(2)]),
     lastName : new FormControl('',[Validators.required,Validators.minLength(2)]),
-    email:new FormControl('',[Validators.required,Validators.minLength(15),Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$")]),
+    email:new FormControl('',[Validators.required,Validators.email]),
     phoneNumber:new FormControl('',[Validators.required,Validators.pattern("^[0-9]*$"),Validators.minLength(10), Validators.maxLength(10)]),
     dateOfBirth: new FormControl('',[Validators.required]),
     password : new FormControl('',[Validators.required,Validators.minLength(8)]),
@@ -73,11 +73,17 @@ export class PatientRegistrationComponent implements OnInit {
     if (this.reactiveForm.invalid) {
     return;
     }
-    
+
       console.log(this.reactiveForm.value);
       let newUser: User= this.reactiveForm.value;
      newUser.role = 4;
+    var options = { hour12: false };
+     
+     //newUser.dateOfBirth.setDate(options);
+    
       this.userService.createUser(newUser).subscribe(  data => {
+        this.reactiveForm.get('dateOfBirth').setValue(newUser.dateOfBirth.toLocaleTimeString('en-US', options));
+
         this.toastService.show(data.statusMessage, { classname: 'bg-success text-light', delay: 5000 })
       },
       error => {
@@ -85,11 +91,5 @@ export class PatientRegistrationComponent implements OnInit {
       })
     
     }
-
-    
-
-  
- 
-
 
 }
