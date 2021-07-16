@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { User } from 'src/app/model/user';
+import { User } from 'src/app/model/User';
 import { ToastService } from 'src/app/service/toast/toast.service';
 
 import { UserService } from '../../service/user/user-service';
