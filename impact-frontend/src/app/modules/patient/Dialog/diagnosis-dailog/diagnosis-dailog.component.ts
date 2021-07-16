@@ -76,7 +76,7 @@ export class DiagnosisDailogComponent implements OnInit {
     let diagnose:Diagnosis=this.Form.value;
     let appointmentId=2;
     this.service.saveDiagnosis(diagnose,appointmentId).subscribe(data=>{
-        this.toastService.show(data.statusMessage,{ classname: 'bg-success text-light', delay: 5000 })
+        this.toastService.show(data.statusMessage,{ classname: 'bg-success text-light', delay: 1000 })
     })
   }
   

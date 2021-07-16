@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+//import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PatientVisitComponent } from '../patient/patient-visit/patient-visit.component';
@@ -8,7 +8,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
-import { BrowserModule } from '@angular/platform-browser';
+//import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DiagnosisComponent } from './diagnosis/diagnosis.component';
 import { PatientProceduresComponent } from './patient-procedures/patient-procedures.component';
@@ -32,24 +32,23 @@ import { ProcedureDailogComponent } from './Dialog/procedure-dailog/procedure-da
 import { AuthGuard } from 'src/app/auth.guard';
 
 
-const routes: Routes = [
-    {
-        path: '', 
-        component: PatientVisitComponent,
-        children: [
-        { path: 'diagnosis', component: DiagnosisComponent },
-        { path: 'procedures', component: PatientProceduresComponent},
-        { path: 'signs', component: VitalSignsComponent },
-        { path: 'medications', component:MedicationsComponent},
-        { path: 'patient-details', component:PatientDetailsComponent}
-    ],
-    canActivate: [AuthGuard],
-    data:{
-      expectedRole:['ROLE_PHYSICIAN', 'ROLE_NURSE', 'ROLE_PATIENT']
-    }
+ const routes: Routes = [
+     {
+         path: '', 
+         component: PatientVisitComponent,
+         children: [
+         { path: '', component: PatientVisitComponent },
+         { path: 'diagnosis', component: DiagnosisComponent },
+         { path: 'procedures', component: PatientProceduresComponent},
+         { path: 'signs', component: VitalSignsComponent },
+         { path: 'medications', component:MedicationsComponent},
+         { path: 'patient-details', component:PatientDetailsComponent}
+     ],
+    
+   
 
-    }
-];
+     }
+ ];
 
 @NgModule({
 
@@ -65,29 +64,29 @@ const routes: Routes = [
         ProcedureDailogComponent
     ],
 
-    imports: [RouterModule.forRoot(routes),
-        SharedModule,
-        CommonModule,
-        RouterModule,
-        FormsModule,
-        ReactiveFormsModule,
-        MatSidenavModule,
-        MatDividerModule,
-        MatToolbarModule,
-        MatListModule,
-        MatIconModule,
-        MatTableModule,
-        MatCardModule,
-        MatDividerModule,
-        MatDialogModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatButtonModule,
-        MatSelectModule,
+    imports: [
+         SharedModule,
+        // CommonModule,
+         RouterModule,
+         FormsModule,
+         ReactiveFormsModule,
+         MatSidenavModule,
+         MatDividerModule,
+         MatToolbarModule,
+         MatListModule,
+         MatIconModule,
+         MatTableModule,
+         MatCardModule,
+         MatDividerModule,
+         MatDialogModule,
+         MatFormFieldModule,
+         MatInputModule,
+         MatButtonModule,
+         MatSelectModule,
         
-        MatAutocompleteModule,
-        BrowserAnimationsModule,
-        BrowserModule
+         MatAutocompleteModule,
+         BrowserAnimationsModule,
+         //BrowserModule
 
     ],
     exports: [RouterModule],

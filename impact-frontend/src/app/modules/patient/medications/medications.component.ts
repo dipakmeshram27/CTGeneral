@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog ,MatDialogConfig} from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+import { ToastService } from 'src/app/service/toast/toast.service';
 import { MedicationsDialogComponent } from '../Dialog/medications-dialog/medications-dialog.component';
 import { MedicationsService } from '../service/medications.service';
 
@@ -16,7 +17,8 @@ export class MedicationsComponent implements OnInit {
 
  listdata: MatTableDataSource<any>;
   constructor(private  dialog?: MatDialog,
-        private medService?: MedicationsService) { }
+        private medService?: MedicationsService,
+        private toastService?:ToastService) { }
 
   ngOnInit() {
    
@@ -50,6 +52,7 @@ export class MedicationsComponent implements OnInit {
 
   deleteMedication(drugId:number){
     this.medService.deleteMedication(drugId);
+    this.toastService.show("one row deleted",{ classname: 'bg-danger text-light', delay: 1000 })
   }
 
   editMedication(drugId:number){

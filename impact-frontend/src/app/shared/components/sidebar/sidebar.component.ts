@@ -29,12 +29,12 @@ export class SidebarComponent implements OnInit {
         const currentRole = this.loginService.userRole;
  
         console.log(currentRole);
-        if (currentRole === "Physician") {
+        if (currentRole === "ROLE_PHYSICIAN") {
           this.loginService.loggedIn.next(true);
-          this.routerLinks = [{ link: '/', name: 'dashboard' }, { link: '/patient-details', name: 'Patient Details' }, { link: '/inbox', name: 'Inbox' }, { link: '/note', name: 'Note' }];
+          this.routerLinks = [{ link: '/', name: 'dashboard' }, { link: '/patient-details', name: 'Patient Details' }, { link: '/inbox', name: 'Inbox' }, { link: '/note', name: 'Note' },{ link: '/visit', name: 'Vital Signs' },{link:'/diagnosis',name:'Diagnosis'}];
  
         } else if (currentRole === "ROLE_PATIENT") {
-          this.routerLinks = [{ link: '/', name: 'dashboard' }, { link: '/patient-details', name: 'Patient Details' }];
+          this.routerLinks = [{ link: '/', name: 'dashboard' }, { link: '/patient-details', name: 'Patient Details' },{ link: '/visit', name: 'Visit Signs' },{link:'/diagnosis',name:'Diagnosis'}];
  
         }
  

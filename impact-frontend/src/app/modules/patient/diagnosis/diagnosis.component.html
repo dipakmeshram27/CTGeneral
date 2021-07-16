@@ -13,8 +13,8 @@
       <tbody>
        <tr *ngFor="let Diagnosis of DiagnosisList">
         <!-- <td scope="row">{{Medications.DrugID}}</td> -->
-        <td scope="row">{{Diagnosis.DiagnosisCode}}</td>
-        <td scope="row">{{Diagnosis.DiagnosisName}}</td>
+        <td scope="row">{{Diagnosis.diagnosisCode}}</td>
+        <td scope="row">{{Diagnosis.diagnosisName}}</td>
         <td scope="row">{{Diagnosis.description}}</td>
         <td><mat-icon (click)="deleteDiagnosis(Diagnosis.DiagnosisCode)">delete</mat-icon></td>
       </tr> 

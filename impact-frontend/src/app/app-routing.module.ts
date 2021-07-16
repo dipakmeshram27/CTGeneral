@@ -13,6 +13,9 @@ import { AuthGuard } from './auth.guard';
 
 
 import { PatientVisitComponent } from './modules/patient/patient-visit/patient-visit.component';
+import { DiagnosisComponent } from './modules/patient/diagnosis/diagnosis.component';
+import { VitalSignsComponent } from './modules/patient/vital-signs/vital-signs.component';
+import { MedicationsComponent } from './modules/patient/medications/medications.component';
 
 
 const routes: Routes = [
@@ -61,8 +64,32 @@ const routes: Routes = [
 
 },
 
-{ path: 'visit', 
-component: PatientVisitComponent,
+ { path: 'visit', 
+ component: VitalSignsComponent,
+ canActivate: [AuthGuard],
+ data:{
+   expectedRole:['ROLE_PHYSICIAN', 'ROLE_NURSE', 'ROLE_PATIENT']
+ } 
+ },
+
+{ path: 'diagnosis', 
+component: DiagnosisComponent,
+canActivate: [AuthGuard],
+data:{
+  expectedRole:['ROLE_PHYSICIAN', 'ROLE_NURSE', 'ROLE_PATIENT']
+} 
+},
+
+{ path: 'visit/signs', 
+component: VitalSignsComponent,
+canActivate: [AuthGuard],
+data:{
+  expectedRole:['ROLE_PHYSICIAN', 'ROLE_NURSE', 'ROLE_PATIENT']
+} 
+},
+
+{ path: 'visit/medications', 
+component: MedicationsComponent,
 canActivate: [AuthGuard],
 data:{
   expectedRole:['ROLE_PHYSICIAN', 'ROLE_NURSE', 'ROLE_PATIENT']
@@ -85,10 +112,10 @@ data:{
     component: ForgotPasswordComponent
   },
 
-  {
-    path: 'visit',
-    loadChildren: () =>import('./modules/patient/patient-visit.module').then(m =>m.PatientVisitModule)
-  }
+  
+//    { path: 'visit',
+//    loadChildren: () =>import('./modules/patient/patient-visit.module').then(m =>m.PatientVisitModule)
+// }
 
  // { path: 'customer', component: CustomerComponent, canActivate: [AuthGuard] },
 

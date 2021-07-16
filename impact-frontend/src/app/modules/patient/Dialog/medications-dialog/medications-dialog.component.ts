@@ -95,7 +95,7 @@ export class MedicationsDialogComponent implements OnInit {
     medicine.appointmentId=2;
     console.log(medicine)
     this.medService.saveMedication(medicine).subscribe(data=>{
-      this.to.show(data.statusMessage,{ classname: 'bg-success text-light', delay: 5000 })
+      this.to.show(data.statusMessage,{ classname: 'bg-success text-light', delay: 1000 })
     })
   }
 
