@@ -1,1 +1,130 @@
-<router-outlet></router-outlet>
+<!-- <router-outlet></router-outlet> -->
+
+<div class="container" style="height: 500px; overflow: hidden;">
+    <div class="row">
+        <div class="col-12">
+            <button type="button" class="primaryButton float-end m-2" (click)="open(content)">Send Note</button>
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-6">
+            <app-sent-note></app-sent-note>
+        </div>
+        <div class="col-6">
+            <app-receive-note></app-receive-note>
+        </div>
+
+    </div>
+    <ng-template #content let-modal>
+        <div class="title1" style="margin-top: 10px;">Send Note</div>
+
+        <div class="container-fluid">
+            <form (ngSubmit)='sendNotes()' [formGroup]='form' novalidate class="form">
+                <div class="row mb-3">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="title2" style="margin-left: 10px;">Receiver Name</div>
+                                </div>
+                                <div class="col-md-8 col-sm-12">
+                                    <select class="u2565_input" formControlName="recieverId"
+                                        [ngClass]="{ 'is-invalid': submitted && f.recieverId.errors }"
+                                        (change)="populateDesgination()">
+                                        <option *ngFor="let user of users" [ngValue]="user.userId">
+                                            {{user.firstName}} {{user.lastName}}</option>
+                                    </select>
+                                    <div *ngIf="submitted && f.recieverId.errors" class="invalid-feedback">
+                                        <div *ngIf="f.recieverId.errors.required">Please select the reciever name
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="title2"style="margin-left: 10px;">Designation</div>
+                                </div>
+                                <div class="col-md-8 col-sm-12">
+                                    <div class="form-group">
+                                        <input type="text" id="designation" placeholder="Designation"
+                                            class="u2464_input" formControlName="designation" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="title2"style="margin-left: 10px;">Message</div>
+                                </div>
+                                <div class="col-md-8 col-sm-12">
+                                    <div class="form-group">
+                                        <textarea id="msg" placeholder="Message" class="textArea"
+                                            formControlName="message"
+                                            [ngClass]="{ 'is-invalid': submitted && f.message.errors }" rows="6"
+                                            cols="60"></textarea>
+                                        <div *ngIf="submitted && f.message.errors" class="invalid-feedback">
+                                            <div *ngIf="f.message.errors.required">Message is required</div>
+                                            <div *ngIf="f.message.errors.maxlength">Notes contains maximum 200
+                                                characters</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="title2"style="margin-left: 10px;">Urgency Level</div>
+                                </div>
+                                <div class="col-md-8 col-sm-12">
+                                    <div>
+                                        <input id="urgent" type="radio" value=true name="urgency"
+                                            formControlName="urgency" style="margin-right: 10px;"
+                                            [ngClass]="{ 'is-invalid': submitted && f.urgency.errors }">
+                                        <div class="regularText d-inline" style="margin-right: 20px;">Urgent</div>
+                                        <input id="nourgent" type="radio" value=false name="urgency"
+                                            formControlName="urgency" style="margin-right: 10px;"
+                                            [ngClass]="{ 'is-invalid': submitted && f.urgency.errors }">
+                                        <div class="regularText d-inline">Not Urgent</div>
+                                        <div *ngIf="submitted && f.urgency.errors" class="invalid-feedback">
+                                            <div *ngIf="f.urgency.errors.required">Urgency is required</div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-5">
+                    <div class="col-6"></div>
+                    <div class="col-6">
+                        <div class="float-end">
+                            <button class="primaryButton float-end" style="width: 100px;">Send</button>
+                            <button type="reset" class="secondaryButton" (click)="modal.close()">Close</button>
+                        </div>
+
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </ng-template>
+</div>

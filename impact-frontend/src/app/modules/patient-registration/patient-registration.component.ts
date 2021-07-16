@@ -76,7 +76,7 @@ export class PatientRegistrationComponent implements OnInit {
     
       console.log(this.reactiveForm.value);
       let newUser: User= this.reactiveForm.value;
-     newUser.role = 1;
+     newUser.role = 4;
       this.userService.createUser(newUser).subscribe(  data => {
         this.toastService.show(data.statusMessage, { classname: 'bg-success text-light', delay: 5000 })
       },

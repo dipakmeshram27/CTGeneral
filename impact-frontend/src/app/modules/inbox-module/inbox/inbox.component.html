@@ -1,0 +1,153 @@
+<div class="row text-center">
+  <div class="col-md-4 m-2">
+    <div class="btn-group">
+      <div class="btn btn-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate"
+        (viewDateChange)="closeOpenMonthViewDay()">
+        Previous
+      </div>
+      <div class="btn btn-outline-secondary" mwlCalendarToday [(viewDate)]="viewDate">
+        Today
+      </div>
+      <div class="btn btn-primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate"
+        (viewDateChange)="closeOpenMonthViewDay()">
+        Next
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 m-2">
+    <h2>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h2>
+  </div>
+  <div class="col-md-4"></div>
+</div>
+
+<div>
+  <mwl-calendar-week-view [viewDate]="viewDate" [events]="events"
+    (hourSegmentClicked)="hourSegmentClicked($event.date,content)"
+    (eventClicked)="handleEvent('Clicked', $event.event, content)">
+  </mwl-calendar-week-view>
+</div>
+
+<ng-template #content let-modal>
+  <fieldset style="border-radius: 10px; border: 1px solid lightgray; padding: 20px;">
+    <div class="container-fluid">
+      <div class="row mb-4">
+        <div class="col-12 text-center">
+          <div class="title1">Book an Appointment</div>
+        </div>
+      </div>
+      <form [formGroup]='bookingForm' novalidate class="form">
+        <div class="form-group mb-3">
+          <div class="row">
+            <div class="col-4">
+              <div class="title2">Meeting Title</div>
+            </div>
+            <div class="col-8">
+              <input type="text" class="u2464_input" formControlName="meetingTitle" [disabled]=""><br>
+            </div>
+          </div>
+        </div>
+        <div class="form-group mb-3">
+          <div class="row">
+            <div class="col-4">
+              <div class="title2">Description</div>
+            </div>
+            <div class="col-8">
+              <textarea id="description" placeholder="Description" class="textArea" formControlName="description"
+                rows="6" cols="60"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="isAppointmentToPatient" class=" mb-3">
+          <div class="row">
+            <div class="col-4">
+              <div class="title2">Patient</div>
+            </div>
+            <div class="col-8">
+              <div>
+                <select class="u2565_input" formControlName="patientId"
+                  [ngClass]="{ 'is-invalid': submitted && f.patientId.errors }">
+                  <option *ngFor="let user of patients" [ngValue]="user.userId">
+                    {{user.firstName}} {{user.lastName}}</option>
+                </select>
+                <div *ngIf="submitted && f.patientId.errors" class="invalid-feedback">
+                  <div *ngIf="f.patientId.errors.required">Please select the Patient
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="isAppointmentToPhysician" class=" mb-3">
+          <div class="row">
+            <div class="col-4">
+              <div class="title2">Physician</div>
+            </div>
+            <div class="col-8">
+              <div>
+                <select class="u2565_input" formControlName="physicianId"
+                  [ngClass]="{ 'is-invalid': submitted && f.physicianId.errors }">
+                  <option *ngFor="let user of physicians" [ngValue]="user.userId">
+                    {{user.firstName}} {{user.lastName}}</option>
+                </select>
+                <div *ngIf="submitted && f.physicianId.errors" class="invalid-feedback">
+                  <div *ngIf="f.physicianId.errors.required">Please select the physician
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group mb-3">
+          <div class="row">
+            <div class="col-4">
+              <div class="title2">Date</div>
+            </div>
+            <div class="col-8">
+              <input type="date" class="u2464_input" formControlName="appointmentDate" />
+            </div>
+          </div>
+        </div>
+        <div class="form-group mb-3">
+          <div class="row">
+            <div class="col-4">
+              <div class="title2">Start Time</div>
+            </div>
+            <div class="col-8">
+              <input type="time" class="u2464_input" formControlName="appointmentStartTime" /><br>
+            </div>
+          </div>
+        </div>
+        <div class="form-group mb-5">
+          <div class="row">
+            <div class="col-4">
+              <div class="title2">End Time</div>
+            </div>
+            <div class="col-8">
+              <input type="time" class="u2464_input" formControlName="appointmentEndTime" /><br>
+            </div>
+          </div>
+        </div>
+        <div class="row" *ngIf="isNewAppointment; else update;">
+          <div class="col-12 text-center">
+            <button type="button" class="secondaryButton" (click)="modal.close('Close click')">Close</button>
+            <button type="submit" class="primaryButton" (click)='book()' >Book</button>
+          </div>
+        </div>
+        <ng-template #update>
+        <div class="row">
+          <div class="col-12 text-center">
+            <button type="button" class="secondaryButton" (click)="modal.close('Close click')">Close</button>
+            <button type="button" class="primaryButton" style="margin-right: 20px;" (click)="updateAppointment()">Update Appointment</button>
+            <button type="submit" class="primaryButton" (click)="goToVisit()" *ngIf="!isPatient">Go To Visit</button>
+          </div>
+        </div>
+      </ng-template>
+      </form>
+    </div>
+
+
+  </fieldset>
+</ng-template>

@@ -3,4 +3,6 @@ export class Notes {
     senderId : number;
     recieverId:number;
     urgency:boolean;
+    reply:String;
+    noteId:number;
 }

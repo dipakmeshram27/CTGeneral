@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { SharedModule } from './shared/shared.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
 import { EmployeeRegistrationComponent } from './modules/employee-registration/employee-registration.component';
 import { PatientRegistrationComponent } from './modules/patient-registration/patient-registration.component';
@@ -21,6 +21,13 @@ import { ViewAllPatientsComponent } from './modules/view-all-patients/view-all-p
 
 import { PatientDetailsComponent } from './modules/patient-details/patient-details.component'
 import {Ng2TelInputModule} from 'ng2-tel-input';
+import { NgxIntlTelInputModule } from "ngx-intl-tel-input";
+import { LoginComponent } from './modules/login/login.component';
+import { ForgotPasswordComponent } from './modules/forgot-password/forgot-password.component';
+import { InboxComponent } from './modules/inbox-module/inbox/inbox.component';
+import { InboxModuleModule } from './modules/inbox-module/inbox-module.module';
+import { TokenInterceptor } from './token.interceptor';
+import { MatToolbar, MatToolbarModule } from '@angular/material/toolbar';
 
 
 @NgModule({
@@ -31,6 +38,15 @@ import {Ng2TelInputModule} from 'ng2-tel-input';
     ViewAllEmployeeComponent,
     ViewAllPatientsComponent,
     PatientDetailsComponent,
+    PatientDetailsComponent,
+    LoginComponent,
+    ForgotPasswordComponent,
+    
+
+
+
+
+  
   ],
   imports: 
   [
@@ -46,10 +62,13 @@ import {Ng2TelInputModule} from 'ng2-tel-input';
     BsDatepickerModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
-    Ng2TelInputModule
+    Ng2TelInputModule,
+    NgxIntlTelInputModule,
+    InboxModuleModule,
+    MatToolbarModule
   ],
- 
-  providers: [UserService],
+  providers: [DatacreateService, UserService,
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

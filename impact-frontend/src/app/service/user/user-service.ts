@@ -11,13 +11,14 @@ import { SetStatus } from 'src/app/model/SetStatus';
 export class UserService {
   constructor(private http:HttpClient) { }
 
-
-  getUsers():Observable<User[]>
-  {
-    return this.http.get<User[]>(`${environment.baseUrl}/user/getAllUser`);
+  getUsers():Observable<User[]>{
+    return this.http.get<User[]>(`${environment.baseUrl}/user/getAllUser`+'admin');
   }
-  createUser(newUser: User):Observable<any>
-  {
+
+  //getUsers():Observable<User[]>{
+   // return this.http.get<User[]>(`${environment.baseUrl}/user/getAllUser`);
+  //}
+  createUser(newUser: User):Observable<any>{
     return this.http.post(`${environment.baseUrl}/user/addUser`, newUser);
   }
   geturrentEmp(userId):Observable<User[]>

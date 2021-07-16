@@ -8,4 +8,5 @@ export class usernotes{
     lastName:string;
     noteId:number;
     recieverId:number;
+    reply:String;
 }
