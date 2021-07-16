@@ -21,6 +21,7 @@ export class LoginService {
 
 
  userRole:string;
+ userName:string;
   constructor(private http: HttpClient,private router: Router) { }
 //========================================================
 private userSubject: BehaviorSubject<User>;  
@@ -75,7 +76,7 @@ return this.loggedIn.asObservable();
 
   userLogin(login: UserLogin):Observable<any>{
     
-    return this.http.post(`${environment.baseUrl}/user-api/user/login`, login)
+    return this.http.post(`${environment.baseUrl}/user/login`, login)
     .pipe(catchError(this.HandleError));
   }
 

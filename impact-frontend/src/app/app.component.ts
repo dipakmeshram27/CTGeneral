@@ -14,7 +14,7 @@ export class AppComponent {
   navBarOpened=true;
 
 
-  sidebarOpened=true;
+  sidebarOpened=false;
 
 
   constructor(private currentRoute: ActivatedRoute,
