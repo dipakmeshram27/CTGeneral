@@ -50,9 +50,9 @@
 div.has-error{
     height: 0px;
 }
-.image {
- 
-    padding: 72px;
+.img-fluid {
+    flex-wrap: wrap;
+    padding: 65px;
     
     background: transparent;
     background: url('../login/image/loginImage.png');
@@ -60,8 +60,20 @@ div.has-error{
     background-size: cover;
    
     background-position: center;
-    height: 100%;
-    width: 100%;
+    
+    max-width: 100%;
+    max-height: 100%;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    overflow: auto;
+    position: fixed;
+    right: 0;
+    top: 0;
+    -o-object-fit: contain;
+    object-fit: contain;
+    
+ 
    
   }
 

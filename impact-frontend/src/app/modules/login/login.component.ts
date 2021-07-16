@@ -67,7 +67,7 @@ export class LoginComponent implements OnInit {
         let decodedString = JSON.parse(atob(localStorage.getItem('token').split('.')[1]));
       
         this.loginService.loggedIn.next(true);
-
+        this.loginService.userName=decodedString.name;
        this.loginService.userRole = decodedString.role[0].authority;
        console.log(this.loginService.userRole)
         this.router.navigate(['/app-dashboard']);

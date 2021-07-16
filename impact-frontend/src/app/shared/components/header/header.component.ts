@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { UserLogin } from 'src/app/model/userlogin';
 import { LoginService } from 'src/app/service/login/login-service';
@@ -14,7 +15,7 @@ export class HeaderComponent implements OnInit {
 
     //routerLinksMaster=[{link:'/', name:'dashboard'},{link: '/patient-registration', name:'Patient Registration'},{link:'/schedule', name:'Schedule'},{link:'/patient-details', name:'Patient Details'},{link:'/inbox',name:'Inbox'}];
     isLoggedIn$: Observable<boolean>;
-  constructor(private loginService:LoginService) {
+  constructor(private loginService:LoginService, private router:Router) {
    
    }
 
@@ -24,8 +25,12 @@ export class HeaderComponent implements OnInit {
   toggleSidebar() {
     this.toggleSidebarForMe.emit();
   }
-  /*onLogout(){
-    this.loginService.logout(); 
-    }*/
 
+  logout() {
+    let logOut=localStorage.clear();
+    this.router.navigate(['']);
+    
+
+  }
+ 
 }

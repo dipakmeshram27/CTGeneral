@@ -21,6 +21,7 @@ export class LoginService {
 
 
  userRole:string;
+ userName:string;
   constructor(private http: HttpClient,private router: Router) { }
 //========================================================
 private userSubject: BehaviorSubject<User>;  
