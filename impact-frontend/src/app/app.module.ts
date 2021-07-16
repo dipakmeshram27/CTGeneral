@@ -24,6 +24,7 @@ import {Ng2TelInputModule} from 'ng2-tel-input';
 import { NgxIntlTelInputModule } from "ngx-intl-tel-input";
 import { LoginComponent } from './modules/login/login.component';
 import { ForgotPasswordComponent } from './modules/forgot-password/forgot-password.component';
+import { PatientVisitModule } from './modules/patient/patient-visit.module';
 import { InboxComponent } from './modules/inbox-module/inbox/inbox.component';
 import { InboxModuleModule } from './modules/inbox-module/inbox-module.module';
 import { TokenInterceptor } from './token.interceptor';
@@ -63,6 +64,7 @@ import { MatToolbar, MatToolbarModule } from '@angular/material/toolbar';
     FormsModule,
     ReactiveFormsModule,
     Ng2TelInputModule,
+    PatientVisitModule,
     NgxIntlTelInputModule,
     InboxModuleModule,
     MatToolbarModule

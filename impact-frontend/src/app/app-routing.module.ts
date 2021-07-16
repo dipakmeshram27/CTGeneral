@@ -14,6 +14,13 @@ import {InboxModuleModule} from './modules/inbox-module/inbox-module.module'
 import { AuthGuard } from './auth.guard';
 
 
+import { PatientVisitComponent } from './modules/patient/patient-visit/patient-visit.component';
+import { DiagnosisComponent } from './modules/patient/diagnosis/diagnosis.component';
+import { VitalSignsComponent } from './modules/patient/vital-signs/vital-signs.component';
+import { MedicationsComponent } from './modules/patient/medications/medications.component';
+import { PatientProceduresComponent } from './modules/patient/patient-procedures/patient-procedures.component';
+
+
 const routes: Routes = [
   
   {
@@ -40,6 +47,7 @@ const routes: Routes = [
     expectedRole:['ROLE_PHYSICIAN', 'ROLE_NURSE', 'ROLE_PATIENT']
   }
 },
+
   
   { path: 'schedule', 
   component: SchedulingComponent,
@@ -55,7 +63,40 @@ const routes: Routes = [
   canActivate: [AuthGuard],
   data:{
     expectedRole:['ROLE_ADMIN']
-  }
+  },
+
+},
+
+ { path: 'visit', 
+ component: VitalSignsComponent,
+ canActivate: [AuthGuard],
+ data:{
+   expectedRole:['ROLE_PHYSICIAN', 'ROLE_NURSE', 'ROLE_PATIENT']
+ } 
+ },
+
+{ path: 'diagnosis', 
+component: DiagnosisComponent,
+canActivate: [AuthGuard],
+data:{
+  expectedRole:['ROLE_PHYSICIAN', 'ROLE_NURSE', 'ROLE_PATIENT']
+} 
+},
+
+{ path: 'procedure', 
+component: PatientProceduresComponent,
+canActivate: [AuthGuard],
+data:{
+  expectedRole:['ROLE_PHYSICIAN', 'ROLE_NURSE', 'ROLE_PATIENT']
+} 
+},
+
+{ path: 'medication', 
+component: MedicationsComponent,
+canActivate: [AuthGuard],
+data:{
+  expectedRole:['ROLE_PHYSICIAN', 'ROLE_NURSE', 'ROLE_PATIENT']
+} 
 },
 { path: 'view-employee' , component:ViewAllEmployeeComponent ,canActivate: [AuthGuard],
 data:{
@@ -81,7 +122,12 @@ data:{
   {
     path: 'forgot-password',
     component: ForgotPasswordComponent
-  }
+  },
+
+  
+//    { path: 'visit',
+//    loadChildren: () =>import('./modules/patient/patient-visit.module').then(m =>m.PatientVisitModule)
+// }
 
  // { path: 'customer', component: CustomerComponent, canActivate: [AuthGuard] },
   

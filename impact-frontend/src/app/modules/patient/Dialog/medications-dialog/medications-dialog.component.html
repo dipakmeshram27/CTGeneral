@@ -1,0 +1,62 @@
+
+    <h2 mat-dialog-title>Add Medications 
+      <mat-icon mat-flat-button (click)="onNoClick()">cancel</mat-icon> </h2>
+    
+
+<mat-dialog-content>
+
+  <form [formGroup]="Form" (submit)="onSubmit()">
+
+    <!-- <mat-form-field  appearance="fill">
+      <mat-label>
+        Drug Id
+      </mat-label>
+      <input formControlName="DrugID" matInput type="text" [matAutocomplete]="auto" />
+      <mat-error *ngIf="Form.controls['DrugID'].hasError('required')">This field cannot be empty
+      </mat-error>
+
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)='getPosts($event.option.value)'>
+        <mat-option *ngFor="let item of listoption" [value]="item">
+          {{item}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field><br> -->
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>
+        Drug Name
+      </mat-label>
+      <input formControlName="drugName" matInput type="text" [matAutocomplete]="autoo" />
+      <mat-error *ngIf="Form.controls['drugName'].hasError('required')">This field cannot be empty
+      </mat-error>
+      <mat-autocomplete #autoo="matAutocomplete">
+        <mat-option *ngFor="let item of filteredOptions" [value]="item">
+          {{item}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>
+        Drug Form
+      </mat-label>
+      <input formControlName="drugForm" matInput type="text" [matAutocomplete]="auto2"/>
+      <mat-error *ngIf="Form.controls['drugForm'].hasError('required')">This field cannot be empty
+      </mat-error>
+       <mat-autocomplete #auto2="matAutocomplete">
+            <mat-option *ngFor="let item of filteredOptions1" [value]="item">
+              {{item}}
+            </mat-option>
+          </mat-autocomplete> 
+    </mat-form-field>
+
+    
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Discription</mat-label>
+    <input type="text" formControlName="discription" matInput placeholder="Leave a comment...">
+  </mat-form-field><br>
+
+        <button type="submit" class="btn btn-primary">save</button > 
+  </form>
+
+</mat-dialog-content>
