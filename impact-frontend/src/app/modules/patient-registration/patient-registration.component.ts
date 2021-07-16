@@ -82,8 +82,7 @@ export class PatientRegistrationComponent implements OnInit {
      //newUser.dateOfBirth.setDate(options);
     
       this.userService.createUser(newUser).subscribe(  data => {
-        this.reactiveForm.get('dateOfBirth').setValue(newUser.dateOfBirth.toLocaleTimeString('en-US', options));
-
+       
         this.toastService.show(data.statusMessage, { classname: 'bg-success text-light', delay: 5000 })
       },
       error => {
