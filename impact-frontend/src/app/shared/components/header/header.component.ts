@@ -28,6 +28,7 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     let logOut=localStorage.clear();
+    this.loginService.loggedIn.next(false);
     this.router.navigate(['']);
     
 

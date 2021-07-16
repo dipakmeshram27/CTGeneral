@@ -45,6 +45,9 @@ export class SidebarComponent implements OnInit {
     this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe((e: any) => {
+        console.log(e);
+        
+
         // your logic to get role from login service
         this.currentRole = this.loginService.userRole;
         this.name=this.loginService.userName;
