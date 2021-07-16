@@ -37,6 +37,10 @@ export class SidebarComponent implements OnInit {
           this.routerLinks = [{ link: '/', name: 'dashboard' }, { link: '/patient-details', name: 'Patient Details' },{ link: '/inbox', name: 'Inbox' }];
  
         }
+       else if (currentRole === "Admin") {
+        this.routerLinks = [{ link: '/', name: 'Dashboard' }, { link: '/employee-registration', name: 'Employee Registration' },{ link: '/view-employee', name: 'View All Employee' },{ link: '/view-patient', name: 'View All Patient' }];
+
+      }
  
       });
 }

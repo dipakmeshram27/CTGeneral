@@ -12,7 +12,7 @@ export class UserService {
   constructor(private http:HttpClient) { }
 
   getUsers():Observable<User[]>{
-    return this.http.get<User[]>(`${environment.baseUrl}/user/getAllUser`+'admin');
+    return this.http.get<User[]>(`${environment.baseUrl}/user/getAllUser`);
   }
 
   //getUsers():Observable<User[]>{

@@ -16,7 +16,7 @@ import { UserService } from 'src/app/service/user/user-service';
 import { ViewAllEmployeeComponent } from './modules/view-all-employee/view-all-employee.component';
 import { ViewAllPatientsComponent } from './modules/view-all-patients/view-all-patients.component';
 
-
+//import { DatacreateService } from 'src/app/service/datacreate.service';
 
 
 import { PatientDetailsComponent } from './modules/patient-details/patient-details.component'
@@ -67,7 +67,7 @@ import { MatToolbar, MatToolbarModule } from '@angular/material/toolbar';
     InboxModuleModule,
     MatToolbarModule
   ],
-  providers: [DatacreateService, UserService,
+  providers: [ UserService,
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }  ],
   bootstrap: [AppComponent]
 })
