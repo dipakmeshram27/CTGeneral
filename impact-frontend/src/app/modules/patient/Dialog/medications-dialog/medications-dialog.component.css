@@ -1,0 +1,15 @@
+mat-form-field {
+    width: 100%;
+    
+  }
+
+  .vertical-left{
+    padding: 3px;
+    text-align: left;
+}
+
+.but{
+  height: 25px;
+  width: 25px;
+  line-height: 25px;
+}

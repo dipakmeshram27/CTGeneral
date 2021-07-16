@@ -1,0 +1,30 @@
+<div class="container" >
+    <table class="table" >
+      <thead class="thead-dark">
+        <th scope="col">Procedure Code</th>
+        <th scope="col">Procedure Name</th>
+        <th scope="col">Discription</th>
+      </thead>
+      <tbody>
+        
+       <tr *ngFor="let Procedures of ProcedureList">
+        <td scope="row">{{Procedures.procedureCode}}</td>
+        <td scope="row">{{Procedures.procedureName}}</td>
+        <td scope="row">{{Procedures.discription}}</td>
+        <td><mat-icon (click)="deleteProcedure(Procedures.DrugID)">delete</mat-icon></td>
+      </tr> 
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+     
+      <tr>
+          <div class="vertical-left" style="padding-top: 5px;">
+         <button mat-button mat-flat-button color="primary" (click)="addProcedure()">
+          <mat-icon>add</mat-icon> </button> 
+          </div>
+      </tr>
+    </tbody>
+    </table>
+  </div> 

@@ -1,0 +1,41 @@
+<h2 mat-dialog-title>{{title}}
+  <mat-icon mat-flat-button (click)="onNoClick()">cancel</mat-icon>
+</h2>
+
+<mat-dialog-content >
+<form  [formGroup]="Form" (submit)="onSubmit()">
+  <mat-form-field appearance="fill">
+    <mat-label>Diagnosis Code</mat-label>
+    <input type="text" placeholder="Pick one"  matInput 
+    formControlName="diagnosisCode" [matAutocomplete]="auto">
+    <mat-error *ngIf="Form.controls['diagnosisCode'].hasError('required')">This field cannot be empty
+    </mat-error>
+    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+      <mat-option *ngFor="let option of filteroptions1" [value]="option">
+        {{option}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Diagnosis Name</mat-label>
+    <input type="text" placeholder=""  matInput 
+    formControlName="diagnosisName" [matAutocomplete]="auto1">
+    <mat-error *ngIf="Form.controls['diagnosisName'].hasError('required')">This field cannot be empty
+    </mat-error>
+    <mat-autocomplete autoActiveFirstOption #auto1="matAutocomplete">
+      <mat-option *ngFor="let option of filteroptions" [value]="option">
+        {{option}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder=" Description" formControlName="description" >
+  </mat-form-field><br>
+  <button type="submit" class="mat-raised-button mat-primary" [disabled]="!Form.valid">Save</button>
+</form>
+</mat-dialog-content>
+
+
+  

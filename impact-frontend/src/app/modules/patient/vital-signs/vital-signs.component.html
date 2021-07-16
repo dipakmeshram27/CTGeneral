@@ -1,0 +1,60 @@
+<div class="example-container" style="align-content: center;padding: 20px;">
+    <div>
+        <h2 style="color: cornflowerblue">Enter Vital sings Details</h2>
+    </div>
+    <form [formGroup]="Form" (submit)="onSubmit()">
+    <div>
+        
+            <mat-form-field hintLabel="max limit 250 cm" appearance="fill">
+                <mat-label>Height</mat-label>
+                <input matInput #input maxlength="3" placeholder="Ex. 175 cm" formControlName="height">
+                <span matSuffix>cm</span>
+                <mat-hint align="end">{{input.value?.length || 0}}/3</mat-hint>
+                <mat-error *ngIf="Form.controls['height'].hasError('required')">Please provide Patient height in cms
+                </mat-error>
+            </mat-form-field>
+
+          
+            <mat-form-field hintLabel="max 3 input " appearance="fill">
+                <mat-label>Weight</mat-label>
+                <input matInput #input maxlength="3" placeholder="Ex. 50 kg" formControlName="weight">
+                <span matSuffix>kg</span>
+                <mat-hint align="end">{{input.value?.length || 0}}/3</mat-hint>
+                <mat-error *ngIf="Form.controls['weight'].hasError('required')">Please provide Patient’s Weight in Kgs
+                </mat-error>
+            </mat-form-field>
+    </div>
+    <div>
+        <mat-form-field appearance="fill">
+            <mat-label>Blood Pressure </mat-label>
+            <input matInput #input maxlength="6" placeholder="Ex. 120/80" formControlName="bloodPressure">
+            <span matSuffix>mm Hg</span>
+            <mat-error *ngIf="Form.controls['bloodPressure'].hasError('required')">Please provide Patient’s Blood Pressure (systolic / diastolic)
+            </mat-error>
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-form-field appearance="fill">
+            <mat-label>Body Temperature </mat-label>
+            <input matInput #input maxlength="6" placeholder="Ex. 98.6°F" formControlName="bodyTemperature">
+            <span matSuffix>°F</span>
+            <mat-error *ngIf="Form.controls['bodyTemperature'].hasError('required')">Please provide Patient Body Temperature
+            </mat-error>
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-form-field appearance="fill">
+            <mat-label>Respiration Rate </mat-label>
+            <input matInput #input formControlName="respirationRate">
+            <span matSuffix>BPM</span>
+            <mat-error *ngIf="Form.controls['respirationRate'].hasError('required')">Please provide Patient’s Respiration Rate
+            </mat-error>
+        </mat-form-field>
+    </div>
+
+    <div class="example-button-row">
+        <button mat-raised-button color="primary" [disabled]="!Form.valid">save</button>
+    </div>
+    
+    </form>
+</div>

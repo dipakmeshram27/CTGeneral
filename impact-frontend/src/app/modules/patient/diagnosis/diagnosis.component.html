@@ -1,0 +1,43 @@
+<!-- app.component.html -->
+<div>
+ 
+  
+   <div class="container" >
+    <table class="table" >
+      <thead class="thead-dark">
+        <!-- <th scope="col">Drug ID</th> -->
+        <th scope="col">Diagnosis Code</th>
+        <th scope="col">Diagnosis name</th>
+        <th scope="col">Discription</th>
+      </thead>
+      <tbody>
+       <tr *ngFor="let Diagnosis of DiagnosisList">
+        <!-- <td scope="row">{{Medications.DrugID}}</td> -->
+        <td scope="row">{{Diagnosis.diagnosisCode}}</td>
+        <td scope="row">{{Diagnosis.diagnosisName}}</td>
+        <td scope="row">{{Diagnosis.description}}</td>
+        <td><mat-icon (click)="deleteDiagnosis(Diagnosis.DiagnosisCode)">delete</mat-icon></td>
+      </tr> 
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+     
+      <tr>
+        <!-- <td> <button mat-stroked-button color="primary" (click)="addMedication()">
+          <mat-icon>add</mat-icon> </button>&nbsp;<button mat-stroked-button color="primary">Save</button></td>
+           -->
+           
+           <div class="vertical-left" style="padding-top: 5px;">
+            <button mat-button mat-flat-button color="primary" (click)="addDiagnosis()">
+              <mat-icon>add</mat-icon>
+            </button>
+             </div>
+             
+      </tr>
+    </tbody>
+    </table>
+  </div> 
+
+</div>

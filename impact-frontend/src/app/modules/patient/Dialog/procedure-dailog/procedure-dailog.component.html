@@ -1,0 +1,46 @@
+<h2 mat-dialog-title>Add Procedure
+    <mat-icon mat-flat-button (click)="onNoClick()">cancel</mat-icon>
+</h2>
+
+<mat-dialog-content>
+
+    <form [formGroup]="Form" (submit)="onSubmit()" >
+
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>
+              Procedure Code
+            </mat-label>
+            <input formControlName="procedureCode" matInput type="text" [matAutocomplete]="auto" />
+            <mat-error *ngIf="Form.controls['procedureCode'].hasError('required')">This field cannot be empty
+            </mat-error>
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option *ngFor="let item of filterdCodes" [value]="item">
+                {{item}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field><br>
+
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>
+              Procedure Name
+            </mat-label>
+            <input formControlName="procedureName" matInput type="text" [matAutocomplete]="autoo" />
+            <mat-error *ngIf="Form.controls['procedureName'].hasError('required')">This field cannot be empty
+            </mat-error>
+            <mat-autocomplete #autoo="matAutocomplete">
+              <mat-option *ngFor="let item of filteredOptions" [value]="item">
+                {{item}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+
+          
+
+          <mat-form-field  appearance="fill">
+            <mat-label>Discription</mat-label>
+            <input type="text" formControlName="discription" matInput placeholder="Leave a comment...">
+          </mat-form-field>
+
+          <button type="submit" class="btn btn-primary">save</button >
+    </form>
+</mat-dialog-content>
