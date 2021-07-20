@@ -29,6 +29,7 @@ import { InboxComponent } from './modules/inbox-module/inbox/inbox.component';
 import { InboxModuleModule } from './modules/inbox-module/inbox-module.module';
 import { TokenInterceptor } from './token.interceptor';
 import { MatToolbar, MatToolbarModule } from '@angular/material/toolbar';
+import { ChangePasswordComponent } from './modules/change-password/change-password.component';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import { MatToolbar, MatToolbarModule } from '@angular/material/toolbar';
     PatientDetailsComponent,
     LoginComponent,
     ForgotPasswordComponent,
+    ChangePasswordComponent,
     
 
 

@@ -19,15 +19,27 @@ import { Router } from '@angular/router';
 export class LoginService {
   
 
-
+  public user: Observable<User>;
  userRole:string;
  userName:string;
-  constructor(private http: HttpClient,private router: Router) { }
+  constructor(private http: HttpClient,private router: Router) { 
+
+    this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')));
+    this.user = this.userSubject.asObservable();
+  }
 //========================================================
 private userSubject: BehaviorSubject<User>;  
 loggedIn = new BehaviorSubject<boolean>(false); 
+
+
+
 get isLoggedIn() {
+
 return this.loggedIn.asObservable(); 
+}
+
+public get userValue(): User {
+  return this.userSubject.value;
 }
 //=======================================================
  

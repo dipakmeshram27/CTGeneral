@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { User } from '../../model/User';
 import { environment } from '../../../environments/environment';
 import { SetStatus } from 'src/app/model/SetStatus';
+import { ForgotPassword } from 'src/app/model/forgotpassword';
+import { ChangePassword } from 'src/app/model/changepassword';
 
 @Injectable({
   providedIn: 'root'
@@ -45,5 +47,16 @@ export class UserService {
     console.log(userId);
     return this.http.post(`${environment.baseUrl}/user/editStatusById`,data);
   }
+  forgotPassword(forgotPassword: ForgotPassword):Observable<any>{
+    
+    return this.http.post(`${environment.baseUrl}/user/forgotpassword`, forgotPassword)
+    
+  }
+
+  changePassword(changePassword: ChangePassword):Observable<any>{
+    
+    return this.http.put(`${environment.baseUrl}/user/resetpassword`, changePassword)
+    
+ }
 
 }
